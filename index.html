@@ -504,6 +504,21 @@
 
 </div>
 
+
+<!-- SIDE PEEK PANEL -->
+<div class="peek-backdrop" id="peekBackdrop"></div>
+<div class="peek-panel" id="peekPanel">
+  <div class="peek-header">
+    <span class="peek-title" id="peekTitle"></span>
+    <div class="peek-actions">
+      <button class="peek-btn" id="peekFsBtn" title="Full Screen">&#x26F6;</button>
+      <button class="peek-btn" id="peekTabBtn" title="Open in new tab">&#x2197;</button>
+      <button class="peek-btn danger" id="peekCloseBtn" title="Close">&#x2715;</button>
+    </div>
+  </div>
+  <iframe class="peek-frame" id="peekFrame" src="about:blank" allowfullscreen></iframe>
+</div>
+
 <script>
   // ── DOC TYPE CONFIG ──
   const types = {
@@ -919,28 +934,12 @@
     if (e.key === 'Escape') peekClose();
   });
 
-  // Wire up peek panel buttons after DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('peekBackdrop').addEventListener('click', peekClose);
-    document.getElementById('peekFsBtn').addEventListener('click', peekToggleFullscreen);
-    document.getElementById('peekTabBtn').addEventListener('click', peekOpenTab);
-    document.getElementById('peekCloseBtn').addEventListener('click', peekClose);
-  });
+  // Wire up peek panel buttons (elements defined above the script)
+  document.getElementById('peekBackdrop').addEventListener('click', peekClose);
+  document.getElementById('peekFsBtn').addEventListener('click', peekToggleFullscreen);
+  document.getElementById('peekTabBtn').addEventListener('click', peekOpenTab);
+  document.getElementById('peekCloseBtn').addEventListener('click', peekClose);
 </script>
-
-<!-- SIDE PEEK PANEL -->
-<div class="peek-backdrop" id="peekBackdrop"></div>
-<div class="peek-panel" id="peekPanel">
-  <div class="peek-header">
-    <span class="peek-title" id="peekTitle"></span>
-    <div class="peek-actions">
-      <button class="peek-btn" id="peekFsBtn" title="Full Screen">&#x26F6;</button>
-      <button class="peek-btn" id="peekTabBtn" title="Open in new tab">&#x2197;</button>
-      <button class="peek-btn danger" id="peekCloseBtn" title="Close">&#x2715;</button>
-    </div>
-  </div>
-  <iframe class="peek-frame" id="peekFrame" src="about:blank" allowfullscreen></iframe>
-</div>
 
 </body>
 </html>
