@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dermorepubliq — New Hire Onboarding Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --accent:      #121212;
+      --accent-light:#EBEBEB;
+      --font:        'Poppins', sans-serif;
+      --text:        #121212;
+      --muted:       #5f5144;
+      --border:      #DBD3C9;
+      --bg:          #F7F6F3;
+      --white:       #ffffff;
+      --onyx:        #121212;
+      --taupe:       #989187;
+      --clinical:    #F7F6F3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+    .page { max-width: 860px; margin: 40px auto 60px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+    .doc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 36px 22px 52px; border-bottom: 1px solid var(--border); }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 0.09em; color: var(--onyx); text-transform: uppercase; line-height: 1; }
+    .logo-text span { font-weight: 300; }
+    .doc-type-badge { display: inline-block; margin-top: 9px; padding: 3px 11px; background: var(--accent); color: #ffffff; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; border-radius: 2px; }
+    .doc-meta { text-align: right; font-size: 11px; color: var(--taupe); line-height: 1.85; }
+    .doc-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .title-block { padding: 22px 36px 20px 52px; border-bottom: 1px solid var(--border); background: var(--accent-light); }
+    .title-block .doc-type-label { font-size: 10px; font-weight: 600; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .title-block h1 { font-size: 21px; font-weight: 700; color: var(--onyx); line-height: 1.3; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .info-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--taupe); margin-bottom: 3px; }
+    .info-value { font-size: 12px; font-weight: 500; color: var(--text); }
+    .doc-toolbar { display: flex; gap: 6px; padding: 10px 36px 10px 52px; border-bottom: 1px solid var(--border); background: var(--white); align-items: center; }
+    .toolbar-btn { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); color: var(--taupe); cursor: pointer; transition: all 0.12s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+    .doc-body { padding: 20px 36px 36px 46px; }
+    .section { margin-bottom: 6px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 16px 10px 12px; background: var(--clinical); border: none; cursor: pointer; text-align: left; border-bottom: 1px solid var(--border); transition: background 0.15s; font-family: var(--font); }
+    .section-header:hover { background: #EDEAE5; }
+    .section-number { min-width: 26px; height: 26px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--onyx); flex: 1; }
+    .toggle-icon { flex-shrink: 0; color: var(--taupe); transition: transform 0.22s ease; }
+    .section-header[aria-expanded="false"] .toggle-icon { transform: rotate(-90deg); }
+    .section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.25s ease; }
+    .section-body.collapsed { grid-template-rows: 0fr; }
+    .section-content { overflow: hidden; padding: 20px 18px 20px 14px; }
+    .section-body.collapsed .section-content { padding-top: 0; padding-bottom: 0; }
+    .sub-heading { font-size: 11px; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.07em; margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px dashed var(--border); }
+    .sub-heading:first-child { margin-top: 0; }
+    .section-content p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .section-content ul { padding-left: 0; margin: 6px 0 12px 0; list-style: none; }
+    .section-content ul li { font-size: 13px; color: var(--text); margin-bottom: 6px; padding-left: 18px; position: relative; line-height: 1.6; }
+    .section-content ul li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .section-content ul ul { margin: 6px 0 4px 0; }
+    .section-content ul ul li { padding-left: 16px; }
+    .section-content ul ul li::before { width: 5px; height: 5px; background: none; border: 1.5px solid #888; border-radius: 50%; top: 8px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; border: 1px solid var(--border); }
+    .data-table thead tr { background: var(--accent); color: #ffffff; }
+    .data-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.2); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 9px 12px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); vertical-align: top; font-size: 12px; }
+    .data-table td:last-child { border-right: none; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .data-table tbody tr:nth-child(even) td { background: var(--clinical); }
+    .doc-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px 12px 52px; border-top: 1px solid var(--border); background: var(--clinical); }
+    .doc-footer .footer-left { font-size: 10px; color: var(--taupe); line-height: 1.6; }
+    .doc-footer .footer-right { font-size: 10px; color: var(--taupe); text-align: right; }
+    .confidential-tag { display: inline-block; padding: 2px 7px; border: 1px solid var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); border-radius: 2px; margin-top: 3px; }
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; box-shadow: none; max-width: 100%; }
+      .doc-toolbar { display: none; }
+      .section { border: none; border-bottom: 1px solid var(--border); border-radius: 0; }
+      .section-header { background: none !important; border-bottom: 2px solid var(--accent); }
+      .section-body.collapsed { grid-template-rows: 1fr !important; }
+      .section-content { padding-top: 16px !important; padding-bottom: 16px !important; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="accent-bar"></div>
+  <header class="doc-header">
+    <div>
+      <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:8px;vertical-align:super;">&#174;</sup></div>
+      <div class="doc-type-badge">Policy</div>
+    </div>
+    <div class="doc-meta">
+      <strong>DR-POL-L&amp;D-001</strong>
+      Document ID<br/>Version 1.1<br/>Effective: April 1, 2026
+    </div>
+  </header>
+  <div class="title-block">
+    <div class="doc-type-label">Policy &middot; Learning &amp; Development</div>
+    <h1>New Hire Onboarding Journey</h1>
+  </div>
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">Author/s</div><div class="info-value">John Peter Paul Carriedo, Joseph Kier San Jose</div></div>
+    <div class="info-cell"><div class="info-label">Reviewer/s</div><div class="info-value">Sandra Abegail Barlao</div></div>
+    <div class="info-cell"><div class="info-label">Approver/s</div><div class="info-value">Abimelex Brad Vele&#xF1;a</div></div>
+    <div class="info-cell"><div class="info-label">Release Date</div><div class="info-value">April 1, 2026</div></div>
+  </div>
+
+  <div class="doc-toolbar">
+    <button class="toolbar-btn" onclick="expandAll()">&#9660; Expand All</button>
+    <button class="toolbar-btn" onclick="collapseAll()">&#9654; Collapse All</button>
+    <div class="toolbar-sep"></div>
+    <button class="toolbar-btn" onclick="window.print()">&#128438; Print</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- 1. PURPOSE -->
+    <div class="section" id="sec-1">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">1</div>
+        <div class="section-title">PURPOSE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy establishes a structured, consistent, and compliance-controlled framework for onboarding new employees. It ensures all new hires are effectively integrated into the organization, equipped with the necessary knowledge and tools, and aligned with company values, policies, and performance expectations.</p>
+          <p>This policy aims to:</p>
+          <ul>
+            <li>Ensure compliance with legal, regulatory, and organizational requirements</li>
+            <li>Provide a consistent onboarding experience across all departments</li>
+            <li>Accelerate employee readiness and productivity</li>
+            <li>Reinforce company culture, values, and standards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SCOPE -->
+    <div class="section" id="sec-2">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">2</div>
+        <div class="section-title">SCOPE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy applies to all full-time, part-time, contract, and temporary employees joining the organization, regardless of role or department.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DEFINITIONS -->
+    <div class="section" id="sec-3">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">3</div>
+        <div class="section-title">DEFINITIONS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>Onboarding</strong> – The end-to-end process of integrating a new employee into the organization, covering all phases from pre-boarding through the first one hundred eighty (180) days of employment.</li>
+            <li><strong>Orientation Phase</strong> – A structured, short-term onboarding phase conducted during the employee's initial days, focused on company introduction, policies, compliance training, and system access. This phase is only one component of the overall onboarding journey.</li>
+            <li><strong>Integration Phase</strong> – Role-specific onboarding, guided work exposure, and initial application of skills.</li>
+            <li><strong>Early Performance Phase</strong> – The period up to the employee's third (3rd) month focused on development and adjustment.</li>
+            <li><strong>Sustained Performance Phase</strong> – The period from the fourth (4th) to sixth (6th) month focused on performance consistency.</li>
+            <li><strong>Compliance Training</strong> – Mandatory training required for legal, regulatory, safety, or operational purposes.</li>
+            <li><strong>Conditional Pass</strong> – Temporary progression with outstanding requirements subject to a corrective action plan.</li>
+            <li><strong>Endorsement</strong> – Formal approval for progression to the next onboarding phase or independent deployment.</li>
+            <li><strong>Non-Endorsement</strong> – Failure to meet onboarding requirements.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. POLICY STATEMENT -->
+    <div class="section" id="sec-4">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">4</div>
+        <div class="section-title">POLICY STATEMENT</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>The onboarding of all new hires shall follow a structured, documented, and compliance-controlled process spanning from pre-boarding through the first one hundred eighty (180) days of employment. All stakeholders—including L&amp;D, HR, hiring managers, and support teams—are required to comply with this policy.</p>
+          <p>Completion of onboarding requirements is mandatory. Completion of the Orientation Phase alone does not constitute completion of onboarding. No new hire shall be endorsed to the next onboarding phase or operational deployment unless all applicable requirements have been completed and validated.</p>
+          <p>Endorsement must be formally approved by:</p>
+          <ul>
+            <li>L&amp;D, for training completion and onboarding readiness</li>
+            <li>HR, for documentation and compliance validation</li>
+            <li>Hiring Manager, for role readiness and operational alignment</li>
+          </ul>
+          <p>Any endorsement made without proper approval shall be considered non-compliant. L&amp;D shall own the onboarding framework, standards, and learning design, while HR shall govern lifecycle execution, compliance, and documentation across all phases.</p>
+
+          <h3 class="sub-heading">4.1 &nbsp; General Principles</h3>
+          <p>To uphold the principles of this policy, all stakeholders must comply with the following mandatory requirements:</p>
+          <ul>
+            <li><strong>Completion of Mandatory Training</strong> – All new employees must complete assigned compliance, security, policy, and role-specific training within the established timelines.</li>
+            <li><strong>Documentation Submission</strong> – Required employment, legal, and regulatory documents must be submitted accurately and on time.</li>
+            <li><strong>Manager-Driven Onboarding Execution</strong> – Hiring Managers must create and implement a structured onboarding plan, ensure system access is set up, conduct regular check-ins, and monitor progress.</li>
+            <li><strong>Attendance &amp; Participation</strong> – Employees must actively participate in orientation sessions, training activities, and team integration meetings.</li>
+            <li><strong>Recordkeeping</strong> – L&amp;D shall maintain training-related records; HR shall maintain onboarding documentation, personnel records, and compliance tracking.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. ONBOARDING JOURNEY FRAMEWORK -->
+    <div class="section" id="sec-5">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">5</div>
+        <div class="section-title">ONBOARDING JOURNEY FRAMEWORK</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>The onboarding journey spans from pre-boarding through the first one hundred eighty (180) days of employment, designed to progressively integrate new hires through defined phases. The Orientation Phase represents only the initial stage and must not be interpreted as the complete onboarding process.</p>
+
+          <h3 class="sub-heading">5.1 &nbsp; Pre-Boarding Phase</h3>
+          <p>Administrative and operational preparation conducted prior to the employee's start date. At a minimum, this phase shall include:</p>
+          <ul>
+            <li>Confirmation of onboarding plan, schedule, and role requirements</li>
+            <li>Completion of pre-employment documentation</li>
+            <li>System and learning platform setup</li>
+            <li>Preparation of onboarding materials and logistics</li>
+            <li>Communication of onboarding expectations and schedule</li>
+          </ul>
+
+          <h3 class="sub-heading">5.2 &nbsp; Orientation Phase (Mandatory Compliance Phase)</h3>
+          <p>The organization's initial onboarding phase focused on compliance, company orientation, and foundational training. This phase is mandatory and shall not be bypassed. Exceptions due to urgent operational requirements must be formally justified and approved by HR and L&amp;D, and documented for compliance.</p>
+          <p>Completion of the Orientation Phase is a prerequisite to progression to the Integration Phase, except for approved Conditional Pass cases. Detailed procedures, schedules, and execution guidelines are defined in the corresponding SOP.</p>
+
+          <h3 class="sub-heading">5.3 &nbsp; Integration Phase</h3>
+          <p>Transitions the new hire into operational responsibilities through structured onboarding and guided work application. At a minimum, this phase shall include:</p>
+          <ul>
+            <li>Role-specific onboarding covering responsibilities, workflows, tools, and performance expectations</li>
+            <li>Introduction to team structure and stakeholders</li>
+            <li>Guided task execution (e.g., nesting, shadowing, supervised work)</li>
+            <li>Regular check-ins and feedback</li>
+            <li>Documented evaluation of readiness</li>
+          </ul>
+
+          <h3 class="sub-heading">5.4 &nbsp; Early Performance Phase</h3>
+          <p>Covers the period up to the employee's third (3rd) month, focusing on development and adjustment.</p>
+
+          <h3 class="sub-heading">5.5 &nbsp; Sustained Performance Phase</h3>
+          <p>Covers the fourth (4th) to sixth (6th) month, focusing on performance consistency, coaching, and readiness for regularization.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PHASE REQUIREMENTS AND CONTROLS -->
+    <div class="section" id="sec-6">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">6</div>
+        <div class="section-title">PHASE REQUIREMENTS AND CONTROLS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Execution and ownership of onboarding activities across phases shall follow the governance structure defined in this policy and the RASCI matrix.</p>
+
+          <h3 class="sub-heading">6.1 &nbsp; Orientation Mandatory Components</h3>
+          <ul>
+            <li>Company orientation and culture alignment</li>
+            <li>HR policies, Code of Conduct, and workplace expectations</li>
+            <li>Compensation and benefits orientation</li>
+            <li>System onboarding and access setup</li>
+            <li>Mandatory e-learning modules and compliance training</li>
+            <li>Required onboarding documentation and acknowledgments</li>
+            <li>Post-training assessments</li>
+          </ul>
+
+          <h3 class="sub-heading">6.2 &nbsp; Compliance Training Requirements</h3>
+          <p>Mandatory compliance training must be completed within prescribed timelines. No new hire shall be deployed to production areas, operational environments, or assigned to regulated tasks without prior completion of the required minimum compliance training. At a minimum, the following must be completed prior to deployment:</p>
+          <ul>
+            <li>Code of Conduct</li>
+            <li>Occupational Safety and Health (OSH)</li>
+            <li>Good Manufacturing Practices (GMP)</li>
+          </ul>
+          <p>Additional role-specific compliance requirements may apply.</p>
+
+          <h3 class="sub-heading">6.3 &nbsp; Orientation Completion Requirements</h3>
+          <p>The Orientation Phase shall be considered complete only when all required orientation activities have been completed and validated, including:</p>
+          <ul>
+            <li>Attendance in all required sessions (subject to approved exceptions)</li>
+            <li>Completion of all required training and courses</li>
+            <li>Achievement of required passing standards in assessments</li>
+            <li>Completion of all required onboarding documentation</li>
+            <li>Compliance with attendance, training, and conduct expectations</li>
+          </ul>
+
+          <h3 class="sub-heading">6.4 &nbsp; Orientation Endorsement Status</h3>
+          <p>At the end of the Orientation Phase, new hires shall be assigned one of the following:</p>
+          <ul>
+            <li><strong>Pass</strong> – All requirements completed; eligible to proceed</li>
+            <li><strong>Conditional Pass</strong> – Minor deficiencies; allowed to proceed with a documented corrective action plan</li>
+            <li><strong>Fail</strong> – Requirements not met; not eligible for progression without remediation</li>
+          </ul>
+          <p>No endorsement shall be granted if the minimum compliance requirements are not satisfied.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. INTEGRATION AND PERFORMANCE PHASES -->
+    <div class="section" id="sec-7">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">7</div>
+        <div class="section-title">INTEGRATION AND PERFORMANCE PHASES</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Execution of role-specific onboarding may be facilitated by L&amp;D or Hiring Managers, with L&amp;D ensuring adherence to defined onboarding standards. Subsequent onboarding phases shall include:</p>
+          <ul>
+            <li>Role-specific onboarding and training</li>
+            <li>Guided work application and support</li>
+            <li>Performance monitoring and coaching</li>
+            <li>Formal probationary evaluations</li>
+          </ul>
+          <p>All activities must be documented in accordance with company standards. Detailed procedures, requirements, and execution guidelines shall be defined in the corresponding SOPs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. DOCUMENTATION & RECORDS -->
+    <div class="section" id="sec-8">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">8</div>
+        <div class="section-title">DOCUMENTATION &amp; RECORDS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>All onboarding activities across all phases must be properly documented to ensure compliance, auditability, and effective tracking of employee progress. This includes, but is not limited to:</p>
+          <ul>
+            <li>Training completion records</li>
+            <li>Assessment results</li>
+            <li>Attendance and participation records</li>
+            <li>Signed onboarding and training acknowledgment forms</li>
+            <li>Role-specific onboarding documentation</li>
+            <li>Integration and nesting feedback records</li>
+            <li>Performance plans, coaching logs, and evaluation documentation</li>
+          </ul>
+          <p>L&amp;D shall maintain training-related records. All onboarding records shall be forwarded to HR for personnel file maintenance, compliance tracking, and audit purposes. Failure to maintain or submit required documentation may result in delays in endorsement, progression, or employee regularization.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. RASCI MATRIX -->
+    <div class="section" id="sec-9">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">9</div>
+        <div class="section-title">RASCI MATRIX</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Detailed phase-level responsibilities are defined in the corresponding SOPs. This RASCI focuses on policy-level governance and accountability.</p>
+          <table class="data-table">
+            <thead><tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr></thead>
+            <tbody>
+              <tr><td>Establish onboarding policy, framework, and standards</td><td>L&amp;D</td><td>L&amp;D Lead</td><td>HR Manager</td><td>Hiring Manager</td><td>Leadership</td></tr>
+              <tr><td>Approve onboarding policy and major changes</td><td>HR Manager</td><td>L&amp;D Lead</td><td>COO</td><td>—</td><td>All stakeholders</td></tr>
+              <tr><td>Review and update onboarding policy</td><td>L&amp;D</td><td>L&amp;D Lead</td><td>HR</td><td>Hiring Manager</td><td>Leadership</td></tr>
+              <tr><td>Govern onboarding lifecycle implementation</td><td>HR Manager</td><td>HR</td><td>L&amp;D</td><td>Hiring Manager</td><td>IT, F&amp;A</td></tr>
+              <tr><td>Ensure compliance across all onboarding phases</td><td>HR Manager</td><td>HR</td><td>L&amp;D</td><td>Hiring Manager</td><td>Leadership</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. GOVERNANCE AND COMPLIANCE -->
+    <div class="section" id="sec-10">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">10</div>
+        <div class="section-title">GOVERNANCE AND COMPLIANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>Monitoring</strong> – HR shall govern onboarding progression across all phases, ensuring required milestones, evaluations, and documentation are completed.</li>
+            <li><strong>Training Completion Tracking</strong> – Mandatory training modules and onboarding tasks are logged and monitored by L&amp;D.</li>
+            <li><strong>Manager Check-Ins</strong> – Hiring Managers are responsible for monitoring onboarding progress and verifying completion of role-specific activities.</li>
+            <li><strong>System Access Audits</strong> – IT conducts periodic reviews to ensure appropriate system access and completed security requirements.</li>
+            <li><strong>Documentation Verification</strong> – HR ensures all employment, legal, and onboarding documents are completed, validated, and properly stored.</li>
+            <li><strong>Orientation Completion Control</strong> – L&amp;D and HR shall validate completion of the Orientation Phase prior to endorsement or progression.</li>
+          </ul>
+
+          <h3 class="sub-heading">10.1 &nbsp; Enforcement</h3>
+          <ul>
+            <li><strong>Deployment Restriction</strong> – New hires who have not completed required compliance training shall not access production areas, equipment, or regulated work environments.</li>
+            <li><strong>Non-Completion Alerts</strong> – Notifications and reminders shall be issued when onboarding requirements, training, or documentation are overdue.</li>
+            <li><strong>Escalation Protocols</strong> – Persistent non-compliance shall be escalated to the Hiring Manager, Department Head, and/or HR and L&amp;D leadership.</li>
+            <li><strong>Progression Restriction</strong> – New hires who fail to complete mandatory requirements may be restricted from progression to the next phase or independent work.</li>
+            <li><strong>Endorsement Hold</strong> – Endorsement may be withheld until all required activities, training, and documentation are completed and validated.</li>
+            <li><strong>Corrective Action</strong> – Failure to comply with mandatory onboarding requirements may result in corrective action in accordance with company policy.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. RELATED DOCUMENTS -->
+    <div class="section" id="sec-11">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">11</div>
+        <div class="section-title">RELATED DOCUMENTS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <h3 class="sub-heading">11.1 &nbsp; Standard Operating Procedures</h3>
+          <ul>
+            <li>LD-SOP-002-1.0-2025 — Pre-Boarding and Orientation Phases</li>
+            <li>LD-SOP-001-1.0-2025 — Integration Phase</li>
+            <li>LD-SOP-003-1.0-2025 — Early and Sustained Performance Phases</li>
+          </ul>
+          <h3 class="sub-heading">11.2 &nbsp; Templates and Forms</h3>
+          <ul>
+            <li>LD-TMP-005-2.0-2025 – Training Report</li>
+            <li>HR-TMP-017-1.0-2025 – Employee Onboarding Acknowledgment Checklist</li>
+            <li>HR-TMP-009-1.2-2025 – Coaching Log</li>
+            <li>LD-TMP-008-1.0-2025 — General Nesting Feedback</li>
+          </ul>
+          <h3 class="sub-heading">11.3 &nbsp; Systems and Tools</h3>
+          <ul>
+            <li>Dermorepubliq University (LMS) – Training delivery, assessments, and completion tracking</li>
+            <li>Sprout HR (HRIS) – Employee records and onboarding documentation</li>
+          </ul>
+          <h3 class="sub-heading">11.4 &nbsp; Policies and References</h3>
+          <ul>
+            <li>HR-PD-002 – Onboarding Notification Process</li>
+            <li>Code of Conduct and Disciplinary Policy</li>
+            <li>Information Security Policy</li>
+            <li>Occupational Safety and Health Policy</li>
+            <li>Good Manufacturing Practices (GMP) Guidelines</li>
+          </ul>
+          <h3 class="sub-heading">11.5 &nbsp; Additional Supporting Documents</h3>
+          <p>Additional procedures, templates, or system references may be developed and maintained by L&amp;D and HR to support the implementation of this policy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. DOCUMENT REVIEW AND MAINTENANCE -->
+    <div class="section" id="sec-12">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">12</div>
+        <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy shall be reviewed annually, or as required, to ensure continued relevance, effectiveness, and alignment with organizational, legal, and regulatory requirements. The review shall be led by the L&amp;D department, in coordination with HR and other relevant stakeholders. Any updates shall be subject to formal review and approval in accordance with the organization's document control procedures.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. REVISION AND CHANGE LOGS -->
+    <div class="section" id="sec-13">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">13</div>
+        <div class="section-title">REVISION AND CHANGE LOGS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr></thead>
+            <tbody>
+              <tr><td>1.0</td><td>Joseph Kier San Jose, John Peter Paul Carriedo</td><td>December 4, 2025</td><td>Initiated draft</td></tr>
+              <tr><td>1.1</td><td>Sandra Barlao</td><td>March 23, 2026</td><td>Streamlined into a policy-level framework; clarified governance roles (L&amp;D, HR, Managers); strengthened orientation compliance and endorsement controls; aligned with SOPs and document control standards.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <footer class="doc-footer">
+    <div class="footer-left">
+      DR-POL-L&amp;D-001 &nbsp;&middot;&nbsp; Version 1.1 &nbsp;&middot;&nbsp; Effective April 1, 2026
+      <br/>&#169;2026 Dermorepubliq Corporation. All rights reserved.
+      <br/><span class="confidential-tag">Internal Use Only</span>
+    </div>
+    <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+  </footer>
+</div>
+<script>
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.nextElementSibling.classList.toggle('collapsed', expanded);
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'true');
+      b.nextElementSibling.classList.remove('collapsed');
+    });
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.add('collapsed');
+    });
+  }
+</script>
+</body>
+</html>

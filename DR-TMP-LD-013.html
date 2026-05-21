@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dermorepubliq — Training Bond Agreement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --doc-accent:      #5f5144;
+      --doc-accent-light:#EDE8E3;
+      --font:            'Poppins', sans-serif;
+      --text:            #121212;
+      --text-muted:      #5f5144;
+      --border:          #DBD3C9;
+      --bg:              #F7F6F3;
+      --white:           #ffffff;
+      --dermo-onyx:      #121212;
+      --stone-taupe:     #989187;
+      --clinical-white:  #F7F6F3;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
+    .page{max-width:860px;margin:40px auto;background:var(--white);border:1px solid var(--border);position:relative;overflow:hidden;}
+    .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--doc-accent);}
+    .doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:32px 40px 24px 52px;border-bottom:1px solid var(--border);}
+    .logo-text{font-size:18px;font-weight:700;letter-spacing:0.08em;color:var(--dermo-onyx);text-transform:uppercase;}
+    .logo-text span{font-weight:300;}
+    .doc-type-badge{display:inline-block;margin-top:8px;padding:3px 12px;background:var(--doc-accent);color:#ffffff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
+    .doc-meta{text-align:right;font-size:11px;color:var(--stone-taupe);line-height:1.9;}
+    .doc-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+    .title-block{padding:28px 40px 24px 52px;border-bottom:1px solid var(--border);background:var(--doc-accent-light);}
+    .title-block h1{font-size:22px;font-weight:700;color:var(--dermo-onyx);line-height:1.3;margin-bottom:6px;}
+    .title-block .doc-id{font-size:11px;font-weight:500;color:var(--doc-accent);letter-spacing:0.08em;text-transform:uppercase;}
+    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+    .info-cell{padding:14px 16px;border-right:1px solid var(--border);}
+    .info-cell:last-child{border-right:none;}
+    .info-cell:first-child{padding-left:52px;}
+    .info-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone-taupe);margin-bottom:3px;}
+    .info-value{font-size:12px;font-weight:500;color:var(--text);}
+    .doc-body{padding:32px 40px 32px 52px;}
+    .section{margin-bottom:28px;}
+    .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--doc-accent);}
+    .section-number{width:26px;height:26px;background:var(--doc-accent);color:#ffffff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
+    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dermo-onyx);}
+    .doc-body p{font-size:13px;color:var(--text);margin-bottom:10px;}
+    .doc-body ul,.doc-body ol{padding-left:20px;margin-bottom:10px;}
+    .doc-body li{font-size:13px;color:var(--text);margin-bottom:5px;}
+    .subsection-title{font-size:12px;font-weight:700;color:var(--doc-accent);text-transform:uppercase;letter-spacing:0.05em;margin:16px 0 6px;}
+    .steps{list-style:none;padding:0;counter-reset:steps;}
+    .steps li{counter-increment:steps;display:flex;gap:14px;margin-bottom:12px;align-items:flex-start;}
+    .steps li::before{content:counter(steps);min-width:24px;height:24px;background:var(--doc-accent-light);border:1.5px solid var(--doc-accent);color:var(--doc-accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;margin-top:1px;}
+    .callout{display:flex;gap:12px;padding:12px 16px;border-left:3px solid var(--doc-accent);background:var(--doc-accent-light);margin:16px 0;border-radius:0 4px 4px 0;}
+    .callout-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+    .callout-text{font-size:12px;color:var(--text);}
+    .callout-text strong{font-weight:600;display:block;margin-bottom:2px;}
+    .data-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;}
+    .data-table thead tr{background:var(--doc-accent);color:#ffffff;}
+    .data-table th{padding:9px 14px;text-align:left;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
+    .data-table td{padding:9px 14px;border-bottom:1px solid var(--border);}
+    .data-table tr:last-child td{border-bottom:none;}
+    .data-table tr:nth-child(even) td{background:var(--clinical-white);}
+    .sig-line{display:block;border-bottom:1px solid var(--stone-taupe);margin-top:18px;width:80%;}
+    .doc-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 40px 14px 52px;border-top:1px solid var(--border);background:var(--clinical-white);}
+    .doc-footer .footer-left{font-size:10px;color:var(--stone-taupe);line-height:1.6;}
+    .doc-footer .footer-right{font-size:10px;color:var(--stone-taupe);text-align:right;}
+    .confidential-tag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-taupe);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-taupe);border-radius:2px;margin-top:4px;}
+    @media print{body{background:white;}.page{margin:0;border:none;max-width:100%;}.accent-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="accent-bar"></div>
+    <header class="doc-header">
+      <div class="brand-block">
+        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
+        <div class="doc-type-badge">Template</div>
+      </div>
+      <div class="doc-meta">
+        <strong>DR-TMP-L&amp;D-013</strong>
+        Document ID
+        <br/>Version 1.0
+        <br/>Effective: 2026
+        <br/>Next Review: 2026 Review
+      </div>
+    </header>
+    <div class="title-block">
+      <div class="doc-id">Template · Learning &amp; Development</div>
+      <h1>Training Bond Agreement</h1>
+    </div>
+    <div class="info-grid">
+      <div class="info-cell"><div class="info-label">Department</div><div class="info-value">Learning &amp; Development</div></div>
+      <div class="info-cell"><div class="info-label">Document Owner</div><div class="info-value">L&amp;D Director</div></div>
+      <div class="info-cell"><div class="info-label">Responsible Dept.</div><div class="info-value">Human Resources</div></div>
+      <div class="info-cell"><div class="info-label">Classification</div><div class="info-value">Internal Use Only</div></div>
+    </div>
+    <div class="doc-body">
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div class="section-title">Training Bond Agreement</div>
+        </div>
+        <p>This template outlines the terms and conditions of the Training Bond Agreement between Dermorepubliq Corporation and the employee participating in company-funded external training. Refer to the source document for the complete template.</p>
+      </div>
+    </div>
+    <footer class="doc-footer">
+      <div class="footer-left">
+        DR-TMP-L&amp;D-013 · Version 1.0 · Effective 2026
+        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
+        <br/><span class="confidential-tag">Internal Use Only</span>
+      </div>
+      <div class="footer-right">
+        Uncontrolled when printed.<br/>
+        Verify version before use.
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

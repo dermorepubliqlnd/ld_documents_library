@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dermorepubliq — External Training Policy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --accent:      #121212;
+      --accent-light:#EBEBEB;
+      --font:        'Poppins', sans-serif;
+      --text:        #121212;
+      --muted:       #5f5144;
+      --border:      #DBD3C9;
+      --bg:          #F7F6F3;
+      --white:       #ffffff;
+      --onyx:        #121212;
+      --taupe:       #989187;
+      --clinical:    #F7F6F3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+    .page { max-width: 860px; margin: 40px auto 60px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+    .doc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 36px 22px 52px; border-bottom: 1px solid var(--border); }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 0.09em; color: var(--onyx); text-transform: uppercase; line-height: 1; }
+    .logo-text span { font-weight: 300; }
+    .doc-type-badge { display: inline-block; margin-top: 9px; padding: 3px 11px; background: var(--accent); color: #ffffff; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; border-radius: 2px; }
+    .doc-meta { text-align: right; font-size: 11px; color: var(--taupe); line-height: 1.85; }
+    .doc-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .title-block { padding: 22px 36px 20px 52px; border-bottom: 1px solid var(--border); background: var(--accent-light); }
+    .title-block .doc-type-label { font-size: 10px; font-weight: 600; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .title-block h1 { font-size: 21px; font-weight: 700; color: var(--onyx); line-height: 1.3; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .info-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--taupe); margin-bottom: 3px; }
+    .info-value { font-size: 12px; font-weight: 500; color: var(--text); }
+    .doc-toolbar { display: flex; gap: 6px; padding: 10px 36px 10px 52px; border-bottom: 1px solid var(--border); background: var(--white); align-items: center; }
+    .toolbar-btn { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); color: var(--taupe); cursor: pointer; transition: all 0.12s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+    .doc-body { padding: 20px 36px 36px 46px; }
+    .section { margin-bottom: 6px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 16px 10px 12px; background: var(--clinical); border: none; cursor: pointer; text-align: left; border-bottom: 1px solid var(--border); transition: background 0.15s; font-family: var(--font); }
+    .section-header:hover { background: #EDEAE5; }
+    .section-number { min-width: 26px; height: 26px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--onyx); flex: 1; }
+    .toggle-icon { flex-shrink: 0; color: var(--taupe); transition: transform 0.22s ease; }
+    .section-header[aria-expanded="false"] .toggle-icon { transform: rotate(-90deg); }
+    .section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.25s ease; }
+    .section-body.collapsed { grid-template-rows: 0fr; }
+    .section-content { overflow: hidden; padding: 20px 18px 20px 14px; }
+    .section-body.collapsed .section-content { padding-top: 0; padding-bottom: 0; }
+    .sub-heading { font-size: 11px; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.07em; margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px dashed var(--border); }
+    .sub-heading:first-child { margin-top: 0; }
+    .section-content p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .section-content ul { padding-left: 0; margin: 6px 0 12px 0; list-style: none; }
+    .section-content ul li { font-size: 13px; color: var(--text); margin-bottom: 6px; padding-left: 18px; position: relative; line-height: 1.6; }
+    .section-content ul li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .section-content ul ul { margin: 6px 0 4px 0; }
+    .section-content ul ul li { padding-left: 16px; }
+    .section-content ul ul li::before { width: 5px; height: 5px; background: none; border: 1.5px solid #888; border-radius: 50%; top: 8px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; border: 1px solid var(--border); }
+    .data-table thead tr { background: var(--accent); color: #ffffff; }
+    .data-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.2); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 9px 12px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); vertical-align: top; font-size: 12px; }
+    .data-table td:last-child { border-right: none; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .data-table tbody tr:nth-child(even) td { background: var(--clinical); }
+    .doc-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px 12px 52px; border-top: 1px solid var(--border); background: var(--clinical); }
+    .doc-footer .footer-left { font-size: 10px; color: var(--taupe); line-height: 1.6; }
+    .doc-footer .footer-right { font-size: 10px; color: var(--taupe); text-align: right; }
+    .confidential-tag { display: inline-block; padding: 2px 7px; border: 1px solid var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); border-radius: 2px; margin-top: 3px; }
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; box-shadow: none; max-width: 100%; }
+      .doc-toolbar { display: none; }
+      .section { border: none; border-bottom: 1px solid var(--border); border-radius: 0; }
+      .section-header { background: none !important; border-bottom: 2px solid var(--accent); }
+      .section-body.collapsed { grid-template-rows: 1fr !important; }
+      .section-content { padding-top: 16px !important; padding-bottom: 16px !important; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="accent-bar"></div>
+  <header class="doc-header">
+    <div>
+      <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:8px;vertical-align:super;">&#174;</sup></div>
+      <div class="doc-type-badge">Policy</div>
+    </div>
+    <div class="doc-meta">
+      <strong>DR-POL-L&amp;D-004</strong>
+      Document ID<br/>Version 1.0<br/>Effective: May 12, 2026
+    </div>
+  </header>
+  <div class="title-block">
+    <div class="doc-type-label">Policy &middot; Learning &amp; Development</div>
+    <h1>External Training</h1>
+  </div>
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">Author/s</div><div class="info-value">Joseph Kier San Jose</div></div>
+    <div class="info-cell"><div class="info-label">Reviewer/s</div><div class="info-value">Sandra Abegail Barlao, Adelfa Malate II</div></div>
+    <div class="info-cell"><div class="info-label">Approver/s</div><div class="info-value">Abimelex Vele&#xF1;a</div></div>
+    <div class="info-cell"><div class="info-label">Release Date</div><div class="info-value">May 12, 2026</div></div>
+  </div>
+
+  <div class="doc-toolbar">
+    <button class="toolbar-btn" onclick="expandAll()">&#9660; Expand All</button>
+    <button class="toolbar-btn" onclick="collapseAll()">&#9654; Collapse All</button>
+    <div class="toolbar-sep"></div>
+    <button class="toolbar-btn" onclick="window.print()">&#128438; Print</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- 1. PURPOSE -->
+    <div class="section" id="sec-1">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">1</div>
+        <div class="section-title">PURPOSE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy establishes guidelines for identifying, approving, participating in, and evaluating External Training programs to ensure effective use of resources and alignment with organizational goals.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SCOPE -->
+    <div class="section" id="sec-2">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">2</div>
+        <div class="section-title">SCOPE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <h3 class="sub-heading">2.1 &nbsp; In Scope</h3>
+          <p>This policy applies to all Employees nominated for or requesting participation in training programs conducted by external providers and fully or partially funded by the Company. This includes:</p>
+          <ul>
+            <li>Workshops</li>
+            <li>Seminars</li>
+            <li>Certifications</li>
+            <li>Conferences</li>
+            <li>Online courses</li>
+            <li>Licensures</li>
+            <li>Other similar professional development activities</li>
+          </ul>
+          <h3 class="sub-heading">2.2 &nbsp; Out of Scope</h3>
+          <p>This policy does not apply to the following:</p>
+          <ul>
+            <li>Training programs conducted by the Learning &amp; Development (L&amp;D) team</li>
+            <li>Educational assistance</li>
+            <li>External Training not funded by the Company</li>
+          </ul>
+          <p>For the avoidance of doubt, all provisions related to cost, reimbursement, and repayment obligations shall apply only to the portion of training costs funded by the Company, unless otherwise explicitly stated in the Training Bond Agreement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DEFINITIONS -->
+    <div class="section" id="sec-3">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">3</div>
+        <div class="section-title">DEFINITIONS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>External Training Provider</strong> – A third-party organization or individual delivering training services outside the Company.</li>
+            <li><strong>External Training</strong> – Any learning activity conducted by an external provider, whether in-person or virtual.</li>
+            <li><strong>Vendor Sourcing</strong> – The process of identifying, evaluating, and selecting External Training providers.</li>
+            <li><strong>Training Bond Agreement</strong> – A formal agreement outlining Employee obligations following Company-sponsored training.</li>
+            <li><strong>Sponsoring Department</strong> – The department responsible for initiating or supporting the training request.</li>
+            <li><strong>Knowledge Transfer</strong> – The structured process of sharing knowledge, skills, and insights gained from training with other Employees or teams.</li>
+            <li><strong>RICA Helpdesk</strong> – Internal platform for request, issues, and change assistance.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. POLICY STATEMENT -->
+    <div class="section" id="sec-4">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">4</div>
+        <div class="section-title">POLICY STATEMENT</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>The organization supports Employee development through participation in External Training programs that enhance job performance, professional growth, and organizational capability. All External Training engagements must align with business objectives, follow proper approval processes, and uphold the organization's standards of professionalism and accountability.</p>
+
+          <h3 class="sub-heading">4.1 &nbsp; Employee Eligibility</h3>
+          <p>Employees must meet the following criteria to be eligible for External Training sponsorship:</p>
+          <ul>
+            <li>Full-time regular employment status at the time of application and throughout the training period.</li>
+            <li>No active disciplinary infractions or pending administrative cases, unless approved as an exception by management.</li>
+            <li>Satisfactory performance — at least a "Meets Expectations" rating (or equivalent) in the most recent performance evaluation, and not under a Performance Improvement Plan (PIP) unless the training directly addresses identified performance gaps.</li>
+            <li>Sufficient tenure in role and relevance of the training to current or future responsibilities; operational requirements must also be considered.</li>
+          </ul>
+          <p>Final eligibility is subject to approval by the Employee's immediate supervisor and the L&amp;D Team.</p>
+
+          <h3 class="sub-heading">4.2 &nbsp; Training Request &amp; Approval</h3>
+          <p>All External Training must be requested through the RICA Helpdesk and approved prior to enrollment. Approval must consider alignment with business goals, budget availability, operational impact, and training classification.</p>
+          <p>All requests must be submitted at least 30 working days before the end of the enrollment period. The approval process follows defined SLAs:</p>
+          <ul>
+            <li>Request Submission – Employee submits a complete training request with required details and justification</li>
+            <li>Manager Approval – within 3 working days from submission</li>
+            <li>L&amp;D Evaluation (relevance and vendor validation) – within 10 working days</li>
+            <li>Final Approval from Director and Chiefs (if applicable) – within 5 working days after manager approval and L&amp;D review</li>
+            <li>Finance Review and Approval – within 10 working days after all reviews and approvals are completed</li>
+            <li>Signing of Training Bond – 2 days after funding decision</li>
+          </ul>
+          <p>For training costs below Php 10,000, final approval from Director and Chief is not required; however, Manager approval, L&amp;D evaluation, and Finance validation remain mandatory.</p>
+
+          <p><strong>4.2.1 &nbsp; Approval Matrix</strong></p>
+          <table class="data-table">
+            <thead><tr><th>Training Cost</th><th>Manager</th><th>Director</th><th>Chief</th><th>Finance Controller/CFO</th></tr></thead>
+            <tbody>
+              <tr><td>Up to Php 9,999.99</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td></tr>
+              <tr><td>Php 10,000.00 – 49,999.99</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+              <tr><td>Php 50,000.00 – 99,999.99</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Php 100,000.00 and above</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>4.2.2 &nbsp; Budget Alignment and Pre-Approved Training Plans</strong></p>
+          <p>Training programs included in the department's approved annual budget or training plan shall be considered pre-approved from a budget allocation perspective. However, all External Training requests must still undergo the standard request and approval process to ensure alignment with current business priorities, validation of training details, confirmation of operational readiness, and compliance with Procurement and Finance requirements.</p>
+          <p>Where applicable, budget-approved programs may be subject to streamlined review timelines. Any deviations from the approved budget—including changes in cost, provider, scope, or participant—must be re-evaluated and may require additional approvals.</p>
+
+          <h3 class="sub-heading">4.3 &nbsp; Vendor Sourcing &amp; Selection</h3>
+          <p>External Training providers must undergo a structured sourcing and evaluation process. Selection should be based on provider reputation, industry recognition, content relevance, facilitator expertise, and cost-effectiveness. All vendor sourcing and selection activities shall comply with the organization's Procurement policies, including requirements for vendor accreditation, due diligence, contracting, and approval thresholds. L&amp;D should maintain a preferred vendor list, and new vendors must be vetted in coordination with Procurement before engagement.</p>
+
+          <h3 class="sub-heading">4.4 &nbsp; Cost &amp; Funding</h3>
+          <p>Training costs must be reviewed and approved in advance. Training costs shall include, but are not limited to:</p>
+          <ul>
+            <li>Registration or enrollment fees</li>
+            <li>Examination fees</li>
+            <li>Learning materials</li>
+            <li>Travel and transportation expenses</li>
+            <li>Lodging or accommodation</li>
+            <li>Meal allowances</li>
+            <li>Other incidental expenses, provided that such expenses are clearly defined, justified, and pre-approved</li>
+          </ul>
+          <p>All cost and funding decisions shall comply with the organization's Finance and Procurement policies. No expenses shall be incurred without prior approval and confirmation of available budget.</p>
+
+          <h3 class="sub-heading">4.5 &nbsp; Employee Responsibilities</h3>
+          <p><strong>4.5.1 &nbsp; Knowledge Transfer</strong></p>
+          <p>Employees must actively participate in the training, complete all requirements, and apply acquired knowledge and skills to their roles. Within five (5) working days after the conclusion of the training, employees are required to submit:</p>
+          <ul>
+            <li>Proof of completion</li>
+            <li>A summary of key learnings or takeaways, including how the training will support their role and contribute to the organization</li>
+          </ul>
+          <p>For Type B (Certification-Based) and Type C (Licensure/High-Impact) training, employees may also be required to conduct a structured knowledge transfer session (e.g., presentation, workshop, or documentation) as determined by the L&amp;D Team or Department Head.</p>
+          <p><strong>4.5.2 &nbsp; Company Representation</strong></p>
+          <p>Employees attending External Training act as representatives of the organization and must maintain professional conduct at all times. Employees must protect confidential and proprietary information. Any misconduct or inappropriate behavior during training may result in disciplinary action and may affect future training eligibility.</p>
+
+          <h3 class="sub-heading">4.6 &nbsp; Training Bond &amp; Agreement</h3>
+          <p>The training bond and agreement protects the organization's investment in Employee development. Employees participating in External Training will be required to enter into a training bond or agreement outlining the required service period after training and conditions under which training costs may be reimbursed to the Company.</p>
+
+          <p><strong>4.6.1 &nbsp; Training Classification</strong></p>
+          <table class="data-table">
+            <thead><tr><th>Classification</th><th>Definition</th><th>Examples</th></tr></thead>
+            <tbody>
+              <tr><td>Type A – Developmental Training</td><td>Enhances skills but does not result in formal certification or licensure</td><td>Workshops, seminars, webinars or online learning sessions w/o certification track, product knowledge briefings</td></tr>
+              <tr><td>Type B – Certification-Based Training</td><td>Leads to industry-recognized certifications</td><td>Six Sigma (Yellow/Green/Black Belt), PMP or CAPM, CHRA/CHRP, IT certifications (CompTIA, AWS, Microsoft), ISO Internal Auditor Certifications</td></tr>
+              <tr><td>Type C – Licensure / High-Impact Qualification</td><td>Leads to government-issued licenses or significantly enhances professional qualifications and market value</td><td>PRC licensure, board exam review programs, regulatory-required qualifications, trainings that enable signatory authority or regulatory accountability</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>4.6.2 &nbsp; Bond Amount and Period</strong></p>
+          <p><em>Type A – Developmental Training (Cost-Based)</em></p>
+          <table class="data-table">
+            <thead><tr><th>Training Cost</th><th>Bond Period</th></tr></thead>
+            <tbody>
+              <tr><td>Php 0.01 – Php 9,999.99</td><td>3 months</td></tr>
+              <tr><td>Php 10,000.00 – Php 29,999.99</td><td>6 months</td></tr>
+              <tr><td>Php 30,000.00 – Php 59,999.99</td><td>12 months</td></tr>
+              <tr><td>Php 60,000.00 – Php 99,999.99</td><td>18 months</td></tr>
+              <tr><td>Php 100,000.00 and above</td><td>24 months</td></tr>
+            </tbody>
+          </table>
+          <p><em>Type B – Certification-Based Training (Cost-Based with Minimum Thresholds)</em></p>
+          <table class="data-table">
+            <thead><tr><th>Cost Type</th><th>Training Cost</th><th>Bond Period</th></tr></thead>
+            <tbody>
+              <tr><td>Low Cost</td><td>Up to Php 29,999.99</td><td>6 months</td></tr>
+              <tr><td>Mid to High Cost</td><td>Php 30,000.00 – Php 99,999.99</td><td>12 months</td></tr>
+              <tr><td>High-value or Premium Cost</td><td>Php 100,000.00 and above</td><td>24 months</td></tr>
+            </tbody>
+          </table>
+          <p><em>Type C – Licensure / High-Impact Qualification</em></p>
+          <table class="data-table">
+            <thead><tr><th>Level of Qualification Gained</th><th>Bond Period</th></tr></thead>
+            <tbody>
+              <tr><td>Licensure-related training, review programs, or exam preparation</td><td>12 months</td></tr>
+              <tr><td>Full licensure, regulatory qualifications, or high-impact professional credentials</td><td>24 months</td></tr>
+            </tbody>
+          </table>
+          <p>Where multiple rules apply, the longer bond period shall prevail, subject to a maximum of twenty-four (24) months per training. All bond computations shall be based only on the portion of training costs funded by the Company.</p>
+
+          <p><strong>4.6.3 &nbsp; Repayment Obligations</strong></p>
+          <p>The Employee agrees to reimburse the Company for training-related costs under the following conditions:</p>
+          <ul>
+            <li>Voluntary resignation before completion of the service obligation</li>
+            <li>Termination for Just Cause under Article 297 of the Labor Code of the Philippines</li>
+            <li>Failure to complete the training without a valid documented reason</li>
+            <li>Other Employee-related reasons including non-attendance without valid reason, failure to complete required training outputs, withdrawal without prior approval, or failure to submit post-training requirements</li>
+          </ul>
+          <p>Repayment shall be calculated on a pro-rated basis proportionate to the remaining unserved bond period:</p>
+          <table class="data-table">
+            <thead><tr><th>Remaining Service Period</th><th>Repayment Amount</th></tr></thead>
+            <tbody>
+              <tr><td>100% (before training completion or immediately after)</td><td>100% of the total cost</td></tr>
+              <tr><td>75% of the bond period remaining</td><td>75% of the total cost</td></tr>
+              <tr><td>50% of the bond period remaining</td><td>50% of the total cost</td></tr>
+              <tr><td>25% of the bond period remaining</td><td>25% of the total cost</td></tr>
+              <tr><td>Completed bond period</td><td>No repayment required</td></tr>
+            </tbody>
+          </table>
+          <p>The Company reserves the right to deduct any outstanding amount from the Employee's final pay, subject to applicable labor laws. If the final pay is insufficient, the Employee agrees to settle the remaining balance within thirty (30) calendar days from the date of separation.</p>
+
+          <p><strong>4.6.4 &nbsp; Exceptions</strong></p>
+          <p>Repayment shall not be required if separation is due to termination by the Company for Authorized Causes under Article 298 of the Labor Code of the Philippines (e.g., redundancy, retrenchment, cessation of business), medical incapacity, or other valid and documented reasons beyond the Employee's control.</p>
+
+          <p><strong>4.6.5 &nbsp; Stacking of Bond Terms</strong></p>
+          <p>If the Employee enters into a new Training Bond while an existing bond period is still active, the bond periods shall run concurrently; however, each bond shall remain independently enforceable. In the event of separation while multiple bonds are active, the Employee shall be liable to reimburse the outstanding balance for each bond separately.</p>
+
+          <p><strong>4.6.6 &nbsp; Continuity of the Agreement</strong></p>
+          <p>The Agreement shall remain in force even in the event of transfer, reassignment, or promotion within the Company or any of its affiliates or subsidiaries, unless otherwise waived in writing by the Company.</p>
+
+          <p><strong>4.6.7 &nbsp; Use of Acquired Knowledge and Conflict of Interest</strong></p>
+          <p>The Employee agrees that any knowledge, skills, certifications, or qualifications acquired through the Training covered by the Bond shall be primarily used for the benefit of Dermorepubliq Corporation during the Bond Period. Any external use that results in a direct conflict of interest or competitive disadvantage must be disclosed and may require prior written approval from the Company.</p>
+
+          <h3 class="sub-heading">4.7 &nbsp; Non-Attendance and Withdrawal</h3>
+          <p>Employees are expected to attend and complete all approved External Training. Failure to attend or complete without valid documented justification may result in reimbursement of costs and may affect future training eligibility. Guidelines for withdrawal:</p>
+          <ul>
+            <li><strong>Withdrawal before start date</strong> – must be formally communicated and approved. No penalty applies if cancellation is within the provider's allowable period and no costs are incurred.</li>
+            <li><strong>Late withdrawal or no-show</strong> – where cancellation occurs beyond the provider's allowable period, may result in full or partial forfeiture of training fees.</li>
+            <li><strong>Withdrawal after training has commenced</strong> – must be justified and approved. Costs incurred up to the point of withdrawal shall be assessed accordingly.</li>
+          </ul>
+          <p>All cases of non-attendance or withdrawal shall be reviewed and documented. Repeated occurrences may impact eligibility for future External Training opportunities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RASCI MATRIX -->
+    <div class="section" id="sec-5">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">5</div>
+        <div class="section-title">RASCI MATRIX</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr></thead>
+            <tbody>
+              <tr><td>Assess External Training request</td><td>Department Heads</td><td>Department Heads</td><td>L&amp;D Manager, HR Specialists</td><td>Department Heads</td><td>Employee</td></tr>
+              <tr><td>Assess eligibility of Employee for External Training</td><td>Department Heads</td><td>Department Heads</td><td>L&amp;D Manager, HR Specialists</td><td>Department Heads</td><td>Employee</td></tr>
+              <tr><td>Source and select External Training providers</td><td>L&amp;D Manager, Department Heads</td><td>L&amp;D Manager, Department Heads</td><td>Procurement Specialist</td><td>Procurement Specialist</td><td>Department Heads, Employee</td></tr>
+              <tr><td>Approve and disburse the training budget</td><td>Finance</td><td>Finance</td><td>Procurement Specialist, Department Heads, Employee</td><td>L&amp;D Manager, Department Heads</td><td>Directors and Chiefs</td></tr>
+              <tr><td>Complete all training requirements</td><td>Employee</td><td>Employee</td><td>L&amp;D Manager, Department Heads</td><td>L&amp;D Manager, Department Heads, HR Specialist</td><td>L&amp;D Manager, Department Heads</td></tr>
+              <tr><td>Conduct knowledge sharing sessions</td><td>Employee</td><td>L&amp;D Manager</td><td>Immediate Supervisor</td><td>L&amp;D Manager</td><td>Department Head</td></tr>
+              <tr><td>Prepare Training Bond Agreement</td><td>L&amp;D Manager</td><td>L&amp;D Director</td><td>Department Heads, HR Managers, Employee, Directors and Chiefs</td><td>Department Heads, HR Specialist</td><td>Department Heads, HR Specialist</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. GOVERNANCE AND COMPLIANCE -->
+    <div class="section" id="sec-6">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">6</div>
+        <div class="section-title">GOVERNANCE AND COMPLIANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy is governed by the Learning and Development (L&amp;D) Team in coordination with Department Heads, Finance, and Procurement to ensure proper implementation, consistency, and alignment with organizational objectives.</p>
+
+          <h3 class="sub-heading">6.1 &nbsp; Compliance</h3>
+          <p>Compliance with this policy is monitored through audit checks and training records, including validation of eligibility, adherence to approval workflows, vendor sourcing requirements, financial controls, and completion of post-training and knowledge transfer requirements. Regular reviews shall be conducted to assess policy effectiveness, identify gaps, and implement corrective actions where necessary.</p>
+
+          <h3 class="sub-heading">6.2 &nbsp; Enforcement</h3>
+          <p>Enforcement is applied through established approval controls, documentation requirements, and accountability mechanisms. Non-compliance—including unauthorized training participation, failure to meet requirements, or misuse of training funds—may result in cost recovery, disqualification from future External Training opportunities, and disciplinary measures in accordance with Company policies. Continuous non-compliance will be escalated to management for appropriate action.</p>
+          <p>This Policy serves as the governing document for all External Training activities. All related procedures, agreements, and supporting documents must align with and operate within the provisions of this Policy. In case of any inconsistency, this Policy shall prevail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. RELATED DOCUMENTS -->
+    <div class="section" id="sec-7">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">7</div>
+        <div class="section-title">RELATED DOCUMENTS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li>LD-SOP-009-1.0-2026 — External Training Request</li>
+            <li>LD-SOP-010-1.0-2026 – Post External Training Documentation</li>
+            <li>LD-TMP-013-1.0-2026 — Training Bond Agreement</li>
+            <li>FIN-SOP-002-2.0-2026 – General Accounting – Accounts Payable</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. DOCUMENT REVIEW AND MAINTENANCE -->
+    <div class="section" id="sec-8">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">8</div>
+        <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This policy will be reviewed annually or as needed by the L&amp;D manager to ensure continued relevance and alignment with organizational goals. Updates will be communicated to all stakeholders and implemented accordingly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. REVISION AND CHANGE LOGS -->
+    <div class="section" id="sec-9">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">9</div>
+        <div class="section-title">REVISION AND CHANGE LOGS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr></thead>
+            <tbody>
+              <tr><td>1.0</td><td>Joseph San Jose</td><td>March 19, 2026</td><td>Created the first version</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <footer class="doc-footer">
+    <div class="footer-left">
+      DR-POL-L&amp;D-004 &nbsp;&middot;&nbsp; Version 1.0 &nbsp;&middot;&nbsp; Effective May 12, 2026
+      <br/>&#169;2026 Dermorepubliq Corporation. All rights reserved.
+      <br/><span class="confidential-tag">Internal Use Only</span>
+    </div>
+    <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+  </footer>
+</div>
+<script>
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.nextElementSibling.classList.toggle('collapsed', expanded);
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'true');
+      b.nextElementSibling.classList.remove('collapsed');
+    });
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.add('collapsed');
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dermorepubliq — Post External Training Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--doc-accent:#83AA6E;--doc-accent-light:#EAF2E5;--font:'Poppins',sans-serif;--text:#121212;--text-muted:#5f5144;--border:#DBD3C9;--bg:#F7F6F3;--white:#ffffff;--dermo-onyx:#121212;--stone-taupe:#989187;--clinical-white:#F7F6F3;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
+    .page{max-width:860px;margin:40px auto;background:var(--white);border:1px solid var(--border);position:relative;overflow:hidden;}
+    .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--doc-accent);}
+    .doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:32px 40px 24px 52px;border-bottom:1px solid var(--border);}
+    .logo-text{font-size:18px;font-weight:700;letter-spacing:0.08em;color:var(--dermo-onyx);text-transform:uppercase;}
+    .logo-text span{font-weight:300;}
+    .doc-type-badge{display:inline-block;margin-top:8px;padding:3px 12px;background:var(--doc-accent);color:#ffffff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
+    .doc-meta{text-align:right;font-size:11px;color:var(--stone-taupe);line-height:1.9;}
+    .doc-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+    .title-block{padding:28px 40px 24px 52px;border-bottom:1px solid var(--border);background:var(--doc-accent-light);}
+    .title-block h1{font-size:22px;font-weight:700;color:var(--dermo-onyx);line-height:1.3;margin-bottom:6px;}
+    .title-block .doc-id{font-size:11px;font-weight:500;color:var(--doc-accent);letter-spacing:0.08em;text-transform:uppercase;}
+    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+    .info-cell{padding:14px 16px;border-right:1px solid var(--border);}
+    .info-cell:last-child{border-right:none;}
+    .info-cell:first-child{padding-left:52px;}
+    .info-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone-taupe);margin-bottom:3px;}
+    .info-value{font-size:12px;font-weight:500;color:var(--text);}
+    .doc-body{padding:32px 40px 32px 52px;}
+    .section{margin-bottom:28px;}
+    .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--doc-accent);}
+    .section-number{width:26px;height:26px;background:var(--doc-accent);color:#ffffff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
+    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dermo-onyx);}
+    .doc-body p{font-size:13px;color:var(--text);margin-bottom:10px;}
+    .doc-body ul,.doc-body ol{padding-left:20px;margin-bottom:10px;}
+    .doc-body li{font-size:13px;color:var(--text);margin-bottom:5px;}
+    .subsection-title{font-size:12px;font-weight:700;color:var(--doc-accent);text-transform:uppercase;letter-spacing:0.05em;margin:16px 0 6px;}
+    .doc-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 40px 14px 52px;border-top:1px solid var(--border);background:var(--clinical-white);}
+    .doc-footer .footer-left{font-size:10px;color:var(--stone-taupe);line-height:1.6;}
+    .doc-footer .footer-right{font-size:10px;color:var(--stone-taupe);text-align:right;}
+    .confidential-tag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-taupe);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-taupe);border-radius:2px;margin-top:4px;}
+    @media print{body{background:white;}.page{margin:0;border:none;max-width:100%;}.accent-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="accent-bar"></div>
+    <header class="doc-header">
+      <div class="brand-block">
+        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
+        <div class="doc-type-badge">Standard Operating Procedure</div>
+      </div>
+      <div class="doc-meta">
+        <strong>DR-SOP-L&amp;D-010</strong>
+        Document ID
+        <br/>Version 1.0
+        <br/>Effective: May 12, 2026
+      </div>
+    </header>
+    <div class="title-block">
+      <div class="doc-id">SOP · Learning &amp; Development</div>
+      <h1>Post External Training Documentation</h1>
+    </div>
+    <div class="info-grid">
+      <div class="info-cell"><div class="info-label">Department</div><div class="info-value">Learning &amp; Development</div></div>
+      <div class="info-cell"><div class="info-label">Document Owner</div><div class="info-value">L&amp;D Director</div></div>
+      <div class="info-cell"><div class="info-label">Responsible Dept.</div><div class="info-value">Human Resources</div></div>
+      <div class="info-cell"><div class="info-label">Classification</div><div class="info-value">Internal Use Only</div></div>
+    </div>
+    <div class="doc-body">
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div class="section-title">PURPOSE</div>
+        </div>
+        <p>To establish a standardized process for documenting completion of approved external training</p>
+<p>and verifying proof of knowledge transfer, ensuring that external learning outcomes are captured,</p>
+<p>shared, traceable, and reflected in employee and training records.</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div class="section-title">SCOPE</div>
+        </div>
+        <p class="subsection-title">2.1. In Scope</p>
+<p>This SOP covers:</p>
+<ul><li></li></ul>
+<p>Documentation of completed external training programs delivered by third-party</p>
+<p>providers, including seminars, workshops, certifications, conferences, and externally</p>
+<p>hosted courses.</p>
+<ul><li></li></ul>
+<p>Submission and validation of proof of training completion, such as certificates,</p>
+<p>attendance records, completion emails, digital badges, transcripts, or assessment</p>
+<p>results.</p>
+<ul><li></li></ul>
+<p>Documentation of knowledge transfer activities conducted after external training,</p>
+<p>where required by the External Training Policy, training approval conditions, or L&amp;D</p>
+<p>assessment.</p>
+<ul><li></li></ul>
+<p>Review, acceptance, record updating, and closure of post-training documentation</p>
+<p>in the official ticketing and/or training record system.</p>
+<ul><li></li></ul>
+<p>Responsibilities of the requesting employee, immediate supervisor, L&amp;D, HR, and</p>
+<p>Department Head in ensuring completion of evidence and knowledge transfer</p>
+<p>proof are complete and accurate.</p>
+<p class="subsection-title">2.2. Out of Scope</p>
+<p>This SOP does not cover:</p>
+<ul><li></li></ul>
+<p>External training request submission, evaluation, approval, funding, and enrollment</p>
+<p>processes.</p>
+<ul><li></li></ul>
+<p>Vendor sourcing, procurement, payment processing, reimbursement, or training</p>
+<p>bond execution.</p>
+<ul><li></li></ul>
+<p>Design and delivery of internal training programs that are not linked to an</p>
+<p>approved external training completion requirement.</p>
+<ul><li></li></ul>
+<p>Assessment of whether an employee should attend external training before</p>
+<p>approval.</p>
+<ul><li></li></ul>
+<p>Performance management actions unrelated to training completion</p>
+<p>documentation or knowledge transfer proof.</p>
+<p class="subsection-title">2.3. Process Start and End</p>
+<p>The process begins when the employee completes an approved external training program</p>
+<p>or receives completion evidence from the third-party provider.</p>
+<p>The process ends when L&amp;D verifies completion evidence and knowledge transfer proof, HR</p>
+<p>or the designated records owner updates the employee training record, and the ticket or</p>
+<p>record is closed.</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div class="section-title">REFERENCES</div>
+        </div>
+        <ul><li></li></ul>
+<p>LD-POL-004-1.0-2026 - External Training</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div class="section-title">DEFINITIONS</div>
+        </div>
+        <ul><li></li></ul>
+<p>External Training - Any learning intervention delivered by a third-party provider outside</p>
+<p>the organization.</p>
+<ul><li></li></ul>
+<p>Proof of Completion - Documentary evidence that the employee attended, completed,</p>
+<p>passed, or obtained recognition for the external training.</p>
+<ul><li></li></ul>
+<p>Knowledge Transfer - A structured activity where the trained employee shares relevant</p>
+<p>learnings, tools, methods, or action points with appropriate internal stakeholders.</p>
+<ul><li></li></ul>
+<p>Proof of Knowledge Transfer - Evidence that knowledge transfer was planned, conducted,</p>
+<p>attended, and documented, including materials, attendance, recordings, assessments, or</p>
+<p>sign-offs.</p>
+<ul><li></li></ul>
+<p>Training Record - The official record maintained by L&amp;D, HR, or the designated system</p>
+<p>reflecting completed training and supporting documentation.</p>
+<ul><li></li></ul>
+<p>RICA Helpdesk - Requests, Incidents, &amp; Change Assistant Helpdesk, or the official ticketing</p>
+<p>system used to submit and track training-related documentation.</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <div class="section-title">RASCI MATRIX</div>
+        </div>
+        <p>Activity R A S C I</p>
+<p>Employee, Department</p>
+<p>Ticket filing L&amp;D Manager L&amp;D Manager Employee Immediate Head, L&amp;D</p>
+<p>Supervisor director</p>
+<p>Submission of Department</p>
+<p>Requesting Requesting Immediate L&amp;D</p>
+<p>proof of Head, L&amp;D</p>
+<p>Employee Employee Supervisor manager</p>
+<p>completion director</p>
+<p>Immediate</p>
+<p>Supervisor,</p>
+<p>Documentation</p>
+<p>L&amp;D Manager L&amp;D Manager Employee Department HR Specialist,</p>
+<p>Review</p>
+<p>Head, L&amp;D</p>
+<p>director</p>
+<p>Target</p>
+<p>Proof of Participants,</p>
+<p>Requesting Immediate Immediate</p>
+<p>knowledge L&amp;D Manager Department</p>
+<p>Employee Supervisor Supervisor</p>
+<p>transfer Head, L&amp;D</p>
+<p>director</p>
+<p>Validate Department</p>
+<p>Immediate</p>
+<p>knowledge L&amp;D Manager L&amp;D Manager Head, L&amp;D HR Specialist</p>
+<p>Supervisor</p>
+<p>transfer director</p>
+<p>Department</p>
+<p>Training record HR Specialist / HR Manager / Immediate</p>
+<p>Employee Head, L&amp;D</p>
+<p>update L&amp;D Manager L&amp;D Manager Supervisor</p>
+<p>Director</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">6</div>
+          <div class="section-title">PROCESS FLOW DIAGRAM</div>
+        </div>
+        
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">7</div>
+          <div class="section-title">PROCEDURE</div>
+        </div>
+        <p class="subsection-title">7.1. Ticket Submission</p>
+<p>The L&amp;D Manager files a ticket on behalf of the employee within five (5) working days after</p>
+<p>the employee completes the training or receives completion documentation from the</p>
+<p>provider.</p>
+<p class="subsection-title">7.2. Submit Proof of Completion</p>
+<p>7.2.1. The employee must complete the External Training Feedback Form, which captures</p>
+<p>training relevance, key learning points, immediate application opportunities, and</p>
+<p>recommended follow-up actions.</p>
+<p>7.2.2. The employee attaches proof of external training completion to the ticket. Acceptable</p>
+<p>proof of completion may include:</p>
+<ul><li></li></ul>
+<p>Certificate of completion, attendance, passing, or certification;</p>
+<ul><li></li></ul>
+<p>Provider-issued attendance report, completion email, transcript, digital</p>
+<p>badge, or examination result;</p>
+<ul><li></li></ul>
+<p>Screenshot or system-generated completion record from the provider</p>
+<p>platform, provided that required details are visible;</p>
+<ul><li></li></ul>
+<p>Other official provider confirmation accepted by L&amp;D.</p>
+<p>Completion evidence must clearly show, where available, the employee&#x27;s name,</p>
+<p>training title, provider name, completion or attendance date, training duration or hours,</p>
+<p>and result or credential information.</p>
+<p>For certifications, licensure, or programs with formal assessment results, the employee</p>
+<p>shall include the result status and any credential validity period, renewal requirement, or</p>
+<p>continuing education condition, when applicable.</p>
+<p>This step must be completed within three (3) working days. Once completed, the ticket</p>
+<p>is routed to Step 7.3.</p>
+<p class="subsection-title">7.3. Documentation Review</p>
+<p>The L&amp;D manager reviews the submitted proof of completion within five (5) working days</p>
+<p>from submission. The review shall confirm whether the submitted document is legible,</p>
+<p>complete, relevant to the approved training, and sufficient for recordkeeping.</p>
+<p>If documentation is incomplete, unclear, or inconsistent with the approved training, the L&amp;D</p>
+<p>manager shall return the ticket to Step 7.2 with required corrections or additional evidence.</p>
+<p>If documentation is valid and complete, the ticket is routed to Step 7.3.</p>
+<p class="subsection-title">7.4. Proof of Knowledge Transfer</p>
+<p>The employee uploads proof of knowledge transfer within twenty (20) working days after</p>
+<p>the activity. Acceptable proof may include one or more of the following, depending on the</p>
+<p>approved method:</p>
+<ul><li></li></ul>
+<p>Knowledge Transfer Report or summary of topics covered, key insights, action</p>
+<p>points, and recommendations;</p>
+<ul><li></li></ul>
+<p>Attendance sheet, participant list, or system attendance report;</p>
+<ul><li></li></ul>
+<p>Presentation deck, job aid, process guide, checklist, recording, or shared learning</p>
+<p>material;</p>
+<ul><li></li></ul>
+<p>Participant feedback, acknowledgement, short quiz results, discussion notes, or</p>
+<p>supervisor sign-off;</p>
+<ul><li></li></ul>
+<p>Evidence of application, such as updated work instruction, improvement proposal,</p>
+<p>coaching log, or implementation action plan.</p>
+<p>Proof of knowledge transfer must be sufficient to show that the learning was shared with</p>
+<p>the intended audience and that participants had an opportunity to receive, discuss, and</p>
+<p>apply the transferred knowledge.</p>
+<p>The ticket is routed to Step 7.5 upon completion of this task.</p>
+<p>If knowledge transfer is not required for a particular external training, then proceed to Step</p>
+<p>7.6.</p>
+<p class="subsection-title">7.5. Validate Knowledge Transfer</p>
+<p>L&amp;D reviews proof of knowledge transfer within five (5) working days from submission.</p>
+<p>Validation shall confirm that the activity was conducted, the target audience was covered,</p>
+<p>materials or outputs were attached, and the proof supports the approved training</p>
+<p>objectives.</p>
+<p>If proof is incomplete, the L&amp;D manager shall return the ticket to Step 7.4 for correction,</p>
+<p>additional evidence, or rescheduling of the knowledge transfer activity, as applicable.</p>
+<p>If the proof is valid and complete, the training record is updated, and the ticket is routed to</p>
+<p>Step 7.6.1.</p>
+<p class="subsection-title">7.6. Employee Record Update and Closure</p>
+<p>7.6.1. The HR Specialist acknowledges the submissions and updates employee records.</p>
+<p>7.6.2. The employee adds their External Learning Record in Dermorepubliq University.</p>
+<p>7.6.3. The employee verifies completion and closes the ticket.</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">8</div>
+          <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
+        </div>
+        <ul><li></li></ul>
+<p>External Training Feedback Form</p>
+<ul><li></li></ul>
+<p>RICA Helpdesk</p>
+<ul><li></li></ul>
+<p>Dermorepubliq University</p>
+<p>9. KPI and COMPLIANCE</p>
+<p>The following KPI is established to monitor the timeliness, completeness, and compliance of</p>
+<p>external training completion documentation and knowledge transfer proof:</p>
+<p>KPI / Metric Target Frequency Responsible Monitoring Tool</p>
+<p>On-time Processing Rate ≥ 90% Quarterly L&amp;D RICA Helpdesk Reports</p>
+<p>(requests completed within SLA)</p>
+<p>Failure to submit complete documentation or proof of knowledge transfer may result in delayed</p>
+<p>ticket closure, incomplete training records, escalation to the immediate supervisor or Department</p>
+<p>Head, and other actions in accordance with applicable policies. Repeated non-compliance may</p>
+<p>be subject to management review.</p>
+<p>Records shall be retained in the designated system or repository in accordance with applicable</p>
+<p>HR and document retention requirements. Documents must be legible, traceable, and accessible</p>
+<p>to authorized reviewers for audit and reporting purposes.</p>
+<p>10.DOCUMENT REVIEW AND MAINTENANCE</p>
+<p>The L&amp;D Manager is responsible for maintaining and updating this SOP in coordination with HR</p>
+<p>and relevant stakeholders. This SOP shall be reviewed annually or as needed due to changes in</p>
+<p>the External Training Policy, documentation requirements, ticketing system workflow, audit</p>
+<p>findings, or organizational structure. All revisions must be approved, documented, communicated,</p>
+<p>and stored in the official document repository.</p>
+      </div>
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number">9</div>
+          <div class="section-title">REVISION AND CHANGE LOGS</div>
+        </div>
+        <p>Version Author Date Summary of Change(s)</p>
+<p class="subsection-title">1.0 Joseph San Jose May 7, 2026 Created the first version</p>
+      </div>
+    </div>
+    <footer class="doc-footer">
+      <div class="footer-left">
+        DR-SOP-L&amp;D-010 · Version 1.0 · Effective May 12, 2026
+        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
+        <br/><span class="confidential-tag">Internal Use Only</span>
+      </div>
+      <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+    </footer>
+  </div>
+</body>
+</html>

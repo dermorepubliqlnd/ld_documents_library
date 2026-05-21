@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>L&amp;D Documents Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --clinical-white: #F7F6F3;
+      --soft-linen:     #DBD3C9;
+      --stone-taupe:    #989187;
+      --warm-mahogany:  #5f5144;
+      --dermo-onyx:     #121212;
+
+      --policy:         #121212;
+      --policy-light:   #EBEBEB;
+      --sop:            #83AA6E;
+      --sop-light:      #EAF2E5;
+      --wi:             #E18B64;
+      --wi-light:       #FBF0E9;
+      --guidelines:     #7843A6;
+      --guidelines-light:#F0E8F8;
+      --test:           #F1D53D;
+      --test-light:     #FDFBE8;
+
+      --font: 'Poppins', sans-serif;
+      --sidebar-w: 240px;
+      --bg: #F7F6F3;
+      --white: #ffffff;
+      --border: #E0DAD3;
+      --text: #121212;
+      --text-muted: #989187;
+      --text-sub: #5f5144;
+      --hover-bg: #F0EDE8;
+      --sidebar-bg: #1E1E1E;
+      --sidebar-text: #E8E4DF;
+      --sidebar-muted: #888;
+      --sidebar-hover: #2E2E2E;
+      --sidebar-active: #3A3A3A;
+      --topbar-h: 60px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      height: var(--topbar-h);
+      background: var(--dermo-onyx);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+      flex-shrink: 0;
+      z-index: 100;
+      position: relative;
+    }
+    .topbar-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .topbar-logo span { font-weight: 300; }
+    .topbar-logo sup { font-size: 8px; vertical-align: super; }
+    .topbar-divider {
+      width: 1px; height: 22px;
+      background: #444;
+      flex-shrink: 0;
+    }
+    .topbar-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .topbar-search {
+      flex: 1;
+      max-width: 420px;
+      margin-left: auto;
+      position: relative;
+    }
+    .topbar-search input {
+      width: 100%;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 8px 14px 8px 38px;
+      font-family: var(--font);
+      font-size: 12px;
+      color: #eee;
+      outline: none;
+      transition: border 0.15s;
+    }
+    .topbar-search input::placeholder { color: #666; }
+    .topbar-search input:focus { border-color: #666; }
+    .topbar-search .search-icon {
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .topbar-count {
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      flex-shrink: 0;
+      overflow-y: auto;
+      padding: 16px 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+    .nav-section { margin-bottom: 6px; }
+    .nav-section-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sidebar-muted);
+      padding: 10px 18px 5px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px;
+      cursor: pointer;
+      transition: background 0.12s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { background: var(--sidebar-hover); }
+    .nav-item.active {
+      background: var(--sidebar-active);
+      border-left-color: var(--item-color, #83AA6E);
+    }
+    .nav-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--item-color, #999);
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    .nav-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--sidebar-text);
+      flex: 1;
+    }
+    .nav-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--sidebar-muted);
+      background: #2a2a2a;
+      padding: 1px 7px;
+      border-radius: 10px;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 8px 18px;
+    }
+
+    /* ── CONTENT AREA ── */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+    }
+    .content::-webkit-scrollbar { width: 6px; }
+    .content::-webkit-scrollbar-thumb { background: var(--soft-linen); border-radius: 3px; }
+
+    /* Section heading */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-heading-bar {
+      width: 4px; height: 22px;
+      border-radius: 2px;
+      background: var(--active-color, var(--sop));
+      flex-shrink: 0;
+    }
+    .section-heading h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .section-heading .section-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ── DOCUMENT GRID ── */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    /* ── DOCUMENT CARD ── */
+    .doc-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: box-shadow 0.15s, transform 0.15s;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .doc-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+    .doc-card-top {
+      height: 5px;
+      background: var(--card-color, var(--sop));
+      flex-shrink: 0;
+    }
+    .doc-card-body {
+      padding: 16px 16px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .doc-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      background: var(--card-light, #EAF2E5);
+      color: var(--card-color, var(--sop));
+    }
+    .doc-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 5px;
+      min-height: 38px;
+    }
+    .doc-card-id {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 10px;
+      flex: 1;
+    }
+    .doc-card-meta {
+      display: flex;
+      gap: 14px;
+      font-size: 10px;
+      color: var(--text-muted);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .doc-card-meta span { display: flex; align-items: center; gap: 4px; }
+
+    .doc-card-actions {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px 14px;
+    }
+    .btn-view {
+      flex: 1;
+      padding: 7px 0;
+      background: var(--card-color, var(--sop));
+      color: var(--btn-text, #ffffff);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      transition: opacity 0.12s;
+    }
+    .btn-view:hover { opacity: 0.85; }
+    .btn-pdf {
+      padding: 7px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: border-color 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+    .btn-pdf:hover { border-color: var(--card-color); color: var(--card-color); }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state .empty-icon { font-size: 36px; margin-bottom: 12px; }
+    .empty-state h3 { font-size: 15px; font-weight: 600; color: var(--text-sub); margin-bottom: 6px; }
+    .empty-state p { font-size: 13px; }
+
+    /* Group separator */
+    .group-label {
+      grid-column: 1 / -1;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 0 2px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2px;
+    }
+
+    /* ── SIDE PEEK ── */
+    .peek-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.22);
+      z-index: 200;
+      cursor: pointer;
+    }
+    .peek-backdrop.open { display: block; }
+
+    .peek-panel {
+      position: fixed;
+      top: var(--topbar-h);
+      right: 0;
+      width: 60%;
+      height: calc(100vh - var(--topbar-h));
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      box-shadow: -6px 0 32px rgba(0,0,0,0.13);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    .peek-panel.open  { transform: translateX(0); }
+    .peek-panel.fullscreen { top: 0; width: 100%; height: 100vh; }
+
+    .peek-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--clinical-white);
+      flex-shrink: 0;
+      gap: 12px;
+    }
+    .peek-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+    .peek-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .peek-btn {
+      font-family: var(--font);
+      font-size: 13px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+      line-height: 1;
+    }
+    .peek-btn:hover { border-color: var(--dermo-onyx); color: var(--dermo-onyx); background: var(--hover-bg); }
+    .peek-btn.danger:hover { border-color: #b00020; color: #b00020; }
+    .peek-frame { flex: 1; border: none; width: 100%; background: var(--bg); }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">DERMO<span>REPUBLIQ</span><sup>®</sup></div>
+  <div class="topbar-divider"></div>
+  <div class="topbar-title">L&amp;D Documents Library</div>
+  <div class="topbar-search">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search by title, document ID, or keyword…"/>
+  </div>
+  <div class="topbar-count" id="result-count"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-section">
+      <div class="nav-section-label">Browse</div>
+      <div class="nav-item active" data-filter="all" style="--item-color:#989187;" onclick="filterNav(this,'all')">
+        <div class="nav-dot" style="background:#989187;"></div>
+        <span class="nav-label">All Documents</span>
+        <span class="nav-badge" id="count-all">0</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Document Type</div>
+      <div class="nav-item" data-filter="Policy" style="--item-color:#aaaaaa;" onclick="filterNav(this,'Policy')">
+        <div class="nav-dot" style="background:#ffffff; border: 2px solid #aaaaaa;"></div>
+        <span class="nav-label">Policy</span>
+        <span class="nav-badge" id="count-Policy">0</span>
+      </div>
+      <div class="nav-item" data-filter="SOP" style="--item-color:#83AA6E;" onclick="filterNav(this,'SOP')">
+        <div class="nav-dot" style="background:#83AA6E;"></div>
+        <span class="nav-label">Standard Operating Procedure</span>
+        <span class="nav-badge" id="count-SOP">0</span>
+      </div>
+      <div class="nav-item" data-filter="Guidelines" style="--item-color:#7843A6;" onclick="filterNav(this,'Guidelines')">
+        <div class="nav-dot" style="background:#7843A6;"></div>
+        <span class="nav-label">Guidelines</span>
+        <span class="nav-badge" id="count-Guidelines">0</span>
+      </div>
+      <div class="nav-item" data-filter="Template" style="--item-color:#5f5144;" onclick="filterNav(this,'Template')">
+        <div class="nav-dot" style="background:#5f5144;"></div>
+        <span class="nav-label">Template</span>
+        <span class="nav-badge" id="count-Template">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="section-heading">
+      <div class="section-heading-bar" id="heading-bar"></div>
+      <h2 id="heading-title">All Documents</h2>
+      <span class="section-count" id="heading-count"></span>
+    </div>
+    <div class="doc-grid" id="doc-grid"></div>
+  </div>
+
+</div>
+
+<script>
+  // ── DOC TYPE CONFIG ──
+  const types = {
+    'Policy':      { color: '#121212', light: '#EBEBEB', btnText: '#ffffff' },
+    'SOP':         { color: '#83AA6E', light: '#EAF2E5', btnText: '#ffffff' },
+    'Guidelines':  { color: '#7843A6', light: '#F0E8F8', btnText: '#ffffff' },
+    'Template':    { color: '#5f5144', light: '#EDE8E3', btnText: '#ffffff' },
+  };
+
+  const typeLabels = {
+    'Policy':      'Policy',
+    'SOP':         'SOP',
+    'Guidelines':  'Guidelines',
+    'Template':    'Template',
+  };
+
+  // ── DOCUMENT DATA ──
+  // htmlUrl: link to the HTML version of the document (use '#' if not yet converted)
+  // pdfUrl:  link to the source PDF file (use '#' if not available locally)
+  // note:    optional — shown as a small label on the card (e.g. 'Pending sync')
+  const documents = [
+
+    // ── POLICIES ──────────────────────────────────────────────────────────────
+
+    {
+      id: 'DR-POL-L&D-001',
+      title: 'New Hire Onboarding Journey',
+      type: 'Policy',
+      version: '1.1',
+      date: 'Apr 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-POL-LD-001.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQBHFqpLwWKwRJ3PK11HldoMAXKqvuA4yrvfFSJrrgU1bGo?e=AW4RFs',
+    },
+    {
+      id: 'DR-POL-L&D-003',
+      title: 'Training Program Development Policy',
+      type: 'Policy',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-POL-L&D-004',
+      title: 'External Training Policy',
+      type: 'Policy',
+      version: '1.0',
+      date: 'May 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-POL-LD-004.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQBxuYUNZOwXTZDBVpBEwexrARnyO4qgPGXqYGrSlOqdnBM?e=vOKYOH',
+    },
+
+    // ── SOPs ──────────────────────────────────────────────────────────────────
+
+    {
+      id: 'DR-SOP-L&D-001',
+      title: 'Integration Phase',
+      type: 'SOP',
+      version: '1.0',
+      date: 'Apr 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-001.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQBK6WfEUwfHSrJUQEK38VgZAR1hRogaWzUd4geOM7auoJM?e=lql3GP',
+    },
+    {
+      id: 'DR-SOP-L&D-002',
+      title: 'Pre-Boarding and Orientation Phases',
+      type: 'SOP',
+      version: '1.0',
+      date: 'Apr 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-002.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQDiwa3_JFj7Qq0AElYvUzUnATPvGNuigHu4UShkJDp_ryM?e=hnoPqO',
+    },
+    {
+      id: 'DR-SOP-L&D-003',
+      title: 'Early and Sustained Performance Phases',
+      type: 'SOP',
+      version: '1.0',
+      date: 'Apr 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-003.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQB7PkOhK1KxSYATZDeFuVETAY9BOj6UVaMApJscdHR7A1g?e=fdc6Ed',
+    },
+    {
+      id: 'DR-SOP-L&D-004',
+      title: 'L&D Project Intake Request',
+      type: 'SOP',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-004.html',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-SOP-L&D-005',
+      title: 'Immersion Program',
+      type: 'SOP',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-005.html',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-SOP-L&D-006',
+      title: 'Training Needs Analysis',
+      type: 'SOP',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-SOP-L&D-007',
+      title: 'Instructional Design',
+      type: 'SOP',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-SOP-L&D-008',
+      title: 'Content Development',
+      type: 'SOP',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-SOP-L&D-009',
+      title: 'External Training Request',
+      type: 'SOP',
+      version: '1.0',
+      date: 'May 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-009.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQC4EqdsuUwAQIHLafO9nLkbAablMdtevygukQc_AzgzDDw?e=YUY9xI',
+    },
+    {
+      id: 'DR-SOP-L&D-010',
+      title: 'Post External Training Documentation',
+      type: 'SOP',
+      version: '1.0',
+      date: 'May 2026',
+      department: 'L&D',
+      htmlUrl: 'DR-SOP-LD-010.html',
+      pdfUrl: 'https://dermorepubliqms-my.sharepoint.com/:b:/g/personal/lnd_onedrive_dermorepubliq_com/IQAa86xfTizjTrHWfmUFCqbWAf9vOXMrkWC4rLuT0ml-kSw?e=OrjZIh',
+    },
+
+    // ── GUIDELINES ────────────────────────────────────────────────────────────
+
+    {
+      id: 'DR-GDL-L&D-003',
+      title: 'E-Learning Development Guidelines',
+      type: 'Guidelines',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+
+    // ── TEMPLATES ─────────────────────────────────────────────────────────────
+
+    {
+      id: 'DR-TMP-L&D-006',
+      title: 'Content Development QA Checklist',
+      type: 'Template',
+      version: '2.0',
+      date: '2025',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-TMP-L&D-010',
+      title: 'Immersion Checklist',
+      type: 'Template',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: 'DR-TMP-LD-010.html',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-TMP-L&D-011',
+      title: 'Intake Triage Tool',
+      type: 'Template',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '../../Project Intake Request/LD-TMP-011-1.0-2026 - Intake Triage Tool.xlsm',
+      note: 'Excel (.xlsm)',
+    },
+    {
+      id: 'DR-TMP-L&D-012',
+      title: 'Instructional Design QA Checklist',
+      type: 'Template',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: '#',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+    {
+      id: 'DR-TMP-L&D-013',
+      title: 'Training Bond Agreement',
+      type: 'Template',
+      version: '1.0',
+      date: '2026',
+      department: 'L&D',
+      htmlUrl: 'DR-TMP-LD-013.html',
+      pdfUrl: '#',
+      note: 'In Progress',
+    },
+  ];
+
+  // STATE
+  let activeFilter = 'all';
+  let searchQuery  = '';
+
+  // FILTER & RENDER
+  function getFiltered() {
+    return documents.filter(doc => {
+      const matchType   = activeFilter === 'all' || doc.type === activeFilter;
+      const q           = searchQuery.toLowerCase();
+      const matchSearch = !q ||
+        doc.title.toLowerCase().includes(q) ||
+        doc.id.toLowerCase().includes(q) ||
+        doc.type.toLowerCase().includes(q) ||
+        doc.department.toLowerCase().includes(q);
+      return matchType && matchSearch;
+    });
+  }
+
+  function render() {
+    const filtered = getFiltered();
+    const grid = document.getElementById('doc-grid');
+    grid.innerHTML = '';
+
+    const headingTitle = document.getElementById('heading-title');
+    const headingBar   = document.getElementById('heading-bar');
+    const headingCount = document.getElementById('heading-count');
+    const typeColor    = activeFilter === 'all' ? '#989187' : types[activeFilter]?.color || '#989187';
+    headingBar.style.background = typeColor;
+    headingTitle.textContent    = activeFilter === 'all' ? 'All Documents' : typeLabels[activeFilter] || activeFilter;
+    headingCount.textContent    = `${filtered.length} document${filtered.length !== 1 ? 's' : ''}`;
+
+    document.getElementById('result-count').textContent =
+      searchQuery ? `${filtered.length} result${filtered.length !== 1 ? 's' : ''}` : '';
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">&#128194;</div>
+          <h3>No documents found</h3>
+          <p>Try a different search term or filter.</p>
+        </div>`;
+      return;
+    }
+
+    if (activeFilter === 'all') {
+      const grouped = {};
+      filtered.forEach(doc => {
+        if (!grouped[doc.type]) grouped[doc.type] = [];
+        grouped[doc.type].push(doc);
+      });
+      const order = ['Policy','SOP','Guidelines','Template'];
+      order.forEach(type => {
+        if (!grouped[type]) return;
+        const label = document.createElement('div');
+        label.className = 'group-label';
+        label.textContent = typeLabels[type] || type;
+        grid.appendChild(label);
+        grouped[type].forEach(doc => grid.appendChild(makeCard(doc)));
+      });
+    } else {
+      filtered.forEach(doc => grid.appendChild(makeCard(doc)));
+    }
+  }
+
+  function makeCard(doc) {
+    const t = types[doc.type] || { color: '#999', light: '#f5f5f5', btnText: '#fff' };
+    const card = document.createElement('div');
+    card.className = 'doc-card';
+    card.style.setProperty('--card-color', t.color);
+    card.style.setProperty('--card-light', t.light);
+    card.style.setProperty('--btn-text', t.btnText);
+
+    const hasHtml = doc.htmlUrl && doc.htmlUrl !== '#';
+    const hasPdf  = doc.pdfUrl  && doc.pdfUrl  !== '#';
+    const noteTag = doc.note ? `<span style="font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${t.color};background:${t.light};padding:2px 6px;border-radius:2px;margin-left:6px;">${doc.note}</span>` : '';
+
+    card.innerHTML = `
+      <div class="doc-card-top"></div>
+      <div class="doc-card-body">
+        <div class="doc-card-badge">${typeLabels[doc.type] || doc.type}${noteTag}</div>
+        <div class="doc-card-title">${doc.title}</div>
+        <div class="doc-card-id">${doc.id}</div>
+        <div class="doc-card-meta">
+          <span>&#128203; v${doc.version}</span>
+          <span>&#128197; ${doc.date}</span>
+          <span>&#127962; ${doc.department}</span>
+        </div>
+      </div>
+      <div class="doc-card-actions">
+        ${hasHtml
+          ? `<button class="btn-view" onclick="peekOpen('${doc.htmlUrl}','${doc.title.replace(/'/g,"\\'")}')">View Document</button>`
+          : `<span class="btn-view" style="opacity:0.4;cursor:default;pointer-events:none;">Not Available</span>`
+        }
+        ${hasPdf
+          ? `<a class="btn-pdf" href="${doc.pdfUrl}" target="_blank" rel="noopener" title="Open source file"><span>&#128196;</span> PDF</a>`
+          : `<span class="btn-pdf" style="opacity:0.35;cursor:default;"><span>&#128196;</span> PDF</span>`
+        }
+      </div>`;
+    return card;
+  }
+
+  // NAV COUNTS
+  function updateCounts() {
+    const allItems = documents;
+    document.getElementById('count-all').textContent = allItems.length;
+    ['Policy','SOP','Guidelines','Template'].forEach(type => {
+      const el = document.getElementById('count-' + type);
+      if (el) el.textContent = allItems.filter(d => d.type === type).length;
+    });
+  }
+
+  // NAV CLICK
+  function filterNav(el, filter) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+    activeFilter = filter;
+    render();
+  }
+
+  // SEARCH
+  document.getElementById('search-input').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    if (searchQuery) {
+      activeFilter = 'all';
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.querySelector('[data-filter="all"]').classList.add('active');
+    }
+    render();
+  });
+
+  // INIT
+  updateCounts();
+  render();
+
+  // ── SIDE PEEK ──────────────────────────────────────────────
+  let currentPeekUrl = '';
+
+  function peekOpen(url, title) {
+    currentPeekUrl = url;
+    document.getElementById('peekTitle').textContent = title;
+    document.getElementById('peekFrame').src = url;
+    document.getElementById('peekPanel').classList.add('open');
+    document.getElementById('peekPanel').classList.remove('fullscreen');
+    document.getElementById('peekBackdrop').classList.add('open');
+    document.getElementById('peekFsBtn').title = 'Full Screen';
+    document.getElementById('peekFsBtn').innerHTML = '&#x26F6;';
+  }
+
+  function peekClose() {
+    const panel = document.getElementById('peekPanel');
+    panel.classList.remove('open', 'fullscreen');
+    document.getElementById('peekBackdrop').classList.remove('open');
+    // Clear iframe after slide-out animation
+    setTimeout(() => { document.getElementById('peekFrame').src = 'about:blank'; }, 300);
+  }
+
+  function peekToggleFullscreen() {
+    const panel  = document.getElementById('peekPanel');
+    const btn    = document.getElementById('peekFsBtn');
+    const isFs   = panel.classList.toggle('fullscreen');
+    // In fullscreen the backdrop isn't needed (panel covers everything)
+    document.getElementById('peekBackdrop').style.display = isFs ? 'none' : 'block';
+    btn.innerHTML = isFs ? '&#x29C9;' : '&#x26F6;';
+    btn.title     = isFs ? 'Exit Full Screen' : 'Full Screen';
+  }
+
+  function peekOpenTab() {
+    if (currentPeekUrl) window.open(currentPeekUrl, '_blank', 'noopener');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') peekClose();
+  });
+</script>
+
+<!-- SIDE PEEK PANEL -->
+<div class="peek-backdrop" id="peekBackdrop" onclick="peekClose()"></div>
+<div class="peek-panel" id="peekPanel">
+  <div class="peek-header">
+    <span class="peek-title" id="peekTitle"></span>
+    <div class="peek-actions">
+      <button class="peek-btn" id="peekFsBtn" onclick="peekToggleFullscreen()" title="Full Screen">&#x26F6;</button>
+      <button class="peek-btn" onclick="peekOpenTab()" title="Open in new tab">&#x2197;</button>
+      <button class="peek-btn danger" onclick="peekClose()" titl

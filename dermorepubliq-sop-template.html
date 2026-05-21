@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dermorepubliq — Standard Operating Procedure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Brand Tokens ── */
+    :root {
+      --clinical-white:  #F7F6F3;
+      --soft-linen:      #DBD3C9;
+      --stone-taupe:     #989187;
+      --warm-mahogany:   #5f5144;
+      --dermo-onyx:      #121212;
+
+      --policy:          #121212;
+      --sop:             #83AA6E;
+      --wi:              #E18B64;
+      --guidelines:      #7843A6;
+      --test-method:     #F1D53D;
+
+      /* active doc type — change this per document */
+      --doc-accent:      var(--sop);
+      --doc-accent-light: #EAF2E5;
+
+      --font:            'Poppins', sans-serif;
+      --text:            #121212;
+      --text-muted:      #5f5144;
+      --border:          #DBD3C9;
+      --bg:              #F7F6F3;
+      --white:           #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── Page Wrapper ── */
+    .page {
+      max-width: 860px;
+      margin: 40px auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Left Accent Bar ── */
+    .accent-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: var(--doc-accent);
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 32px 40px 24px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-header .brand-block {}
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--dermo-onyx);
+      text-transform: uppercase;
+    }
+    .logo-text span { font-weight: 300; }
+
+    .doc-type-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 12px;
+      background: var(--doc-accent);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    /* dark badge needs dark text */
+    .doc-type-badge.dark { color: var(--dermo-onyx); }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--stone-taupe);
+      line-height: 1.9;
+    }
+    .doc-meta strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    /* ── Title Block ── */
+    .title-block {
+      padding: 28px 40px 24px 52px;
+      border-bottom: 1px solid var(--border);
+      background: var(--doc-accent-light);
+    }
+    .title-block h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dermo-onyx);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .title-block .doc-id {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--doc-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Info Grid ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .info-cell {
+      padding: 14px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .info-cell:last-child { border-right: none; }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone-taupe);
+      margin-bottom: 3px;
+    }
+    .info-value {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ── Body Content ── */
+    .doc-body {
+      padding: 32px 40px 32px 52px;
+    }
+
+    .section { margin-bottom: 28px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--doc-accent);
+    }
+    .section-number {
+      width: 26px; height: 26px;
+      background: var(--doc-accent);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .section-number.dark-num { color: var(--dermo-onyx); }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--dermo-onyx);
+    }
+
+    .doc-body p {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .doc-body ul, .doc-body ol {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+    .doc-body li {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    /* Step list */
+    .steps { list-style: none; padding: 0; counter-reset: steps; }
+    .steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    .steps li::before {
+      content: counter(steps);
+      min-width: 24px; height: 24px;
+      background: var(--doc-accent-light);
+      border: 1.5px solid var(--doc-accent);
+      color: var(--doc-accent);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Note / Warning box */
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--doc-accent);
+      background: var(--doc-accent-light);
+      margin: 16px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .callout-text { font-size: 12px; color: var(--text); }
+    .callout-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* ── Signature Table ── */
+    .sig-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+    .sig-table thead tr {
+      background: var(--doc-accent);
+      color: var(--white);
+    }
+    .sig-table thead tr.dark-head { color: var(--dermo-onyx); }
+    .sig-table th {
+      padding: 9px 14px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .sig-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .sig-table tr:last-child td { border-bottom: none; }
+    .sig-table tr:nth-child(even) td { background: var(--clinical-white); }
+    .sig-line {
+      display: block;
+      border-bottom: 1px solid var(--stone-taupe);
+      margin-top: 18px;
+      width: 80%;
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px 14px 52px;
+      border-top: 1px solid var(--border);
+      background: var(--clinical-white);
+    }
+    .doc-footer .footer-left {
+      font-size: 10px;
+      color: var(--stone-taupe);
+      line-height: 1.6;
+    }
+    .doc-footer .footer-right {
+      font-size: 10px;
+      color: var(--stone-taupe);
+      text-align: right;
+    }
+    .confidential-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--stone-taupe);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone-taupe);
+      border-radius: 2px;
+      margin-top: 4px;
+    }
+
+    /* ── Doc Type Switcher (demo only) ── */
+    .switcher {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .switcher button {
+      padding: 6px 14px;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .switcher button:hover { opacity: 0.85; }
+    .switcher button.active { color: var(--white); border-color: transparent; }
+
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; max-width: 100%; }
+      .switcher { display: none; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO SWITCHER -->
+  <div class="switcher">
+    <span style="font-family:var(--font);font-size:11px;color:var(--stone-taupe);align-self:center;margin-right:4px;">Preview doc type:</span>
+    <button onclick="setType('sop')"     class="active"  id="btn-sop"         style="background:#83AA6E;border-color:#83AA6E;">SOP</button>
+    <button onclick="setType('policy')"  id="btn-policy" style="">Policy</button>
+    <button onclick="setType('wi')"      id="btn-wi"     style="">Work Instructions</button>
+    <button onclick="setType('guide')"   id="btn-guide"  style="">Guidelines</button>
+    <button onclick="setType('test')"    id="btn-test"   style="">Test Method</button>
+  </div>
+
+  <div class="page" id="doc-page">
+    <div class="accent-bar" id="accent-bar"></div>
+
+    <!-- HEADER -->
+    <header class="doc-header">
+      <div class="brand-block">
+        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
+        <div class="doc-type-badge" id="badge">Standard Operating Procedure</div>
+      </div>
+      <div class="doc-meta">
+        <strong>DR-SOP-L&D-001</strong>
+        Document ID
+        <br/>Version 1.0
+        <br/>Effective: May 20, 2026
+        <br/>Next Review: May 20, 2027
+      </div>
+    </header>
+
+    <!-- TITLE -->
+    <div class="title-block" id="title-block">
+      <div class="doc-id" id="doc-id-label">SOP · Learning &amp; Development</div>
+      <h1>Onboarding Program Facilitation and Administration</h1>
+    </div>
+
+    <!-- INFO GRID -->
+    <div class="info-grid">
+      <div class="info-cell">
+        <div class="info-label">Department</div>
+        <div class="info-value">Learning &amp; Development</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">Document Owner</div>
+        <div class="info-value">L&amp;D Director</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">Responsible Dept.</div>
+        <div class="info-value">Human Resources</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">Classification</div>
+        <div class="info-value">Internal Use Only</div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="doc-body">
+
+      <!-- 1. Purpose -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn1">1</div>
+          <div class="section-title">Purpose</div>
+        </div>
+        <p>This Standard Operating Procedure defines the process for facilitating, administering, and evaluating the Dermorepubliq employee onboarding program to ensure a consistent, engaging, and effective experience for all new hires across all departments and roles.</p>
+      </div>
+
+      <!-- 2. Scope -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn2">2</div>
+          <div class="section-title">Scope</div>
+        </div>
+        <p>This procedure applies to:</p>
+        <ul>
+          <li>All new regular and probationary employees across Dermorepubliq Corporation</li>
+          <li>L&amp;D Supervisors, Trainers, and Content Developers facilitating onboarding sessions</li>
+          <li>HR Business Partners coordinating new hire schedules and documentation</li>
+        </ul>
+      </div>
+
+      <!-- 3. Procedure -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn3">3</div>
+          <div class="section-title">Procedure</div>
+        </div>
+
+        <div class="callout">
+          <div class="callout-icon">📌</div>
+          <div class="callout-text">
+            <strong>Before You Begin</strong>
+            Confirm the new hire's start date with HR at least 5 business days in advance. Ensure Litmos enrollment and system access are ready before Day 1.
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li>Receive new hire details from HR via the onboarding intake form no later than 5 business days before the start date.</li>
+          <li>Enroll the new hire in the assigned Litmos onboarding learning path based on their role and department.</li>
+          <li>Prepare facilitation materials including welcome kit, schedule, and department-specific modules.</li>
+          <li>Conduct the Day 1 Orientation session covering company culture, values, and compliance requirements.</li>
+          <li>Monitor e-learning completion via Litmos dashboard throughout the 30-day onboarding window.</li>
+          <li>Conduct the 30-day check-in with the new hire and their immediate supervisor to assess onboarding effectiveness.</li>
+          <li>Administer the post-onboarding evaluation form and encode results in the L&amp;D tracker within 3 business days.</li>
+        </ol>
+      </div>
+
+      <!-- 4. Definitions -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn4">4</div>
+          <div class="section-title">Definitions</div>
+        </div>
+        <ul>
+          <li><strong>Onboarding:</strong> The structured process of integrating a new employee into Dermorepubliq, covering orientation, role-specific training, and cultural assimilation.</li>
+          <li><strong>Litmos:</strong> The company's Learning Management System used to deliver, track, and report on employee training.</li>
+          <li><strong>L&amp;D Tracker:</strong> The Notion-based project and task management system used by the L&amp;D team.</li>
+        </ul>
+      </div>
+
+      <!-- 5. References -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn5">5</div>
+          <div class="section-title">References</div>
+        </div>
+        <ul>
+          <li>DR-POL-HR-001 — Employee Onboarding Policy</li>
+          <li>DR-WI-L&amp;D-002 — Litmos Enrollment Work Instructions</li>
+          <li>DR-TMP-001 — Onboarding Evaluation Form Template</li>
+        </ul>
+      </div>
+
+      <!-- 6. Signatures -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-number" id="sn6">6</div>
+          <div class="section-title">Confirmation and Signatures</div>
+        </div>
+        <table class="sig-table">
+          <thead>
+            <tr id="sig-head">
+              <th>Role</th>
+              <th>Name</th>
+              <th>Signature</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Prepared by</td>
+              <td>L&amp;D Director</td>
+              <td><span class="sig-line"></span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Reviewed by</td>
+              <td>L&amp;D Supervisor</td>
+              <td><span class="sig-line"></span></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Approved by</td>
+              <td>Chief Operating Officer</td>
+              <td><span class="sig-line"></span></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /doc-body -->
+
+    <!-- FOOTER -->
+    <footer class="doc-footer">
+      <div class="footer-left">
+        DR-SOP-L&amp;D-001 · Version 1.0 · Effective May 20, 2026
+        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
+        <br/><span class="confidential-tag">Internal Use Only</span>
+      </div>
+      <div class="footer-right">
+        Page 1 of 1<br/>
+        Uncontrolled when printed.<br/>
+        Verify version before use.
+      </div>
+    </footer>
+
+  </div><!-- /page -->
+
+<script>
+  const types = {
+    sop:    { accent: '#83AA6E', light: '#EAF2E5', badge: 'Standard Operating Procedure', label: 'SOP · Learning & Development',       darkText: false },
+    policy: { accent: '#121212', light: '#EBEBEB', badge: 'Policy',                        label: 'Policy · Learning & Development',    darkText: false },
+    wi:     { accent: '#E18B64', light: '#FBF0E9', badge: 'Work Instructions',              label: 'Work Instructions · L&D',            darkText: false },
+    guide:  { accent: '#7843A6', light: '#F0E8F8', badge: 'Guidelines',                    label: 'Guidelines · Learning & Development', darkText: false },
+    test:   { accent: '#F1D53D', light: '#FDFBE8', badge: 'Test Method',                   label: 'Test Method · Quality',               darkText: true  },
+  };
+
+  function setType(type) {
+    const t = types[type];
+    const root = document.documentElement;
+
+    root.style.setProperty('--doc-accent', t.accent);
+    root.style.setProperty('--doc-accent-light', t.light);
+
+    document.getElementById('accent-bar').style.background = t.accent;
+    document.getElementById('title-block').style.background = t.light;
+
+    const badge = document.getElementById('badge');
+    badge.textContent = t.badge;
+    badge.style.background = t.accent;
+    badge.style.color = t.darkText ? '#121212' : '#ffffff';
+
+    document.getElementById('doc-id-label').textContent = t.label;
+    document.getElementById('doc-id-label').style.color = t.accent;
+
+    // section numbers
+    ['sn1','sn2','sn3','sn4','sn5','sn6'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.background = t.accent;
+        el.style.color = t.darkText ? '#121212' : '#ffffff';
+      }
+    });
+
+    // sig table header
+    const sigHead = document.getElementById('sig-head');
+    if (sigHead) {
+      sigHead.style.background = t.accent;
+      sigHead.style.color = t.darkText ? '#121212' : '#ffffff';
+    }
+
+    // section borders
+    document.querySelectorAll('.section-header').forEach(el => {
+      el.style.borderBottomColor = t.accent;
+    });
+
+    // callout
+    document.querySelectorAll('.callout').forEach(el => {
+      el.style.borderLeftColor = t.accent;
+      el.style.background = t.light;
+    });
+
+    // steps counter color via inline style injection
+    const styleId = 'dynamic-steps';
+    let styleEl = document.getElementById(styleId);
+    if (!styleEl) { styleEl = document.createElement('style'); styleEl.id = styleId; document.head.appendChild(styleEl); }
+    styleEl.textContent = `.steps li::before { background: ${t.light}; border-color: ${t.accent}; color: ${t.accent}; }`;
+
+    // buttons
+    Object.keys(types).forEach(k => {
+      const btn = document.getElementById('btn-' + k);
+      if (!btn) return;
+      if (k === type) {
+        btn.style.background = types[k].accent;
+        btn.style.borderColor = types[k].accent;
+        btn.style.color = types[k].darkText ? '#121212' : '#ffffff';
+        btn.classList.add('active');
+      } else {
+        btn.style.background = '#ffffff';
+        btn.style.borderColor = '#DBD3C9';
+        btn.style.color = '#121212';
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // init
+  setType('sop');
+</script>
+</body>
+</html>
