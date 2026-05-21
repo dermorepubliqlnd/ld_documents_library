@@ -7,266 +7,524 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --doc-accent:      #83AA6E;
-      --doc-accent-light:#EAF2E5;
-      --font:            'Poppins', sans-serif;
-      --text:            #121212;
-      --text-muted:      #5f5144;
-      --border:          #DBD3C9;
-      --bg:              #F7F6F3;
-      --white:           #ffffff;
-      --dermo-onyx:      #121212;
-      --stone-taupe:     #989187;
-      --clinical-white:  #F7F6F3;
+      --accent:      #83AA6E;
+      --accent-light:#EAF2E5;
+      --font:        'Poppins', sans-serif;
+      --text:        #121212;
+      --muted:       #5f5144;
+      --border:      #DBD3C9;
+      --bg:          #F7F6F3;
+      --white:       #ffffff;
+      --onyx:        #121212;
+      --taupe:       #989187;
+      --clinical:    #F7F6F3;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
-    .page{max-width:860px;margin:40px auto;background:var(--white);border:1px solid var(--border);position:relative;overflow:hidden;}
-    .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--doc-accent);}
-    .doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:32px 40px 24px 52px;border-bottom:1px solid var(--border);}
-    .logo-text{font-size:18px;font-weight:700;letter-spacing:0.08em;color:var(--dermo-onyx);text-transform:uppercase;}
-    .logo-text span{font-weight:300;}
-    .doc-type-badge{display:inline-block;margin-top:8px;padding:3px 12px;background:var(--doc-accent);color:#ffffff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
-    .doc-meta{text-align:right;font-size:11px;color:var(--stone-taupe);line-height:1.9;}
-    .doc-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
-    .title-block{padding:28px 40px 24px 52px;border-bottom:1px solid var(--border);background:var(--doc-accent-light);}
-    .title-block h1{font-size:22px;font-weight:700;color:var(--dermo-onyx);line-height:1.3;margin-bottom:6px;}
-    .title-block .doc-id{font-size:11px;font-weight:500;color:var(--doc-accent);letter-spacing:0.08em;text-transform:uppercase;}
-    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
-    .info-cell{padding:14px 16px;border-right:1px solid var(--border);}
-    .info-cell:last-child{border-right:none;}
-    .info-cell:first-child{padding-left:52px;}
-    .info-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone-taupe);margin-bottom:3px;}
-    .info-value{font-size:12px;font-weight:500;color:var(--text);}
-    .doc-body{padding:32px 40px 32px 52px;}
-    .section{margin-bottom:28px;}
-    .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--doc-accent);}
-    .section-number{width:26px;height:26px;background:var(--doc-accent);color:#ffffff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
-    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dermo-onyx);}
-    .doc-body p{font-size:13px;color:var(--text);margin-bottom:10px;}
-    .doc-body ul,.doc-body ol{padding-left:20px;margin-bottom:10px;}
-    .doc-body li{font-size:13px;color:var(--text);margin-bottom:5px;}
-    .subsection-title{font-size:12px;font-weight:700;color:var(--doc-accent);text-transform:uppercase;letter-spacing:0.05em;margin:16px 0 6px;}
-    .steps{list-style:none;padding:0;counter-reset:steps;}
-    .steps li{counter-increment:steps;display:flex;gap:14px;margin-bottom:12px;align-items:flex-start;}
-    .steps li::before{content:counter(steps);min-width:24px;height:24px;background:var(--doc-accent-light);border:1.5px solid var(--doc-accent);color:var(--doc-accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;margin-top:1px;}
-    .callout{display:flex;gap:12px;padding:12px 16px;border-left:3px solid var(--doc-accent);background:var(--doc-accent-light);margin:16px 0;border-radius:0 4px 4px 0;}
-    .callout-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
-    .callout-text{font-size:12px;color:var(--text);}
-    .callout-text strong{font-weight:600;display:block;margin-bottom:2px;}
-    .data-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;}
-    .data-table thead tr{background:var(--doc-accent);color:#ffffff;}
-    .data-table th{padding:9px 14px;text-align:left;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
-    .data-table td{padding:9px 14px;border-bottom:1px solid var(--border);}
-    .data-table tr:last-child td{border-bottom:none;}
-    .data-table tr:nth-child(even) td{background:var(--clinical-white);}
-    .sig-line{display:block;border-bottom:1px solid var(--stone-taupe);margin-top:18px;width:80%;}
-    .doc-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 40px 14px 52px;border-top:1px solid var(--border);background:var(--clinical-white);}
-    .doc-footer .footer-left{font-size:10px;color:var(--stone-taupe);line-height:1.6;}
-    .doc-footer .footer-right{font-size:10px;color:var(--stone-taupe);text-align:right;}
-    .confidential-tag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-taupe);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-taupe);border-radius:2px;margin-top:4px;}
-    @media print{body{background:white;}.page{margin:0;border:none;max-width:100%;}.accent-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+    .page { max-width: 860px; margin: 40px auto 60px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+    .doc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 36px 22px 52px; border-bottom: 1px solid var(--border); }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 0.09em; color: var(--onyx); text-transform: uppercase; line-height: 1; }
+    .logo-text span { font-weight: 300; }
+    .doc-type-badge { display: inline-block; margin-top: 9px; padding: 3px 11px; background: var(--accent); color: #ffffff; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; border-radius: 2px; }
+    .doc-meta { text-align: right; font-size: 11px; color: var(--taupe); line-height: 1.85; }
+    .doc-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .title-block { padding: 22px 36px 20px 52px; border-bottom: 1px solid var(--border); background: var(--accent-light); }
+    .title-block .doc-type-label { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .title-block h1 { font-size: 21px; font-weight: 700; color: var(--onyx); line-height: 1.3; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .info-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--taupe); margin-bottom: 3px; }
+    .info-value { font-size: 12px; font-weight: 500; color: var(--text); }
+
+    /* ── Toolbar ── */
+    .doc-toolbar { display: flex; gap: 6px; padding: 10px 36px 10px 52px; border-bottom: 1px solid var(--border); background: var(--white); align-items: center; }
+    .toolbar-btn { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); color: var(--taupe); cursor: pointer; transition: all 0.12s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+
+    .doc-body { padding: 20px 36px 36px 46px; }
+
+    /* ── Level 1: Sections (collapsible) ── */
+    .section { margin-bottom: 6px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 16px 10px 12px; background: var(--clinical); border: none; cursor: pointer; text-align: left; border-bottom: 1px solid var(--border); transition: background 0.15s; font-family: var(--font); }
+    .section-header:hover { background: #EDEAE5; }
+    .section-number { min-width: 26px; height: 26px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--onyx); flex: 1; }
+    .toggle-icon { flex-shrink: 0; color: var(--taupe); transition: transform 0.22s ease; }
+    .section-header[aria-expanded="false"] .toggle-icon { transform: rotate(-90deg); }
+    .section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.25s ease; }
+    .section-body.collapsed { grid-template-rows: 0fr; }
+    .section-content { overflow: hidden; padding: 20px 18px 20px 14px; }
+    .section-body.collapsed .section-content { padding-top: 0; padding-bottom: 0; }
+
+    /* ── Level 2: Sub-headings (inline, non-collapsible) ── */
+    .sub-heading { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.07em; margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px dashed var(--border); }
+    .sub-heading:first-child { margin-top: 0; }
+
+    /* ── Step labels ── */
+    .step-label { font-size: 12px; font-weight: 600; color: var(--muted); margin: 12px 0 5px; padding-left: 10px; border-left: 3px solid var(--accent-light); font-style: italic; }
+    .step-label:first-child { margin-top: 0; }
+
+    /* ── Typography ── */
+    .section-content p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .section-content ul { padding-left: 0; margin: 6px 0 12px 0; list-style: none; }
+    .section-content ul li { font-size: 13px; color: var(--text); margin-bottom: 6px; padding-left: 18px; position: relative; line-height: 1.6; }
+    .section-content ul li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .section-content ul ul { margin: 6px 0 4px 0; }
+    .section-content ul ul li { padding-left: 16px; }
+    .section-content ul ul li::before { width: 5px; height: 5px; background: none; border: 1.5px solid var(--accent); border-radius: 50%; top: 8px; }
+    .section-content ol { padding-left: 0; margin: 6px 0 12px; list-style: none; counter-reset: ol-counter; }
+    .section-content ol li { counter-increment: ol-counter; font-size: 13px; color: var(--text); margin-bottom: 8px; padding-left: 34px; position: relative; line-height: 1.6; }
+    .section-content ol li::before { content: counter(ol-counter); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; background: var(--accent-light); border: 1.5px solid var(--accent); color: var(--accent); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+
+    /* ── Tables ── */
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; border: 1px solid var(--border); }
+    .data-table thead tr { background: var(--accent); color: #ffffff; }
+    .data-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.2); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 9px 12px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table td:last-child { border-right: none; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .data-table tbody tr:nth-child(even) td { background: var(--clinical); }
+
+    .doc-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px 12px 52px; border-top: 1px solid var(--border); background: var(--clinical); }
+    .doc-footer .footer-left { font-size: 10px; color: var(--taupe); line-height: 1.6; }
+    .doc-footer .footer-right { font-size: 10px; color: var(--taupe); text-align: right; }
+    .confidential-tag { display: inline-block; padding: 2px 7px; border: 1px solid var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); border-radius: 2px; margin-top: 3px; }
+
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; box-shadow: none; max-width: 100%; }
+      .doc-toolbar { display: none; }
+      .section { border: none; border-bottom: 1px solid var(--border); border-radius: 0; }
+      .section-header { background: none !important; border-bottom: 2px solid var(--accent); }
+      .section-body.collapsed { grid-template-rows: 1fr !important; }
+      .section-content { padding-top: 16px !important; padding-bottom: 16px !important; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="accent-bar"></div>
-    <header class="doc-header">
-      <div class="brand-block">
-        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
-        <div class="doc-type-badge">Standard Operating Procedure</div>
-      </div>
-      <div class="doc-meta">
-        <strong>DR-SOP-L&amp;D-004</strong>
-        Document ID
-        <br/>Version 1.0
-        <br/>Effective: 2026
-        <br/>Next Review: 2026 Review
-      </div>
-    </header>
-    <div class="title-block">
-      <div class="doc-id">SOP · Learning &amp; Development</div>
-      <h1>L&amp;D Project Intake Request</h1>
+<div class="page">
+  <div class="accent-bar"></div>
+  <header class="doc-header">
+    <div>
+      <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:8px;vertical-align:super;">&#174;</sup></div>
+      <div class="doc-type-badge">Standard Operating Procedure</div>
     </div>
-    <div class="info-grid">
-      <div class="info-cell"><div class="info-label">Department</div><div class="info-value">Learning &amp; Development</div></div>
-      <div class="info-cell"><div class="info-label">Document Owner</div><div class="info-value">L&amp;D Director</div></div>
-      <div class="info-cell"><div class="info-label">Responsible Dept.</div><div class="info-value">Learning &amp; Development</div></div>
-      <div class="info-cell"><div class="info-label">Classification</div><div class="info-value">Internal Use Only</div></div>
+    <div class="doc-meta">
+      <strong>DR-SOP-L&amp;D-004</strong>
+      Document ID<br/>Version 1.0<br/>Effective: 2026
     </div>
-    <div class="doc-body">
-
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">1</div>
-          <div class="section-title">PURPOSE</div>
-        </div>
-        <p>This SOP establishes a standardized process for submitting, reviewing, prioritizing, and approving Learning &amp; Development (L&amp;D) project requests. It ensures that all L&amp;D initiatives are aligned with organizational goals, resourced appropriately, and managed consistently.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">2</div>
-          <div class="section-title">SCOPE</div>
-        </div>
-        <p class="subsection-title">In Scope</p>
-<p>This SOP applies to:</p>
-<ul><li>All departments requesting support from L&amp;D.</li><li>All L&amp;D team members involved in evaluating, planning, and executing L&amp;D projects.</li><li>Requesting of content development and training, up to the approval of the project scope only.</li><li>Requests related to Dermorepubliq University concerns, document reviews, L&amp;D laptop loan, and training records,</li></ul>
-<p class="subsection-title">Out of Scope</p>
-<p>This SOP does not apply to general inquiries and external training requests. Project management of accepted content development and training requests is out of this SOP&#x27;s scope.</p>
-<p class="subsection-title">Process Start and End</p>
-<p>This SOP is triggered upon filing of a ticket in the RICA Helpdesk and ends once the assigned agent tags the ticket as complete and closed.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">3</div>
-          <div class="section-title">DEFINITIONS</div>
-        </div>
-        <ul><li>Project Intake Request: A formal submission to L&amp;D for new or revised training solutions or initiatives.</li><li>Requestor: The employee, manager, or department submitting the intake.</li><li>Assigned Ticket Agent: The person assigned to process a ticket.</li><li>RICA Helpdesk: A digital platform used to record, classify, and track cross-departmental support requests.</li><li>Notion: A centralized project management tool used to monitor the status, timelines, deliverables, and progress of active projects. It serves as the single source of truth for project documentation, updates, accountability, and reporting.</li><li>Triage: Initial assessment of request complexity, alignment, and feasibility.</li><li>Scoping: Detailed definition of project requirements, deliverables, success metrics, and timelines.</li><li>Service Level Agreement: A documented commitment outlining the expected turnaround times, response times, responsibilities, and performance standards for L&amp;D services. SLAs help manage expectations, ensure consistent service quality, and define measurable benchmarks for L&amp;D support and project-related processes.</li></ul>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">4</div>
-          <div class="section-title">RASCI MATRIX</div>
-        </div>
-        <table class="data-table"><thead><tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr></thead><tbody><tr><td>Complete and submit L&amp;D project request</td><td>Requestor</td><td>Requestor</td><td>IT</td><td>L&amp;D</td><td>L&amp;D</td></tr><tr><td>Acknowledge receipt of intake request</td><td>Assigned Agent</td><td>Assigned Agent</td><td>IT</td><td>L&amp;D</td><td>Requestor</td></tr><tr><td>Conduct initial triage and prioritization</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor, L&amp;D members</td><td>Requestor</td></tr><tr><td>Approves or denies requests upon triage</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td><td>Requestor</td></tr><tr><td>Schedule and facilitate scoping meeting</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager, L&amp;D members</td><td>Requestor</td></tr><tr><td>Finalize project scope and timeline</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td></tr><tr><td>Communicate decision to requestor</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>Requestor</td><td>Requestor</td></tr><tr><td>Approves request output</td><td>Requestor</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>Assigned agent</td><td>Assigned agent</td></tr><tr><td>Update project tracker and intake records</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td></tr><tr><td>Monitor intake compliance and audits</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Assigned Agents</td><td>L&amp;D members</td><td>L&amp;D members</td></tr></tbody></table>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">5</div>
-          <div class="section-title">PROCESS FLOW DIAGRAM</div>
-        </div>
-        <p>See detailed process flows in the appendices section.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">6</div>
-          <div class="section-title">PROCEDURE</div>
-        </div>
-        <p class="subsection-title">Intake Submission</p>
-<p>The requestor files a ticket in the RICA Helpdesk with the following according to the support they need:</p>
-<table class="data-table"><thead><tr><th>Ticket Category</th><th>Description</th><th>Milestones and Service Level Agreement (SLA)</th></tr></thead><tbody><tr><td>Content Development Request</td><td>For requests to create, revise, or update visual, instructional, or communication materials, including but not limited to posters, slide decks, videos, job aids, infographics, handouts, training materials, e-learning content, and other content assets. 
-This category should be used when the primary output is content material or an asset, not the delivery of a training session or program.</td><td>Triage – 1 business day
-Project scoping - 5 business days
-Approval of project scope - 2 business days</td></tr><tr><td>Internal Training Request</td><td>For requesting training programs, training sessions, refreshers, onboarding-related training, team-specific learning interventions, or essential and technical skills training. 
-This category should be used when the primary need is for L&amp;D to design, conduct, coordinate, or support a training session or learning program.</td><td>Triage – 1 business day
-Discovery Session – 3 business days
-Project scoping - 5 business days
-Approval of project scope - 2 business days</td></tr><tr><td>Dermorepubliq University Support</td><td>For Dermorepubliq University-related concerns, including but not limited to profile update, account access, course assignment, e-learning course issues, navigation concerns, report generation, and other system-related support.</td><td>Address ticket concern – 3 business days
-Verify action taken - 2 business days</td></tr></tbody></table>
-<table class="data-table"><thead><tr><th>Ticket Category</th><th>Description</th><th>Milestones and Service Level Agreement (SLA)</th></tr></thead><tbody><tr><td>Document Review</td><td>For reviewing departmental documents such as policies, process documents, standard operating procedures, work instructions, templates, reports, and presentations. Documents shall be reviewed only for adherence to technical writing standards, branding alignment, tone and style, and formatting in accordance with the company’s content style guide.
-This does not include content development, process validation, legal review, or policy approval.</td><td>Address ticket concern – 3 business days
-Verify action taken - 2 business days</td></tr><tr><td>Training Laptop Loan</td><td>For loaning L&amp;D laptops for training purposes. Laptops can only be loaned for 5 business days. A new ticket must be filed for a loan extension.</td><td>Check availability of Laptop – 1 business day
-Acknowledge receipt of Laptop – 1 business day
-Laptop Return – 5 business days
-Verify Ticket Completion - 1 business day</td></tr><tr><td>Training Records</td><td>For requests regarding training completion records, certificates, and related documents.</td><td>Address ticket concern – 3 business days
-Verify training record - 2 business days</td></tr></tbody></table>
-<p>The request ticket must include the following:</p>
-<ul><li>Request tile – Name of the project or request</li><li>Requestor – Name of the requestor</li><li>Requested completion date – Target completion date</li><li>Department – Requestor’s department or business unit</li><li>Description – Summary of the request</li><li>Optional file attachment/s – Files or resources to support the request</li></ul>
-<p>Please see the appendices section for the other required fields for the content development, training request, and training records tickets.</p>
-<p>The requestor submits the accomplished ticket. The ticket is routed to the next step according to its category.</p>
-<p class="subsection-title">Content Development Request</p>
-<p>Ticket is routed to “Triage” milestone. The assigned agent conducts triage using the LD-TMP-011-1.0-2026 - Intake Triage Tool. Based on the results, the assigned agent may:</p>
-<ul><li>Accept the request. Ticket is approved and routed to the “Project Scoping” milestone (Step 6.2.2).</li><li>Request revisions from requestor (e.g., incomplete data, unclear objectives).</li><li>Decline the project due to misalignment or defer the project due to capacity and/or resource constraints. The ticket is rejected and closed.</li></ul>
-<p>Only training-related requests will be triaged. Non-training will be assessed based on the availability of resources and team bandwidth. Other solutions will be recommended that may help address the requester’s concerns. Recommendations will be recorded on the ticket via comments.</p>
-<p>Agent will begin working on the project scope. The agent may set a discovery session with the requester if needed.</p>
-<p>L&amp;D Manager reviews project scope.</p>
-<p>Agent will revise the project scope according to the L&amp;D manager’s feedback. Once all feedback has been addressed, the project scope ticket is marked complete and is routed to “Approval of Project Scope” milestone (Step 6.2.5).</p>
-<p>Requestor will review the project scope and provide feedback.</p>
-<ul><li>If the requestor agrees on the project scope and timeline, the requestor approves and closes the ticket.</li><li>If the requestor has feedback, the ticket is rejected and routed back to the “Project Scoping” milestone, where the agent will revise the project scope. The ticket is resubmitted and routed to the “Approval of Project Scope” milestone.</li></ul>
-<p>Agent updates the team’s project tracker. Completion of the actual project will be monitored outside of RICA.</p>
-<p class="subsection-title">Dermorepubliq University Support</p>
-<p>The ticket is routed to “Address ticket concern” milestone (Step 6.3.2).</p>
-<p>After addressing the concern or issue, the ticket is routed to the “Verify action taken” milestone (Step 6.3.3).</p>
-<p>The requestor reviews and confirms that the concern or issue has been addressed.</p>
-<ul><li>If the concern has been addressed, the ticket is approved and closed.</li><li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to “Address ticket concern milestone”. The agent addresses the feedback, and the ticket is routed to the “Verify action taken” milestone.</li></ul>
-<p class="subsection-title">Document Review</p>
-<p>The ticket is routed to “Address ticket concern” milestone (Step 6.4.2).</p>
-<p>After addressing the concern or issue, the ticket is routed to the “Verify action taken” milestone (Step 6.4.3).</p>
-<p>The requestor reviews and confirms that the concern or issue has been addressed.</p>
-<ul><li>If the concern has been addressed, the ticket is approved and closed.</li><li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to “Address ticket concern milestone”. Agen addresses the feedback, and the ticket is routed to the “Verify action taken” milestone.</li></ul>
-<p class="subsection-title">Training Laptop Loan</p>
-<p>The ticket is routed to the “Check Availability of Laptop” milestone. The assigned agent checks the availability of a laptop in the L&amp;D Laptop Tracker.</p>
-<ul><li>If a laptop is available, the agent checks out the laptop, updates the laptop tracker, and accepts the ticket and routes it to “Acknowledge receipt of Laptop” milestone (Step 6.5.2).</li><li>If laptops are unavailable, the agent rejects and closes the ticket.</li></ul>
-<p>The laptop is endorsed to the requestor. The requestor approves the ticket to acknowledge receipt of the laptop. The ticket is routed to “Laptop Return” milestone (Step 6.5.3).</p>
-<p>Requestor returns the laptop on or before the end of the SLA. The agent updates the Laptop Tracker and marks the ticket as complete upon receipt of the laptop. The ticket is routed to the “Verify Ticket Completion” milestone (Step 6.5.4).</p>
-<p>Requestor verifies the ticket and marks it as complete. The ticket is closed.</p>
-<p class="subsection-title">Training Request</p>
-<p>Ticket is routed to “Triage” milestone. The assigned agent conducts triage using the LD-TMP-011-1.0-2026 - Intake Triage Tool. Based on the triage, the assigned agent may:</p>
-<ul><li>Accept the request. The ticket is approved and routed to the “Discover Session” milestone (Step 6.6.2).</li><li>Request revisions from requestor (e.g., incomplete data, unclear objectives).</li><li>Decline the project due to misalignment or defer the project due to capacity and/or resource constraints. The ticket is rejected and closed.</li></ul>
-<p>Agent schedules a discovery session with the requestor and other stakeholders. After the discovery session, the ticket will be approved and routed to the “Project Scoping” milestone (Step 6.6.3).</p>
-<p>Agent will begin working on the project scope using details from the ticket and information gathered from the discovery meeting.</p>
-<p>L&amp;D Manager and director review project scope.</p>
-<p>Agent will revise project scope according to L&amp;D manager and director’s feedback</p>
-<p>Agent will revise the project scope according to the L&amp;D manager’s feedback. Once all feedback has been addressed, the “Project Scoping” milestone is marked complete and is routed to the “Approval of Project Scope” milestone (Step 6.6.7).</p>
-<p>Requestor will review the project scope and provide feedback.</p>
-<ul><li>If the requestor agrees on the project scope and timeline, the requestor approves and closes the ticket.</li><li>If the requestor has feedback, the ticket is rejected and routed back to the “Project Scoping” milestone, where the agent will revise the project scope. The ticket is resubmitted and routed to the “Approval of Project Scope” milestone.</li></ul>
-<p>Agent updates the team’s project tracker.</p>
-<p class="subsection-title">Training Records Request</p>
-<p>The ticket is routed to “Address ticket concern” milestone (Step 6.7.2).</p>
-<p>After addressing the concern or issue, the training record is attached to the ticket. It is then routed to the “Verify training record” milestone (Step 6.7.3).</p>
-<p>The requestor reviews and confirms that they received the training record requested.</p>
-<ul><li>If the concern has been addressed, the ticket is approved and closed.</li><li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to “Address ticket concern milestone”. Agen addresses the feedback, and the ticket is routed to the “Verify action taken” milestone.</li></ul>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">7</div>
-          <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
-        </div>
-        <ul><li>RICA Helpdesk</li><li>L&amp;D Notion Project Tracker</li><li>LD-TMP-011-1.0-2026 - Intake Triage Tool</li><li>L&amp;D Laptop Tracker.xlsx</li></ul>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">8</div>
-          <div class="section-title">KPI AND COMPLIANCE</div>
-        </div>
-        <p>This section defines how adherence to the L&amp;D Project Intake Request SOP and the effectiveness of the intake process will be monitored. Monitoring ensures that all L&amp;D project requests follow the established intake process, are evaluated consistently, and support effective prioritization and resource allocation. KPI results will be reviewed regularly, and corrective actions will be implemented when targets are not achieved.</p>
-<table class="data-table"><thead><tr><th>KPI / Metric</th><th>Target</th><th>Frequency</th><th>Responsible</th><th>Monitoring Tool</th></tr></thead><tbody><tr><td>Adherence to SLA</td><td>90% of submitted tickets</td><td>Monthly</td><td>Assigned Agent</td><td>RICA Helpdesk</td></tr></tbody></table>
-<p>Failure to meet KPI targets indicates gaps in adherence to the intake process or inefficiencies in request management. When targets are missed, the L&amp;D Lead will review process bottlenecks, identify root causes, and implement corrective actions such as process adjustments, resource allocation changes, or additional guidance to stakeholders.</p>
-<p>Any L&amp;D project initiated without a formally submitted and approved intake request will be considered non-compliant with this SOP. Non-compliant activities may be paused until proper documentation and approval are completed, and repeated violations may be escalated to department leadership for resolution.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">9</div>
-          <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
-        </div>
-        <p>This SOP shall be reviewed annually or earlier if major process changes occur. The L&amp;D Manager is responsible for maintaining and updating the document.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">10</div>
-          <div class="section-title">APPENDICES</div>
-        </div>
-        <p class="subsection-title">Content Development Request Process Flow</p>
-<p class="subsection-title">Dermorepubliq University Support and Document Review Process Flow</p>
-<p class="subsection-title">Laptop Loan Process Flow</p>
-<p class="subsection-title">Training Request Process Flow</p>
-<p class="subsection-title">Training Record Request Process Flow</p>
-<p class="subsection-title">Content Development Request Ticket Information</p>
-<ul><li>Business problem/need – Problem the request intends to solve</li></ul>
-<p class="subsection-title">Laptop Loan Ticket Information</p>
-<ul><li>Purpose of loan – The reason why the laptop is being loaned</li><li>Site – Where the laptop is intended to be used</li><li>Acknowledgement check box – Acknowledges the terms and conditions of the laptop loan, i.e., intended use of laptop, duration, approved location, accountability, and all relevant and applicable IT asset policies.</li></ul>
-<p class="subsection-title">Training Request Ticket Information</p>
-<ul><li>What is the overarching goal of the training program?</li><li>Who are the target participants for this training program?</li><li>What skills, knowledge, or behaviors do you want participants to gain or improve upon?</li><li>What are the key topics or areas of focus for the training program?</li><li>What is the preferred schedule for the training program?</li><li>Other information or feedback that will inform the design and implementation of the training program.</li></ul>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">11</div>
-          <div class="section-title">REVISION AND CHANGE LOGS</div>
-        </div>
-        <table class="data-table"><thead><tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr></thead><tbody><tr><td>1.0</td><td>Joseph Kier San Jose</td><td>01/21/2026</td><td>Created first version</td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table>
-      </div>
-    </div>
-    <footer class="doc-footer">
-      <div class="footer-left">
-        DR-SOP-L&amp;D-004 · Version 1.0 · Effective 2026
-        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
-        <br/><span class="confidential-tag">Internal Use Only</span>
-      </div>
-      <div class="footer-right">
-        Uncontrolled when printed.<br/>
-        Verify version before use.
-      </div>
-    </footer>
+  </header>
+  <div class="title-block">
+    <div class="doc-type-label">SOP &middot; Learning &amp; Development</div>
+    <h1>L&amp;D Project Intake Request</h1>
   </div>
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">Author/s</div><div class="info-value">Joseph Kier San Jose</div></div>
+    <div class="info-cell"><div class="info-label">Reviewer/s</div><div class="info-value">Sandra Abegail Barlao</div></div>
+    <div class="info-cell"><div class="info-label">Approver/s</div><div class="info-value">Abimelex Brad Vele&#xF1;a</div></div>
+    <div class="info-cell"><div class="info-label">Release Date</div><div class="info-value">2026</div></div>
+  </div>
+
+  <div class="doc-toolbar">
+    <button class="toolbar-btn" onclick="expandAll()">&#9660; Expand All</button>
+    <button class="toolbar-btn" onclick="collapseAll()">&#9654; Collapse All</button>
+    <div class="toolbar-sep"></div>
+    <button class="toolbar-btn" onclick="window.print()">&#128438; Print</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- 1. PURPOSE -->
+    <div class="section" id="sec-1">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">1</div>
+        <div class="section-title">PURPOSE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This SOP establishes a standardized process for submitting, reviewing, prioritizing, and approving Learning &amp; Development (L&amp;D) project requests. It ensures that all L&amp;D initiatives are aligned with organizational goals, resourced appropriately, and managed consistently.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SCOPE -->
+    <div class="section" id="sec-2">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">2</div>
+        <div class="section-title">SCOPE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <div class="sub-heading">In Scope</div>
+          <p>This SOP applies to:</p>
+          <ul>
+            <li>All departments requesting support from L&amp;D.</li>
+            <li>All L&amp;D team members involved in evaluating, planning, and executing L&amp;D projects.</li>
+            <li>Requesting of content development and training, up to the approval of the project scope only.</li>
+            <li>Requests related to Dermorepubliq University concerns, document reviews, L&amp;D laptop loan, and training records.</li>
+          </ul>
+          <div class="sub-heading">Out of Scope</div>
+          <p>This SOP does not apply to general inquiries and external training requests. Project management of accepted content development and training requests is out of this SOP's scope.</p>
+          <div class="sub-heading">Process Start and End</div>
+          <p>This SOP is triggered upon filing of a ticket in the RICA Helpdesk and ends once the assigned agent tags the ticket as complete and closed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DEFINITIONS -->
+    <div class="section" id="sec-3">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">3</div>
+        <div class="section-title">DEFINITIONS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>Project Intake Request</strong> – A formal submission to L&amp;D for new or revised training solutions or initiatives.</li>
+            <li><strong>Requestor</strong> – The employee, manager, or department submitting the intake.</li>
+            <li><strong>Assigned Ticket Agent</strong> – The person assigned to process a ticket.</li>
+            <li><strong>RICA Helpdesk</strong> – A digital platform used to record, classify, and track cross-departmental support requests.</li>
+            <li><strong>Notion</strong> – A centralized project management tool used to monitor the status, timelines, deliverables, and progress of active projects. It serves as the single source of truth for project documentation, updates, accountability, and reporting.</li>
+            <li><strong>Triage</strong> – Initial assessment of request complexity, alignment, and feasibility.</li>
+            <li><strong>Scoping</strong> – Detailed definition of project requirements, deliverables, success metrics, and timelines.</li>
+            <li><strong>Service Level Agreement</strong> – A documented commitment outlining the expected turnaround times, response times, responsibilities, and performance standards for L&amp;D services. SLAs help manage expectations, ensure consistent service quality, and define measurable benchmarks for L&amp;D support and project-related processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. RASCI MATRIX -->
+    <div class="section" id="sec-4">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">4</div>
+        <div class="section-title">RASCI MATRIX</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr></thead>
+            <tbody>
+              <tr><td>Complete and submit L&amp;D project request</td><td>Requestor</td><td>Requestor</td><td>IT</td><td>L&amp;D</td><td>L&amp;D</td></tr>
+              <tr><td>Acknowledge receipt of intake request</td><td>Assigned Agent</td><td>Assigned Agent</td><td>IT</td><td>L&amp;D</td><td>Requestor</td></tr>
+              <tr><td>Conduct initial triage and prioritization</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor, L&amp;D members</td><td>Requestor</td></tr>
+              <tr><td>Approves or denies requests upon triage</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td><td>Requestor</td></tr>
+              <tr><td>Schedule and facilitate scoping meeting</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager, L&amp;D members</td><td>Requestor</td></tr>
+              <tr><td>Finalize project scope and timeline</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td></tr>
+              <tr><td>Communicate decision to requestor</td><td>Assigned agent</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>Requestor</td><td>Requestor</td></tr>
+              <tr><td>Approves request output</td><td>Requestor</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>Assigned agent</td><td>Assigned agent</td></tr>
+              <tr><td>Update project tracker and intake records</td><td>Assigned agent</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Requestor</td></tr>
+              <tr><td>Monitor intake compliance and audits</td><td>L&amp;D Manager</td><td>L&amp;D Manager</td><td>Assigned Agents</td><td>L&amp;D members</td><td>L&amp;D members</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PROCESS FLOW DIAGRAM -->
+    <div class="section" id="sec-5">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">5</div>
+        <div class="section-title">PROCESS FLOW DIAGRAM</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>See detailed process flows in the appendices section.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PROCEDURE -->
+    <div class="section" id="sec-6">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">6</div>
+        <div class="section-title">PROCEDURE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+
+          <div class="sub-heading">Intake Submission</div>
+          <p>The requestor files a ticket in the RICA Helpdesk with the following according to the support they need:</p>
+          <table class="data-table">
+            <thead><tr><th>Ticket Category</th><th>Description</th><th>Milestones and Service Level Agreement (SLA)</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Content Development Request</td>
+                <td>For requests to create, revise, or update visual, instructional, or communication materials, including but not limited to posters, slide decks, videos, job aids, infographics, handouts, training materials, e-learning content, and other content assets. This category should be used when the primary output is content material or an asset, not the delivery of a training session or program.</td>
+                <td>Triage – 1 business day<br/>Project scoping – 5 business days<br/>Approval of project scope – 2 business days</td>
+              </tr>
+              <tr>
+                <td>Internal Training Request</td>
+                <td>For requesting training programs, training sessions, refreshers, onboarding-related training, team-specific learning interventions, or essential and technical skills training. This category should be used when the primary need is for L&amp;D to design, conduct, coordinate, or support a training session or learning program.</td>
+                <td>Triage – 1 business day<br/>Discovery Session – 3 business days<br/>Project scoping – 5 business days<br/>Approval of project scope – 2 business days</td>
+              </tr>
+              <tr>
+                <td>Dermorepubliq University Support</td>
+                <td>For Dermorepubliq University-related concerns, including but not limited to profile update, account access, course assignment, e-learning course issues, navigation concerns, report generation, and other system-related support.</td>
+                <td>Address ticket concern – 3 business days<br/>Verify action taken – 2 business days</td>
+              </tr>
+              <tr>
+                <td>Document Review</td>
+                <td>For reviewing departmental documents such as policies, process documents, standard operating procedures, work instructions, templates, reports, and presentations. Documents shall be reviewed only for adherence to technical writing standards, branding alignment, tone and style, and formatting in accordance with the company's content style guide. This does not include content development, process validation, legal review, or policy approval.</td>
+                <td>Address ticket concern – 3 business days<br/>Verify action taken – 2 business days</td>
+              </tr>
+              <tr>
+                <td>Training Laptop Loan</td>
+                <td>For loaning L&amp;D laptops for training purposes. Laptops can only be loaned for 5 business days. A new ticket must be filed for a loan extension.</td>
+                <td>Check availability of Laptop – 1 business day<br/>Acknowledge receipt of Laptop – 1 business day<br/>Laptop Return – 5 business days<br/>Verify Ticket Completion – 1 business day</td>
+              </tr>
+              <tr>
+                <td>Training Records</td>
+                <td>For requests regarding training completion records, certificates, and related documents.</td>
+                <td>Address ticket concern – 3 business days<br/>Verify training record – 2 business days</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>The request ticket must include the following:</p>
+          <ul>
+            <li>Request title – Name of the project or request</li>
+            <li>Requestor – Name of the requestor</li>
+            <li>Requested completion date – Target completion date</li>
+            <li>Department – Requestor's department or business unit</li>
+            <li>Description – Summary of the request</li>
+            <li>Optional file attachment/s – Files or resources to support the request</li>
+          </ul>
+          <p>Please see the appendices section for the other required fields for the content development, training request, and training records tickets.</p>
+          <p>The requestor submits the accomplished ticket. The ticket is routed to the next step according to its category.</p>
+
+          <div class="sub-heading">Content Development Request</div>
+          <p>Ticket is routed to "Triage" milestone. The assigned agent conducts triage using the LD-TMP-011-1.0-2026 - Intake Triage Tool. Based on the results, the assigned agent may:</p>
+          <ul>
+            <li>Accept the request. Ticket is approved and routed to the "Project Scoping" milestone (Step 6.2.2).</li>
+            <li>Request revisions from requestor (e.g., incomplete data, unclear objectives).</li>
+            <li>Decline the project due to misalignment or defer the project due to capacity and/or resource constraints. The ticket is rejected and closed.</li>
+          </ul>
+          <p>Only training-related requests will be triaged. Non-training will be assessed based on the availability of resources and team bandwidth. Other solutions will be recommended that may help address the requester's concerns. Recommendations will be recorded on the ticket via comments.</p>
+          <p>Agent will begin working on the project scope. The agent may set a discovery session with the requester if needed.</p>
+          <p>L&amp;D Manager reviews project scope.</p>
+          <p>Agent will revise the project scope according to the L&amp;D manager's feedback. Once all feedback has been addressed, the project scope ticket is marked complete and is routed to "Approval of Project Scope" milestone (Step 6.2.5).</p>
+          <p>Requestor will review the project scope and provide feedback.</p>
+          <ul>
+            <li>If the requestor agrees on the project scope and timeline, the requestor approves and closes the ticket.</li>
+            <li>If the requestor has feedback, the ticket is rejected and routed back to the "Project Scoping" milestone, where the agent will revise the project scope. The ticket is resubmitted and routed to the "Approval of Project Scope" milestone.</li>
+          </ul>
+          <p>Agent updates the team's project tracker. Completion of the actual project will be monitored outside of RICA.</p>
+
+          <div class="sub-heading">Dermorepubliq University Support</div>
+          <p>The ticket is routed to "Address ticket concern" milestone (Step 6.3.2).</p>
+          <p>After addressing the concern or issue, the ticket is routed to the "Verify action taken" milestone (Step 6.3.3).</p>
+          <p>The requestor reviews and confirms that the concern or issue has been addressed.</p>
+          <ul>
+            <li>If the concern has been addressed, the ticket is approved and closed.</li>
+            <li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to "Address ticket concern milestone". The agent addresses the feedback, and the ticket is routed to the "Verify action taken" milestone.</li>
+          </ul>
+
+          <div class="sub-heading">Document Review</div>
+          <p>The ticket is routed to "Address ticket concern" milestone (Step 6.4.2).</p>
+          <p>After addressing the concern or issue, the ticket is routed to the "Verify action taken" milestone (Step 6.4.3).</p>
+          <p>The requestor reviews and confirms that the concern or issue has been addressed.</p>
+          <ul>
+            <li>If the concern has been addressed, the ticket is approved and closed.</li>
+            <li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to "Address ticket concern milestone". Agent addresses the feedback, and the ticket is routed to the "Verify action taken" milestone.</li>
+          </ul>
+
+          <div class="sub-heading">Training Laptop Loan</div>
+          <p>The ticket is routed to the "Check Availability of Laptop" milestone. The assigned agent checks the availability of a laptop in the L&amp;D Laptop Tracker.</p>
+          <ul>
+            <li>If a laptop is available, the agent checks out the laptop, updates the laptop tracker, and accepts the ticket and routes it to "Acknowledge receipt of Laptop" milestone (Step 6.5.2).</li>
+            <li>If laptops are unavailable, the agent rejects and closes the ticket.</li>
+          </ul>
+          <p>The laptop is endorsed to the requestor. The requestor approves the ticket to acknowledge receipt of the laptop. The ticket is routed to "Laptop Return" milestone (Step 6.5.3).</p>
+          <p>Requestor returns the laptop on or before the end of the SLA. The agent updates the Laptop Tracker and marks the ticket as complete upon receipt of the laptop. The ticket is routed to the "Verify Ticket Completion" milestone (Step 6.5.4).</p>
+          <p>Requestor verifies the ticket and marks it as complete. The ticket is closed.</p>
+
+          <div class="sub-heading">Training Request</div>
+          <p>Ticket is routed to "Triage" milestone. The assigned agent conducts triage using the LD-TMP-011-1.0-2026 - Intake Triage Tool. Based on the triage, the assigned agent may:</p>
+          <ul>
+            <li>Accept the request. The ticket is approved and routed to the "Discovery Session" milestone (Step 6.6.2).</li>
+            <li>Request revisions from requestor (e.g., incomplete data, unclear objectives).</li>
+            <li>Decline the project due to misalignment or defer the project due to capacity and/or resource constraints. The ticket is rejected and closed.</li>
+          </ul>
+          <p>Agent schedules a discovery session with the requestor and other stakeholders. After the discovery session, the ticket will be approved and routed to the "Project Scoping" milestone (Step 6.6.3).</p>
+          <p>Agent will begin working on the project scope using details from the ticket and information gathered from the discovery meeting.</p>
+          <p>L&amp;D Manager and director review project scope.</p>
+          <p>Agent will revise project scope according to L&amp;D manager and director's feedback.</p>
+          <p>Agent will revise the project scope according to the L&amp;D manager's feedback. Once all feedback has been addressed, the "Project Scoping" milestone is marked complete and is routed to the "Approval of Project Scope" milestone (Step 6.6.7).</p>
+          <p>Requestor will review the project scope and provide feedback.</p>
+          <ul>
+            <li>If the requestor agrees on the project scope and timeline, the requestor approves and closes the ticket.</li>
+            <li>If the requestor has feedback, the ticket is rejected and routed back to the "Project Scoping" milestone, where the agent will revise the project scope. The ticket is resubmitted and routed to the "Approval of Project Scope" milestone.</li>
+          </ul>
+          <p>Agent updates the team's project tracker.</p>
+
+          <div class="sub-heading">Training Records Request</div>
+          <p>The ticket is routed to "Address ticket concern" milestone (Step 6.7.2).</p>
+          <p>After addressing the concern or issue, the training record is attached to the ticket. It is then routed to the "Verify training record" milestone (Step 6.7.3).</p>
+          <p>The requestor reviews and confirms that they received the training record requested.</p>
+          <ul>
+            <li>If the concern has been addressed, the ticket is approved and closed.</li>
+            <li>If the concern has not been addressed or is incomplete, the requestor provides feedback, and the ticket is rejected and routed back to "Address ticket concern milestone". Agent addresses the feedback, and the ticket is routed to the "Verify action taken" milestone.</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. FORMS, TOOLS, AND SYSTEMS -->
+    <div class="section" id="sec-7">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">7</div>
+        <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li>RICA Helpdesk</li>
+            <li>L&amp;D Notion Project Tracker</li>
+            <li>LD-TMP-011-1.0-2026 - Intake Triage Tool</li>
+            <li>L&amp;D Laptop Tracker.xlsx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. KPI AND COMPLIANCE -->
+    <div class="section" id="sec-8">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">8</div>
+        <div class="section-title">KPI AND COMPLIANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This section defines how adherence to the L&amp;D Project Intake Request SOP and the effectiveness of the intake process will be monitored. Monitoring ensures that all L&amp;D project requests follow the established intake process, are evaluated consistently, and support effective prioritization and resource allocation. KPI results will be reviewed regularly, and corrective actions will be implemented when targets are not achieved.</p>
+          <table class="data-table">
+            <thead><tr><th>KPI / Metric</th><th>Target</th><th>Frequency</th><th>Responsible</th><th>Monitoring Tool</th></tr></thead>
+            <tbody>
+              <tr><td>Adherence to SLA</td><td>90% of submitted tickets</td><td>Monthly</td><td>Assigned Agent</td><td>RICA Helpdesk</td></tr>
+            </tbody>
+          </table>
+          <p>Failure to meet KPI targets indicates gaps in adherence to the intake process or inefficiencies in request management. When targets are missed, the L&amp;D Lead will review process bottlenecks, identify root causes, and implement corrective actions such as process adjustments, resource allocation changes, or additional guidance to stakeholders.</p>
+          <p>Any L&amp;D project initiated without a formally submitted and approved intake request will be considered non-compliant with this SOP. Non-compliant activities may be paused until proper documentation and approval are completed, and repeated violations may be escalated to department leadership for resolution.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. DOCUMENT REVIEW AND MAINTENANCE -->
+    <div class="section" id="sec-9">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">9</div>
+        <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This SOP shall be reviewed annually or earlier if major process changes occur. The L&amp;D Manager is responsible for maintaining and updating the document.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. APPENDICES -->
+    <div class="section" id="sec-10">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">10</div>
+        <div class="section-title">APPENDICES</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <div class="sub-heading">Content Development Request Process Flow</div>
+          <div class="sub-heading">Dermorepubliq University Support and Document Review Process Flow</div>
+          <div class="sub-heading">Laptop Loan Process Flow</div>
+          <div class="sub-heading">Training Request Process Flow</div>
+          <div class="sub-heading">Training Record Request Process Flow</div>
+          <div class="sub-heading">Content Development Request Ticket Information</div>
+          <ul>
+            <li>Business problem/need – Problem the request intends to solve</li>
+          </ul>
+          <div class="sub-heading">Laptop Loan Ticket Information</div>
+          <ul>
+            <li>Purpose of loan – The reason why the laptop is being loaned</li>
+            <li>Site – Where the laptop is intended to be used</li>
+            <li>Acknowledgement check box – Acknowledges the terms and conditions of the laptop loan, i.e., intended use of laptop, duration, approved location, accountability, and all relevant and applicable IT asset policies.</li>
+          </ul>
+          <div class="sub-heading">Training Request Ticket Information</div>
+          <ul>
+            <li>What is the overarching goal of the training program?</li>
+            <li>Who are the target participants for this training program?</li>
+            <li>What skills, knowledge, or behaviors do you want participants to gain or improve upon?</li>
+            <li>What are the key topics or areas of focus for the training program?</li>
+            <li>What is the preferred schedule for the training program?</li>
+            <li>Other information or feedback that will inform the design and implementation of the training program.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. REVISION AND CHANGE LOGS -->
+    <div class="section" id="sec-11">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">11</div>
+        <div class="section-title">REVISION AND CHANGE LOGS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr></thead>
+            <tbody>
+              <tr><td>1.0</td><td>Joseph Kier San Jose</td><td>01/21/2026</td><td>Created first version</td></tr>
+              <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <footer class="doc-footer">
+    <div class="footer-left">
+      DR-SOP-L&amp;D-004 &nbsp;&middot;&nbsp; Version 1.0 &nbsp;&middot;&nbsp; Effective 2026
+      <br/>&#169;2026 Dermorepubliq Corporation. All rights reserved.
+      <br/><span class="confidential-tag">Internal Use Only</span>
+    </div>
+    <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+  </footer>
+</div>
+
+<script>
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.nextElementSibling.classList.toggle('collapsed', expanded);
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'true');
+      b.nextElementSibling.classList.remove('collapsed');
+    });
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-header').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.add('collapsed');
+    });
+  }
+</script>
 </body>
 </html>

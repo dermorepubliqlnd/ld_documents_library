@@ -6,401 +6,502 @@
   <title>Dermorepubliq — Early and Sustained Performance Phases</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root{--doc-accent:#83AA6E;--doc-accent-light:#EAF2E5;--font:'Poppins',sans-serif;--text:#121212;--text-muted:#5f5144;--border:#DBD3C9;--bg:#F7F6F3;--white:#ffffff;--dermo-onyx:#121212;--stone-taupe:#989187;--clinical-white:#F7F6F3;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
-    .page{max-width:860px;margin:40px auto;background:var(--white);border:1px solid var(--border);position:relative;overflow:hidden;}
-    .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--doc-accent);}
-    .doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:32px 40px 24px 52px;border-bottom:1px solid var(--border);}
-    .logo-text{font-size:18px;font-weight:700;letter-spacing:0.08em;color:var(--dermo-onyx);text-transform:uppercase;}
-    .logo-text span{font-weight:300;}
-    .doc-type-badge{display:inline-block;margin-top:8px;padding:3px 12px;background:var(--doc-accent);color:#ffffff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
-    .doc-meta{text-align:right;font-size:11px;color:var(--stone-taupe);line-height:1.9;}
-    .doc-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
-    .title-block{padding:28px 40px 24px 52px;border-bottom:1px solid var(--border);background:var(--doc-accent-light);}
-    .title-block h1{font-size:22px;font-weight:700;color:var(--dermo-onyx);line-height:1.3;margin-bottom:6px;}
-    .title-block .doc-id{font-size:11px;font-weight:500;color:var(--doc-accent);letter-spacing:0.08em;text-transform:uppercase;}
-    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
-    .info-cell{padding:14px 16px;border-right:1px solid var(--border);}
-    .info-cell:last-child{border-right:none;}
-    .info-cell:first-child{padding-left:52px;}
-    .info-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone-taupe);margin-bottom:3px;}
-    .info-value{font-size:12px;font-weight:500;color:var(--text);}
-    .doc-body{padding:32px 40px 32px 52px;}
-    .section{margin-bottom:28px;}
-    .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--doc-accent);}
-    .section-number{width:26px;height:26px;background:var(--doc-accent);color:#ffffff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
-    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dermo-onyx);}
-    .doc-body p{font-size:13px;color:var(--text);margin-bottom:10px;}
-    .doc-body ul,.doc-body ol{padding-left:20px;margin-bottom:10px;}
-    .doc-body li{font-size:13px;color:var(--text);margin-bottom:5px;}
-    .subsection-title{font-size:12px;font-weight:700;color:var(--doc-accent);text-transform:uppercase;letter-spacing:0.05em;margin:16px 0 6px;}
-    .doc-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 40px 14px 52px;border-top:1px solid var(--border);background:var(--clinical-white);}
-    .doc-footer .footer-left{font-size:10px;color:var(--stone-taupe);line-height:1.6;}
-    .doc-footer .footer-right{font-size:10px;color:var(--stone-taupe);text-align:right;}
-    .confidential-tag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-taupe);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-taupe);border-radius:2px;margin-top:4px;}
-    @media print{body{background:white;}.page{margin:0;border:none;max-width:100%;}.accent-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+    :root {
+      --accent:      #83AA6E;
+      --accent-light:#EAF2E5;
+      --font:        'Poppins', sans-serif;
+      --text:        #121212;
+      --muted:       #5f5144;
+      --border:      #DBD3C9;
+      --bg:          #F7F6F3;
+      --white:       #ffffff;
+      --onyx:        #121212;
+      --taupe:       #989187;
+      --clinical:    #F7F6F3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+    .page { max-width: 860px; margin: 40px auto 60px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+    .doc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 36px 22px 52px; border-bottom: 1px solid var(--border); }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 0.09em; color: var(--onyx); text-transform: uppercase; line-height: 1; }
+    .logo-text span { font-weight: 300; }
+    .doc-type-badge { display: inline-block; margin-top: 9px; padding: 3px 11px; background: var(--accent); color: #ffffff; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; border-radius: 2px; }
+    .doc-meta { text-align: right; font-size: 11px; color: var(--taupe); line-height: 1.85; }
+    .doc-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .title-block { padding: 22px 36px 20px 52px; border-bottom: 1px solid var(--border); background: var(--accent-light); }
+    .title-block .doc-type-label { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .title-block h1 { font-size: 21px; font-weight: 700; color: var(--onyx); line-height: 1.3; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .info-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--taupe); margin-bottom: 3px; }
+    .info-value { font-size: 12px; font-weight: 500; color: var(--text); }
+
+    /* Toolbar */
+    .doc-toolbar { display: flex; gap: 6px; padding: 10px 36px 10px 52px; border-bottom: 1px solid var(--border); background: var(--white); align-items: center; }
+    .toolbar-btn { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); color: var(--taupe); cursor: pointer; transition: all 0.12s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+
+    .doc-body { padding: 20px 36px 36px 46px; }
+
+    /* Level 1: Sections (collapsible) */
+    .section { margin-bottom: 6px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 16px 10px 12px; background: var(--clinical); border: none; cursor: pointer; text-align: left; border-bottom: 1px solid var(--border); transition: background 0.15s; font-family: var(--font); }
+    .section-header:hover { background: #EDEAE5; }
+    .section-number { min-width: 26px; height: 26px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--onyx); flex: 1; }
+    .toggle-icon { flex-shrink: 0; color: var(--taupe); transition: transform 0.22s ease; }
+    .section-header[aria-expanded="false"] .toggle-icon { transform: rotate(-90deg); }
+    .section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.25s ease; }
+    .section-body.collapsed { grid-template-rows: 0fr; }
+    .section-content { overflow: hidden; padding: 20px 18px 20px 14px; }
+    .section-body.collapsed .section-content { padding-top: 0; padding-bottom: 0; }
+
+    /* Level 2: Sub-headings */
+    .sub-heading { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.07em; margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px dashed var(--border); }
+    .sub-heading:first-child { margin-top: 0; }
+
+    /* Step labels */
+    .step-label { font-size: 12px; font-weight: 600; color: var(--muted); margin: 12px 0 5px; padding-left: 10px; border-left: 3px solid var(--accent-light); font-style: italic; }
+    .step-label:first-child { margin-top: 0; }
+
+    /* Typography */
+    .section-content p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .section-content ul { padding-left: 0; margin: 6px 0 12px 0; list-style: none; }
+    .section-content ul li { font-size: 13px; color: var(--text); margin-bottom: 6px; padding-left: 18px; position: relative; line-height: 1.6; }
+    .section-content ul li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .section-content ul ul { margin: 6px 0 4px 0; }
+    .section-content ul ul li { padding-left: 16px; }
+    .section-content ul ul li::before { width: 5px; height: 5px; background: none; border: 1.5px solid var(--accent); border-radius: 50%; top: 8px; }
+    .section-content ol { padding-left: 0; margin: 6px 0 12px; list-style: none; counter-reset: ol-counter; }
+    .section-content ol li { counter-increment: ol-counter; font-size: 13px; color: var(--text); margin-bottom: 8px; padding-left: 34px; position: relative; line-height: 1.6; }
+    .section-content ol li::before { content: counter(ol-counter); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; background: var(--accent-light); border: 1.5px solid var(--accent); color: var(--accent); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; border: 1px solid var(--border); }
+    .data-table thead tr { background: var(--accent); color: #ffffff; }
+    .data-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.2); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 9px 12px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table td:last-child { border-right: none; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .data-table tbody tr:nth-child(even) td { background: var(--clinical); }
+
+    .doc-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px 12px 52px; border-top: 1px solid var(--border); background: var(--clinical); }
+    .doc-footer .footer-left { font-size: 10px; color: var(--taupe); line-height: 1.6; }
+    .doc-footer .footer-right { font-size: 10px; color: var(--taupe); text-align: right; }
+    .confidential-tag { display: inline-block; padding: 2px 7px; border: 1px solid var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); border-radius: 2px; margin-top: 3px; }
+
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; box-shadow: none; max-width: 100%; }
+      .doc-toolbar { display: none; }
+      .section { border: none; border-bottom: 1px solid var(--border); border-radius: 0; }
+      .section-header { background: none !important; border-bottom: 2px solid var(--accent); }
+      .section-body.collapsed { grid-template-rows: 1fr !important; }
+      .section-content { padding-top: 16px !important; padding-bottom: 16px !important; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="accent-bar"></div>
-    <header class="doc-header">
-      <div class="brand-block">
-        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
-        <div class="doc-type-badge">Standard Operating Procedure</div>
-      </div>
-      <div class="doc-meta">
-        <strong>DR-SOP-L&amp;D-003</strong>
-        Document ID
-        <br/>Version 1.0
-        <br/>Effective: April 1, 2026
-      </div>
-    </header>
-    <div class="title-block">
-      <div class="doc-id">SOP · Learning &amp; Development</div>
-      <h1>Early and Sustained Performance Phases</h1>
+<div class="page">
+  <div class="accent-bar"></div>
+  <header class="doc-header">
+    <div>
+      <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:8px;vertical-align:super;">&#174;</sup></div>
+      <div class="doc-type-badge">Standard Operating Procedure</div>
     </div>
-    <div class="info-grid">
-      <div class="info-cell"><div class="info-label">Department</div><div class="info-value">Learning &amp; Development</div></div>
-      <div class="info-cell"><div class="info-label">Document Owner</div><div class="info-value">L&amp;D Director</div></div>
-      <div class="info-cell"><div class="info-label">Responsible Dept.</div><div class="info-value">Human Resources</div></div>
-      <div class="info-cell"><div class="info-label">Classification</div><div class="info-value">Internal Use Only</div></div>
+    <div class="doc-meta">
+      <strong>DR-SOP-L&amp;D-003</strong>
+      Document ID<br/>Version 1.0<br/>Effective: 2026
     </div>
-    <div class="doc-body">
-
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">1</div>
-          <div class="section-title">PURPOSE</div>
-        </div>
-        <p>This Standard Operating Procedure (SOP) outlines the required steps, responsibilities, and</p>
-<p>standards for managing the Early Performance Phase and Sustained Performance Phase of the</p>
-<p>onboarding journey.</p>
-<p>This SOP ensures that new hires receive structured support, intentional performance</p>
-<p>development, and continuous feedback throughout the probationary period, enabling them to</p>
-<p>achieve full role proficiency and readiness for regularization.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">2</div>
-          <div class="section-title">SCOPE</div>
-        </div>
-        <p class="subsection-title">2.1. In Scope</p>
-<p>This SOP applies to all newly hired employees, all departments that conduct role-specific</p>
-<p>onboarding and training, all hiring managers, supervisors, nesting buddies, Learning and</p>
-<p>Development (L&amp;D), and Human Resources (HR)</p>
-<p class="subsection-title">2.2. Out of Scope</p>
-<p>This SOP does not apply to consultants, external partners, and interns.</p>
-<p class="subsection-title">2.3. Process Start and End</p>
-<p>This SOP is triggered upon endorsement of the new hire for progression to the Early</p>
-<p>Performance Phase, which marks the beginning of the probationary period.</p>
-<p>This SOP ends upon completion of the Sustained Performance Phase at the employee’s</p>
-<p>180th day, including final evaluation and endorsement outcome for regularization or</p>
-<p>continuation of employment.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">3</div>
-          <div class="section-title">REFERENCES</div>
-        </div>
-        <ul><li></li></ul>
-<p>LD-POL-001-1.0-2025 – New Hire Onboarding Journey</p>
-<ul><li></li></ul>
-<p>LD-SOP-002-1.0-2025 - Preboarding and Orientation Phases</p>
-<ul><li></li></ul>
-<p>LD-SOP-001-1.0-2025 - Integration Phase</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">4</div>
-          <div class="section-title">DEFINITIONS</div>
-        </div>
-        <ul><li></li></ul>
-<p>Early Performance Phase – A structured period where the new hire begins applying</p>
-<p>learned knowledge and skills to real tasks with guided support, gradually increasing</p>
-<p>workload and expectations.</p>
-<ul><li></li></ul>
-<p>Sustained Performance Phase – A period following initial proficiency, focused on</p>
-<p>performance consistency, continued development, and readiness for regularization.</p>
-<ul><li></li></ul>
-<p>Performance Plan – A structured, time-bound development roadmap outlining tasks, skill</p>
-<p>milestones, workload progression, productivity targets, and learning activities.</p>
-<p>Probationary Period – The first six (6) months of employment, corresponding to the Early</p>
-<p>Performance Phase and Sustained Performance Phase of the onboarding journey, used to</p>
-<p>assess overall performance, behavior, and organizational fit.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">5</div>
-          <div class="section-title">RASCI MATRIX</div>
-        </div>
-        <p>Activity R A S C I</p>
-<p>HR Specialist,</p>
-<p>Develop Performance Immediate Hiring L&amp;D</p>
-<p>Trainer L&amp;D</p>
-<p>Plan Supervisor Manager Director</p>
-<p>Supervisor</p>
-<p>Conduct check-ins and Immediate Hiring L&amp;D</p>
-<p>Trainer HR Specialist</p>
-<p>coaching sessions Supervisor Manager Supervisor</p>
-<p>Maintain check-in HR L&amp;D Hiring</p>
-<p>Trainer Trainer</p>
-<p>surveys in LMS Specialist Supervisor Manager</p>
-<p>Immediate</p>
-<p>Supervisor,</p>
-<p>Analyze check-in survey HR Hiring L&amp;D</p>
-<p>HR Specialist Trainer</p>
-<p>results Specialist Manager, Director</p>
-<p>L&amp;D</p>
-<p>Supervisor</p>
-<p>HR Manager,</p>
-<p>Conduct probationary Immediate Hiring HR L&amp;D</p>
-<p>L&amp;D</p>
-<p>evaluations Supervisor Manager Specialist Director</p>
-<p>Supervisor</p>
-<p>Immediate</p>
-<p>Supervisor,</p>
-<p>Maintain documentation HR Hiring HR</p>
-<p>HR Specialist Trainer</p>
-<p>and records Specialist Manager, Manager</p>
-<p>L&amp;D</p>
-<p>Supervisor</p>
-<p>Review and revise this L&amp;D L&amp;D Trainer, HR L&amp;D Director, Hiring</p>
-<p>SOP Supervisor Supervisor Specialist HR Manager Manager</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">6</div>
-          <div class="section-title">PROCESS FLOW DIAGRAM</div>
-        </div>
-        
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">7</div>
-          <div class="section-title">PROCEDURE</div>
-        </div>
-        <p class="subsection-title">7.1. Early Performance Phase</p>
-<p>7.1.1. Performance Planning</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor develops a performance plan for the new employee,</p>
-<p>which includes workload targets, skills milestones, and KPI checkpoints.</p>
-<ul><li></li></ul>
-<p>The Performance Plan shall be reviewed and aligned with the Hiring Manager prior to</p>
-<p>implementation.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor reviews the performance plan with the new employee,</p>
-<p>ensure understanding, alignment, and commitment.</p>
-<p>7.1.2. 30th Day Check-In</p>
-<ul><li></li></ul>
-<p>The new employee completes the 30th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor meets with the new employee to discuss the following:</p>
-<p>o Onboarding experience</p>
-<p>o Role and tools readiness</p>
-<p>o Support and inclusion</p>
-<ul><li></li></ul>
-<p>The immediate supervisor coaches the new employee, setting goals for the next</p>
-<p>check-in.</p>
-<p>7.1.3. 60th Day Check-In</p>
-<ul><li></li></ul>
-<p>The new employee completes the 60th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor meets with the new employee to discuss the following:</p>
-<p>o Role Confidence</p>
-<p>o Feedback and supervision</p>
-<p>o Teamwork and collaboration</p>
-<ul><li></li></ul>
-<p>The immediate supervisor coaches the new employee, setting goals for the next</p>
-<p>check-in.</p>
-<p>7.1.4. 90th Day Check-In/3rd Month Probationary Review</p>
-<ul><li></li></ul>
-<p>The new employee completes the 90th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li>The immediate supervisor accomplishes the 3rd month Probationary Performance</li></ul>
-<p>Evaluation.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor meets with the new employee to discuss the following:</p>
-<p>o Integration and belonging</p>
-<p>o Motivation and ownership</p>
-<p>o Organizational fit</p>
-<ul><li></li></ul>
-<p>The immediate supervisor discusses the results of the probationary review with the</p>
-<p>new employee.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor coaches the new employee, setting goals for the next</p>
-<p>check-in.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor submits a copy of the accomplished probationary review</p>
-<p>to the HR team for personnel file maintenance and compliance tracking.</p>
-<ul><li></li></ul>
-<p>The Hiring Manager shall remain informed of progress and may provide guidance</p>
-<p>as necessary.</p>
-<p class="subsection-title">7.2. Sustained Performance Phase</p>
-<p>7.2.1. 120th Day Check-In</p>
-<ul><li></li></ul>
-<p>The new employee completes the 120th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor meets with the new employee to discuss the following:</p>
-<p>o Development conversations</p>
-<p>o Stretch and progress</p>
-<p>o Manager and peer support</p>
-<ul><li></li></ul>
-<p>The immediate supervisor shall coach the new employee, setting goals for the next</p>
-<p>check-in.</p>
-<p>7.2.2. 150th Day Check-In</p>
-<ul><li></li></ul>
-<p>The new employee completes the 150th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li>The immediate supervisor shall accomplish the 5th month Probationary Performance</li></ul>
-<p>Evaluation.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor meets with the new employee to discuss the following:</p>
-<p>o Recognition and value</p>
-<p>o Well-being and workload</p>
-<p>o Connection and culture</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor discusses evaluation results and provides coaching</p>
-<p>based on identified strengths and areas for improvement.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor and Hiring Manager shall review the evaluation results</p>
-<p>prior to endorsement to ensure alignment with departmental standards and</p>
-<p>expectations.</p>
-<ul><li></li></ul>
-<p>The Department Head, if applicable, may be involved for alignment on final</p>
-<p>endorsement decisions.</p>
-<ul><li></li></ul>
-<p>All endorsement decisions shall be supported by documented evaluations,</p>
-<p>coaching logs, and observed performance.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor submits the completed evaluation to HR for personnel file</p>
-<p>maintenance and compliance tracking.</p>
-<p>The outcome of the probationary evaluation, including regularization, extension, or non-</p>
-<p>continuation of employment, shall be determined in accordance with the Human</p>
-<p>Resources (HR) Probationary Performance Review Policy and/or applicable SOPs.</p>
-<p>7.2.3. 180th Day Check-In</p>
-<ul><li></li></ul>
-<p>The new employee completes the 180th day check-in survey in Dermorepubliq</p>
-<p>University.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor meets with the new employee to discuss the following:</p>
-<p>o Confirmation and role readiness</p>
-<p>o Career path and development opportunities</p>
-<p>o Reflection on onboarding experience</p>
-<ul><li></li></ul>
-<p>This check-in serves as a post-evaluation engagement and transition discussion</p>
-<p>and does not replace the formal probationary evaluation conducted during the</p>
-<p>150th day.</p>
-<ul><li></li></ul>
-<p>The Immediate Supervisor shall ensure that any remaining development actions or</p>
-<p>transition plans are documented and aligned with the employee’s next phase of</p>
-<p>employment.</p>
-<ul><li></li></ul>
-<p>Coaching and development support may continue as needed beyond onboarding</p>
-<p>completion.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">8</div>
-          <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
-        </div>
-        <ul><li></li></ul>
-<p>HR-TMP-009-1.2-2025 - Coaching Log</p>
-<ul><li></li></ul>
-<p>HR-TMP-019-1.0-2026 - Probationary Review Form</p>
-<ul><li></li></ul>
-<p>Dermorepubliq University</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">9</div>
-          <div class="section-title">TRAINING REQUIREMENTS</div>
-        </div>
-        <p>Supervisors and managers responsible for conducting performance discussions and evaluations</p>
-<p>must be adequately equipped with the necessary coaching and performance management</p>
-<p>competencies.</p>
-<p>At a minimum, they shall undergo foundational learning interventions that cover:</p>
-<ul><li></li></ul>
-<p>Coaching fundamentals and effective feedback delivery</p>
-<ul><li></li></ul>
-<p>Performance evaluation principles and application</p>
-<ul><li></li></ul>
-<p>Conduct of structured performance discussions</p>
-<p>New hires shall also be guided on effective self-assessment practices to support meaningful</p>
-<p>participation in performance discussions and evaluations.</p>
-<p>L&amp;D may provide or assign relevant training programs to ensure consistency in execution across</p>
-<p>departments.</p>
-<p>10.KPI AND COMPLIANCE</p>
-<p>KPI / Metric Target Frequency Responsible Monitoring Tool</p>
-<p>On-Time Completion ≥ 90% completed Per onboarding Immediate Dermorepubliq</p>
-<p>of Required Check-Ins on or before due batch Supervisor University</p>
-<p>date</p>
-<p>On-Time Completion ≥ 90% completed Overall Human Resources Probationary Review</p>
-<p>of Probationary on or before due Monitoring Form</p>
-<p>Reviews (90th &amp; 150th date</p>
-<p>Day)</p>
-<p>New Hire Role 85% of new hires Per onboarding Department Head HR-TMP-016-1.0-</p>
-<p>Proficiency meet role batch 2025 - Individual</p>
-<p>Achievement by 180th readiness Contributor</p>
-<p>Day standards Performance</p>
-<p>Evaluation, HR-TMP-</p>
-<p>009-1.2-2025 -</p>
-<p>Coaching Log</p>
-<p>Endorsement to Hiring 80% endorsed Per onboarding L&amp;D Trainer Email endorsement</p>
-<p>Manager post-orientation batch</p>
-<p>New Hire Experience 4.0 Average Per check-in L&amp;D / HR Operations Dermorepubliq</p>
-<p>Satisfaction Score rating cycle University</p>
-<p>Performance evaluations, check-ins, and coaching activities shall be completed and properly</p>
-<p>documented for all eligible new hires to ensure consistency, transparency, and compliance with</p>
-<p>onboarding standards.</p>
-<p>Failure to complete required check-ins, evaluations, or development actions within defined timelines</p>
-<p>may result in delayed progression, non-endorsement for regularization, or referral to Human</p>
-<p>Resources (HR) for appropriate action in accordance with the HR Probationary Performance Review</p>
-<p>Policy and/or applicable SOPs.</p>
-<p>All performance and endorsement decisions shall be based on documented evaluations, coaching</p>
-<p>logs, and observed behaviors.</p>
-<p>Non-compliance with this SOP, including failure to conduct required performance discussions,</p>
-<p>submit mandatory documentation, or meet defined timelines, may result in corrective actions for</p>
-<p>responsible parties in accordance with company policy.</p>
-<p>Repeated or unresolved non-compliance may be escalated to HR and senior leadership and may</p>
-<p>impact departmental performance, audit results, and accountability measures.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">10</div>
-          <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
-        </div>
-        <p>This SOP shall be reviewed annually by the Learning and Development (L&amp;D) Supervisor, or as</p>
-<p>required, to ensure continued relevance, effectiveness, and alignment with organizational, legal,</p>
-<p>and regulatory requirements.</p>
-<p>The review shall be conducted in coordination with Human Resources (HR) and relevant</p>
-<p>stakeholders.</p>
-<p>Feedback from new hires supervisors, and managers may be incorporated to support continuous</p>
-<p>improvement of onboarding and performance management processes.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">11</div>
-          <div class="section-title">REVISION AND CHANGE LOGS</div>
-        </div>
-        <p>Version Author Date Summary of Change(s)</p>
-<p>December</p>
-<p class="subsection-title">1.0 Joseph San Jose Initiated draft</p>
-<p>4, 2026</p>
-      </div>
-    </div>
-    <footer class="doc-footer">
-      <div class="footer-left">
-        DR-SOP-L&amp;D-003 · Version 1.0 · Effective April 1, 2026
-        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
-        <br/><span class="confidential-tag">Internal Use Only</span>
-      </div>
-      <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
-    </footer>
+  </header>
+  <div class="title-block">
+    <div class="doc-type-label">SOP &middot; Learning &amp; Development</div>
+    <h1>Early and Sustained Performance Phases</h1>
   </div>
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">Author/s</div><div class="info-value">John Peter Paul Carriedo, Joseph Kier San Jose</div></div>
+    <div class="info-cell"><div class="info-label">Reviewer/s</div><div class="info-value">Sandra Abegail Barlao</div></div>
+    <div class="info-cell"><div class="info-label">Approver/s</div><div class="info-value">Abimelex Brad Vele&#xF1;a</div></div>
+    <div class="info-cell"><div class="info-label">Release Date</div><div class="info-value">April 1, 2026</div></div>
+  </div>
+
+  <div class="doc-toolbar">
+    <button class="toolbar-btn" onclick="expandAll()">&#9660; Expand All</button>
+    <button class="toolbar-btn" onclick="collapseAll()">&#9654; Collapse All</button>
+    <div class="toolbar-sep"></div>
+    <button class="toolbar-btn" onclick="window.print()">&#128438; Print</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- 1. PURPOSE -->
+    <div class="section" id="sec-1">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">1</div>
+        <div class="section-title">PURPOSE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This Standard Operating Procedure (SOP) outlines the required steps, responsibilities, and standards for managing the Early Performance Phase and Sustained Performance Phase of the onboarding journey.</p>
+          <p>This SOP ensures that new hires receive structured support, intentional performance development, and continuous feedback throughout the probationary period, enabling them to achieve full role proficiency and readiness for regularization.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SCOPE -->
+    <div class="section" id="sec-2">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">2</div>
+        <div class="section-title">SCOPE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <div class="sub-heading">2.1 In Scope</div>
+          <p>This SOP applies to all newly hired employees, all departments that conduct role-specific onboarding and training, all hiring managers, supervisors, nesting buddies, Learning and Development (L&amp;D), and Human Resources (HR).</p>
+          <div class="sub-heading">2.2 Out of Scope</div>
+          <p>This SOP does not apply to consultants, external partners, and interns.</p>
+          <div class="sub-heading">2.3 Process Start and End</div>
+          <p>This SOP is triggered upon endorsement of the new hire for progression to the Early Performance Phase, which marks the beginning of the probationary period.</p>
+          <p>This SOP ends upon completion of the Sustained Performance Phase at the employee's 180th day, including final evaluation and endorsement outcome for regularization or continuation of employment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. REFERENCES -->
+    <div class="section" id="sec-3">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">3</div>
+        <div class="section-title">REFERENCES</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li>LD-POL-001-1.0-2025 &#8211; New Hire Onboarding Journey</li>
+            <li>LD-SOP-002-1.0-2025 - Preboarding and Orientation Phases</li>
+            <li>LD-SOP-001-1.0-2025 - Integration Phase</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. DEFINITIONS -->
+    <div class="section" id="sec-4">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">4</div>
+        <div class="section-title">DEFINITIONS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>Early Performance Phase</strong> &#8211; A structured period where the new hire begins applying learned knowledge and skills to real tasks with guided support, gradually increasing workload and expectations.</li>
+            <li><strong>Sustained Performance Phase</strong> &#8211; A period following initial proficiency, focused on performance consistency, continued development, and readiness for regularization.</li>
+            <li><strong>Performance Plan</strong> &#8211; A structured, time-bound development roadmap outlining tasks, skill milestones, workload progression, productivity targets, and learning activities.</li>
+            <li><strong>Probationary Period</strong> &#8211; The first six (6) months of employment, corresponding to the Early Performance Phase and Sustained Performance Phase of the onboarding journey, used to assess overall performance, behavior, and organizational fit.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RASCI MATRIX -->
+    <div class="section" id="sec-5">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">5</div>
+        <div class="section-title">RASCI MATRIX</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr></thead>
+            <tbody>
+              <tr><td>Develop Performance Plan</td><td>Immediate Supervisor</td><td>Hiring Manager</td><td>Trainer</td><td>L&amp;D Supervisor</td><td>HR Specialist, L&amp;D Director</td></tr>
+              <tr><td>Conduct check-ins and coaching sessions</td><td>Immediate Supervisor</td><td>Hiring Manager</td><td>Trainer</td><td>L&amp;D Supervisor</td><td>HR Specialist</td></tr>
+              <tr><td>Maintain check-in surveys in LMS</td><td>HR Specialist</td><td>L&amp;D Supervisor</td><td>Trainer</td><td>Hiring Manager</td><td>Trainer</td></tr>
+              <tr><td>Analyze check-in survey results</td><td>HR Specialist</td><td>Hiring Manager, L&amp;D Supervisor</td><td>Immediate Supervisor, L&amp;D Supervisor</td><td>HR Specialist</td><td>Trainer</td></tr>
+              <tr><td>Conduct probationary evaluations</td><td>Immediate Supervisor</td><td>Hiring Manager</td><td>HR Manager, L&amp;D Supervisor</td><td>HR Specialist</td><td>L&amp;D Director</td></tr>
+              <tr><td>Maintain documentation and records</td><td>HR Specialist</td><td>Hiring Manager, L&amp;D Supervisor</td><td>HR Specialist</td><td>HR Manager</td><td>Trainer</td></tr>
+              <tr><td>Review and revise this SOP</td><td>L&amp;D Supervisor</td><td>L&amp;D Supervisor</td><td>Trainer, HR Specialist</td><td>L&amp;D Director, HR Manager</td><td>Hiring Manager</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PROCESS FLOW DIAGRAM -->
+    <div class="section" id="sec-6">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">6</div>
+        <div class="section-title">PROCESS FLOW DIAGRAM</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Process flow diagram to be inserted.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. PROCEDURE -->
+    <div class="section" id="sec-7">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">7</div>
+        <div class="section-title">PROCEDURE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+
+          <div class="sub-heading">7.1 &nbsp; Early Performance Phase</div>
+
+          <div class="step-label">7.1.1 &nbsp; Performance Planning</div>
+          <ul>
+            <li>The Immediate Supervisor develops a performance plan for the new employee, which includes workload targets, skills milestones, and KPI checkpoints.</li>
+            <li>The Performance Plan shall be reviewed and aligned with the Hiring Manager prior to implementation.</li>
+            <li>The Immediate Supervisor reviews the performance plan with the new employee, ensure understanding, alignment, and commitment.</li>
+          </ul>
+
+          <div class="step-label">7.1.2 &nbsp; 30th Day Check-In</div>
+          <ul>
+            <li>The new employee completes the 30th day check-in survey in Dermorepubliq University.</li>
+            <li>The Immediate Supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Onboarding experience</li>
+                <li>Role and tools readiness</li>
+                <li>Support and inclusion</li>
+              </ul>
+            </li>
+            <li>The immediate supervisor coaches the new employee, setting goals for the next check-in.</li>
+          </ul>
+
+          <div class="step-label">7.1.3 &nbsp; 60th Day Check-In</div>
+          <ul>
+            <li>The new employee completes the 60th day check-in survey in Dermorepubliq University.</li>
+            <li>The Immediate Supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Role Confidence</li>
+                <li>Feedback and supervision</li>
+                <li>Teamwork and collaboration</li>
+              </ul>
+            </li>
+            <li>The immediate supervisor coaches the new employee, setting goals for the next check-in.</li>
+          </ul>
+
+          <div class="step-label">7.1.4 &nbsp; 90th Day Check-In / 3rd Month Probationary Review</div>
+          <ul>
+            <li>The new employee completes the 90th day check-in survey in Dermorepubliq University.</li>
+            <li>The immediate supervisor accomplishes the 3rd month Probationary Performance Evaluation.</li>
+            <li>The immediate supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Integration and belonging</li>
+                <li>Motivation and ownership</li>
+                <li>Organizational fit</li>
+              </ul>
+            </li>
+            <li>The immediate supervisor discusses the results of the probationary review with the new employee.</li>
+            <li>The immediate supervisor coaches the new employee, setting goals for the next check-in.</li>
+            <li>The immediate supervisor submits a copy of the accomplished probationary review to the HR team for personnel file maintenance and compliance tracking.</li>
+            <li>The Hiring Manager shall remain informed of progress and may provide guidance as necessary.</li>
+          </ul>
+
+          <div class="sub-heading">7.2 &nbsp; Sustained Performance Phase</div>
+
+          <div class="step-label">7.2.1 &nbsp; 120th Day Check-In</div>
+          <ul>
+            <li>The new employee completes the 120th day check-in survey in Dermorepubliq University.</li>
+            <li>The Immediate Supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Development conversations</li>
+                <li>Stretch and progress</li>
+                <li>Manager and peer support</li>
+              </ul>
+            </li>
+            <li>The immediate supervisor shall coach the new employee, setting goals for the next check-in.</li>
+          </ul>
+
+          <div class="step-label">7.2.2 &nbsp; 150th Day Check-In</div>
+          <ul>
+            <li>The new employee completes the 150th day check-in survey in Dermorepubliq University.</li>
+            <li>The immediate supervisor shall accomplish the 5th month Probationary Performance Evaluation.</li>
+            <li>The immediate supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Recognition and value</li>
+                <li>Well-being and workload</li>
+                <li>Connection and culture</li>
+              </ul>
+            </li>
+            <li>The Immediate Supervisor discusses evaluation results and provides coaching based on identified strengths and areas for improvement.</li>
+            <li>The Immediate Supervisor and Hiring Manager shall review the evaluation results prior to endorsement to ensure alignment with departmental standards and expectations.</li>
+            <li>The Department Head, if applicable, may be involved for alignment on final endorsement decisions.</li>
+            <li>All endorsement decisions shall be supported by documented evaluations, coaching logs, and observed performance.</li>
+            <li>The Immediate Supervisor submits the completed evaluation to HR for personnel file maintenance and compliance tracking.</li>
+          </ul>
+          <p>The outcome of the probationary evaluation, including regularization, extension, or non-continuation of employment, shall be determined in accordance with the Human Resources (HR) Probationary Performance Review Policy and/or applicable SOPs.</p>
+
+          <div class="step-label">7.2.3 &nbsp; 180th Day Check-In</div>
+          <ul>
+            <li>The new employee completes the 180th day check-in survey in Dermorepubliq University.</li>
+            <li>The immediate supervisor meets with the new employee to discuss the following:
+              <ul>
+                <li>Confirmation and role readiness</li>
+                <li>Career path and development opportunities</li>
+                <li>Reflection on onboarding experience</li>
+              </ul>
+            </li>
+            <li>This check-in serves as a post-evaluation engagement and transition discussion and does not replace the formal probationary evaluation conducted during the 150th day.</li>
+            <li>The Immediate Supervisor shall ensure that any remaining development actions or transition plans are documented and aligned with the employee's next phase of employment.</li>
+            <li>Coaching and development support may continue as needed beyond onboarding completion.</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. FORMS, TOOLS, AND SYSTEMS -->
+    <div class="section" id="sec-8">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">8</div>
+        <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li>HR-TMP-009-1.2-2025 - Coaching Log</li>
+            <li>HR-TMP-019-1.0-2026 - Probationary Review Form</li>
+            <li>Dermorepubliq University</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. TRAINING REQUIREMENTS -->
+    <div class="section" id="sec-9">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">9</div>
+        <div class="section-title">TRAINING REQUIREMENTS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Supervisors and managers responsible for conducting performance discussions and evaluations must be adequately equipped with the necessary coaching and performance management competencies.</p>
+          <p>At a minimum, they shall undergo foundational learning interventions that cover:</p>
+          <ul>
+            <li>Coaching fundamentals and effective feedback delivery</li>
+            <li>Performance evaluation principles and application</li>
+            <li>Conduct of structured performance discussions</li>
+          </ul>
+          <p>New hires shall also be guided on effective self-assessment practices to support meaningful participation in performance discussions and evaluations.</p>
+          <p>L&amp;D may provide or assign relevant training programs to ensure consistency in execution across departments.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. KPI AND COMPLIANCE -->
+    <div class="section" id="sec-10">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">10</div>
+        <div class="section-title">KPI AND COMPLIANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>KPI / Metric</th><th>Target</th><th>Frequency</th><th>Responsible</th><th>Monitoring Tool</th></tr></thead>
+            <tbody>
+              <tr><td>On-Time Completion of Required Check-Ins</td><td>&#8805; 90% completed on or before due date</td><td>Per onboarding batch</td><td>Immediate Supervisor</td><td>Dermorepubliq University</td></tr>
+              <tr><td>On-Time Completion of Probationary Reviews (90th &amp; 150th Day)</td><td>&#8805; 90% completed on or before due date</td><td>Overall Monitoring</td><td>Human Resources</td><td>Probationary Review Form</td></tr>
+              <tr><td>New Hire Role Proficiency Achievement by 180th Day</td><td>85% of new hires meet role readiness standards</td><td>Per onboarding batch</td><td>Department Head</td><td>HR-TMP-016-1.0-2025 - Individual Contributor Performance Evaluation, HR-TMP-009-1.2-2025 - Coaching Log</td></tr>
+              <tr><td>Endorsement to Hiring Manager post-orientation</td><td>80% endorsed</td><td>Per onboarding batch</td><td>L&amp;D Trainer</td><td>Email endorsement</td></tr>
+              <tr><td>New Hire Experience Satisfaction Score</td><td>4.0 Average rating</td><td>Per check-in cycle</td><td>L&amp;D / HR Operations</td><td>Dermorepubliq University</td></tr>
+            </tbody>
+          </table>
+          <p>Performance evaluations, check-ins, and coaching activities shall be completed and properly documented for all eligible new hires to ensure consistency, transparency, and compliance with onboarding standards.</p>
+          <p>Failure to complete required check-ins, evaluations, or development actions within defined timelines may result in delayed progression, non-endorsement for regularization, or referral to Human Resources (HR) for appropriate action in accordance with the HR Probationary Performance Review Policy and/or applicable SOPs.</p>
+          <p>All performance and endorsement decisions shall be based on documented evaluations, coaching logs, and observed behaviors.</p>
+          <p>Non-compliance with this SOP, including failure to conduct required performance discussions, submit mandatory documentation, or meet defined timelines, may result in corrective actions for responsible parties in accordance with company policy.</p>
+          <p>Repeated or unresolved non-compliance may be escalated to HR and senior leadership and may impact departmental performance, audit results, and accountability measures.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. DOCUMENT REVIEW AND MAINTENANCE -->
+    <div class="section" id="sec-11">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">11</div>
+        <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This SOP shall be reviewed annually by the Learning and Development (L&amp;D) Supervisor, or as required, to ensure continued relevance, effectiveness, and alignment with organizational, legal, and regulatory requirements.</p>
+          <p>The review shall be conducted in coordination with Human Resources (HR) and relevant stakeholders.</p>
+          <p>Feedback from new hires, supervisors, and managers may be incorporated to support continuous improvement of onboarding and performance management processes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. REVISION AND CHANGE LOGS -->
+    <div class="section" id="sec-12">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">12</div>
+        <div class="section-title">REVISION AND CHANGE LOGS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead><tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr></thead>
+            <tbody>
+              <tr><td>1.0</td><td>Joseph San Jose</td><td>December 4, 2026</td><td>Initiated draft</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end doc-body -->
+
+  <footer class="doc-footer">
+    <div class="footer-left">
+      DR-SOP-L&amp;D-003 &middot; Version 1.0 &middot; Effective April 1, 2026
+      <br/>&#169;2026 Dermorepubliq Corporation. All rights reserved.
+      <br/><span class="confidential-tag">Internal Use Only</span>
+    </div>
+    <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+  </footer>
+</div><!-- end page -->
+
+<script>
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    const body = btn.nextElementSibling;
+    body.classList.toggle('collapsed', expanded);
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-header').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.nextElementSibling.classList.remove('collapsed');
+    });
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-header').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.nextElementSibling.classList.add('collapsed');
+    });
+  }
+</script>
 </body>
 </html>

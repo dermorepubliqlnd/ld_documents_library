@@ -6,593 +6,578 @@
   <title>Dermorepubliq — Integration Phase</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root{--doc-accent:#83AA6E;--doc-accent-light:#EAF2E5;--font:'Poppins',sans-serif;--text:#121212;--text-muted:#5f5144;--border:#DBD3C9;--bg:#F7F6F3;--white:#ffffff;--dermo-onyx:#121212;--stone-taupe:#989187;--clinical-white:#F7F6F3;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
-    .page{max-width:860px;margin:40px auto;background:var(--white);border:1px solid var(--border);position:relative;overflow:hidden;}
-    .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--doc-accent);}
-    .doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:32px 40px 24px 52px;border-bottom:1px solid var(--border);}
-    .logo-text{font-size:18px;font-weight:700;letter-spacing:0.08em;color:var(--dermo-onyx);text-transform:uppercase;}
-    .logo-text span{font-weight:300;}
-    .doc-type-badge{display:inline-block;margin-top:8px;padding:3px 12px;background:var(--doc-accent);color:#ffffff;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;}
-    .doc-meta{text-align:right;font-size:11px;color:var(--stone-taupe);line-height:1.9;}
-    .doc-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
-    .title-block{padding:28px 40px 24px 52px;border-bottom:1px solid var(--border);background:var(--doc-accent-light);}
-    .title-block h1{font-size:22px;font-weight:700;color:var(--dermo-onyx);line-height:1.3;margin-bottom:6px;}
-    .title-block .doc-id{font-size:11px;font-weight:500;color:var(--doc-accent);letter-spacing:0.08em;text-transform:uppercase;}
-    .info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
-    .info-cell{padding:14px 16px;border-right:1px solid var(--border);}
-    .info-cell:last-child{border-right:none;}
-    .info-cell:first-child{padding-left:52px;}
-    .info-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone-taupe);margin-bottom:3px;}
-    .info-value{font-size:12px;font-weight:500;color:var(--text);}
-    .doc-body{padding:32px 40px 32px 52px;}
-    .section{margin-bottom:28px;}
-    .section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--doc-accent);}
-    .section-number{width:26px;height:26px;background:var(--doc-accent);color:#ffffff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0;}
-    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dermo-onyx);}
-    .doc-body p{font-size:13px;color:var(--text);margin-bottom:10px;}
-    .doc-body ul,.doc-body ol{padding-left:20px;margin-bottom:10px;}
-    .doc-body li{font-size:13px;color:var(--text);margin-bottom:5px;}
-    .subsection-title{font-size:12px;font-weight:700;color:var(--doc-accent);text-transform:uppercase;letter-spacing:0.05em;margin:16px 0 6px;}
-    .doc-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 40px 14px 52px;border-top:1px solid var(--border);background:var(--clinical-white);}
-    .doc-footer .footer-left{font-size:10px;color:var(--stone-taupe);line-height:1.6;}
-    .doc-footer .footer-right{font-size:10px;color:var(--stone-taupe);text-align:right;}
-    .confidential-tag{display:inline-block;padding:2px 8px;border:1px solid var(--stone-taupe);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-taupe);border-radius:2px;margin-top:4px;}
-    @media print{body{background:white;}.page{margin:0;border:none;max-width:100%;}.accent-bar{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+    :root {
+      --accent:      #83AA6E;
+      --accent-light:#EAF2E5;
+      --font:        'Poppins', sans-serif;
+      --text:        #121212;
+      --muted:       #5f5144;
+      --border:      #DBD3C9;
+      --bg:          #F7F6F3;
+      --white:       #ffffff;
+      --onyx:        #121212;
+      --taupe:       #989187;
+      --clinical:    #F7F6F3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
+    .page { max-width: 860px; margin: 40px auto 60px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+    .doc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 28px 36px 22px 52px; border-bottom: 1px solid var(--border); }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: 0.09em; color: var(--onyx); text-transform: uppercase; line-height: 1; }
+    .logo-text span { font-weight: 300; }
+    .doc-type-badge { display: inline-block; margin-top: 9px; padding: 3px 11px; background: var(--accent); color: #ffffff; font-size: 9px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; border-radius: 2px; }
+    .doc-meta { text-align: right; font-size: 11px; color: var(--taupe); line-height: 1.85; }
+    .doc-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .title-block { padding: 22px 36px 20px 52px; border-bottom: 1px solid var(--border); background: var(--accent-light); }
+    .title-block .doc-type-label { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .title-block h1 { font-size: 21px; font-weight: 700; color: var(--onyx); line-height: 1.3; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .info-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+    .info-cell:first-child { padding-left: 52px; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--taupe); margin-bottom: 3px; }
+    .info-value { font-size: 12px; font-weight: 500; color: var(--text); }
+    .doc-toolbar { display: flex; gap: 6px; padding: 10px 36px 10px 52px; border-bottom: 1px solid var(--border); background: var(--white); align-items: center; }
+    .toolbar-btn { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); color: var(--taupe); cursor: pointer; transition: all 0.12s; }
+    .toolbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+    .doc-body { padding: 20px 36px 36px 46px; }
+    .section { margin-bottom: 6px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 16px 10px 12px; background: var(--clinical); border: none; cursor: pointer; text-align: left; border-bottom: 1px solid var(--border); transition: background 0.15s; font-family: var(--font); }
+    .section-header:hover { background: #EDEAE5; }
+    .section-number { min-width: 26px; height: 26px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0; }
+    .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--onyx); flex: 1; }
+    .toggle-icon { flex-shrink: 0; color: var(--taupe); transition: transform 0.22s ease; }
+    .section-header[aria-expanded="false"] .toggle-icon { transform: rotate(-90deg); }
+    .section-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.25s ease; }
+    .section-body.collapsed { grid-template-rows: 0fr; }
+    .section-content { overflow: hidden; padding: 20px 18px 20px 14px; }
+    .section-body.collapsed .section-content { padding-top: 0; padding-bottom: 0; }
+    .sub-heading { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.07em; margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px dashed var(--border); }
+    .sub-heading:first-child { margin-top: 0; }
+    .step-label { font-size: 12px; font-weight: 600; color: var(--muted); margin: 12px 0 5px; padding-left: 10px; border-left: 3px solid var(--accent-light); font-style: italic; }
+    .step-label:first-child { margin-top: 0; }
+    .section-content p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.7; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .section-content ul { padding-left: 0; margin: 6px 0 12px 0; list-style: none; }
+    .section-content ul li { font-size: 13px; color: var(--text); margin-bottom: 6px; padding-left: 18px; position: relative; line-height: 1.6; }
+    .section-content ul li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .section-content ul ul { margin: 6px 0 4px 0; }
+    .section-content ul ul li { padding-left: 16px; }
+    .section-content ul ul li::before { width: 5px; height: 5px; background: none; border: 1.5px solid var(--accent); border-radius: 50%; top: 8px; }
+    .section-content ol { padding-left: 0; margin: 6px 0 12px; list-style: none; counter-reset: ol-counter; }
+    .section-content ol li { counter-increment: ol-counter; font-size: 13px; color: var(--text); margin-bottom: 8px; padding-left: 34px; position: relative; line-height: 1.6; }
+    .section-content ol li::before { content: counter(ol-counter); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; background: var(--accent-light); border: 1.5px solid var(--accent); color: var(--accent); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; border: 1px solid var(--border); }
+    .data-table thead tr { background: var(--accent); color: #ffffff; }
+    .data-table th { padding: 9px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.2); }
+    .data-table th:last-child { border-right: none; }
+    .data-table td { padding: 9px 12px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table td:last-child { border-right: none; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .data-table tbody tr:nth-child(even) td { background: var(--clinical); }
+    .doc-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 36px 12px 52px; border-top: 1px solid var(--border); background: var(--clinical); }
+    .doc-footer .footer-left { font-size: 10px; color: var(--taupe); line-height: 1.6; }
+    .doc-footer .footer-right { font-size: 10px; color: var(--taupe); text-align: right; }
+    .confidential-tag { display: inline-block; padding: 2px 7px; border: 1px solid var(--taupe); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); border-radius: 2px; margin-top: 3px; }
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border: none; box-shadow: none; max-width: 100%; }
+      .doc-toolbar { display: none; }
+      .section { border: none; border-bottom: 1px solid var(--border); border-radius: 0; }
+      .section-header { background: none !important; border-bottom: 2px solid var(--accent); }
+      .section-body.collapsed { grid-template-rows: 1fr !important; }
+      .section-content { padding-top: 16px !important; padding-bottom: 16px !important; }
+      .accent-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="accent-bar"></div>
-    <header class="doc-header">
-      <div class="brand-block">
-        <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:9px;">®</sup></div>
-        <div class="doc-type-badge">Standard Operating Procedure</div>
-      </div>
-      <div class="doc-meta">
-        <strong>DR-SOP-L&amp;D-001</strong>
-        Document ID
-        <br/>Version 1.0
-        <br/>Effective: April 1, 2026
-      </div>
-    </header>
-    <div class="title-block">
-      <div class="doc-id">SOP · Learning &amp; Development</div>
-      <h1>Integration Phase</h1>
+<div class="page">
+  <div class="accent-bar"></div>
+  <header class="doc-header">
+    <div>
+      <div class="logo-text">DERMO<span>REPUBLIQ</span><sup style="font-size:8px;vertical-align:super;">&#174;</sup></div>
+      <div class="doc-type-badge">Standard Operating Procedure</div>
     </div>
-    <div class="info-grid">
-      <div class="info-cell"><div class="info-label">Department</div><div class="info-value">Learning &amp; Development</div></div>
-      <div class="info-cell"><div class="info-label">Document Owner</div><div class="info-value">L&amp;D Director</div></div>
-      <div class="info-cell"><div class="info-label">Responsible Dept.</div><div class="info-value">Human Resources</div></div>
-      <div class="info-cell"><div class="info-label">Classification</div><div class="info-value">Internal Use Only</div></div>
+    <div class="doc-meta">
+      <strong>DR-SOP-L&amp;D-001</strong>
+      Document ID<br/>Version 1.0<br/>Effective: 2026
     </div>
-    <div class="doc-body">
-
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">1</div>
-          <div class="section-title">PURPOSE</div>
-        </div>
-        <p>This Standard Operating Procedure (SOP) defines the standardized procedures for conducting</p>
-<p>role-specific onboarding and nesting activities during the Integration Phase of the onboarding</p>
-<p>journey.</p>
-<p>It ensures that new hires acquire the knowledge, skills, and tools necessary for effective job</p>
-<p>performance through structured onboarding, guided work application, and documented</p>
-<p>evaluation, and are properly prepared for progression to the Early Performance Phase.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">2</div>
-          <div class="section-title">SCOPE</div>
-        </div>
-        <p class="subsection-title">2.1. In Scope</p>
-<p>This SOP applies to all hiring managers, department heads, role trainers, mentors, Human</p>
-<p>Resources (HR) personnel, and new individual contributors participating in the onboarding</p>
-<p>process.</p>
-<p class="subsection-title">2.2. Out of Scope</p>
-<p>This SOP does not apply to new people leader employees, consultants, external partners,</p>
-<p>third-party personnel, and interns.</p>
-<p>These roles may follow separate or modified onboarding procedures, as applicable.</p>
-<p class="subsection-title">2.3. Process Start and End</p>
-<p>This SOP is triggered once the new hire has been endorsed for the Integration Phase by the</p>
-<p>Trainer.</p>
-<p>This SOP ends upon the Hiring Manager’s endorsement, extension, or non-endorsement of</p>
-<p>the new hire and progression to the Early Performance Phase, or referral to HR for</p>
-<p>appropriate action.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">3</div>
-          <div class="section-title">REFERENCES</div>
-        </div>
-        <ul><li></li></ul>
-<p>LD-POL-001-1.1-2026 – New Hire Onboarding Journey</p>
-<ul><li></li></ul>
-<p>LD-SOP-002-1.0-2025 – Pre-Boarding and Orientation Phases</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">4</div>
-          <div class="section-title">DEFINITIONS</div>
-        </div>
-        <ul><li></li></ul>
-<p>Onboarding Plan – Activities that the new employee must undergo during the Integration</p>
-<p>Phase</p>
-<ul><li></li></ul>
-<p>Onboarding Collaterals – Slide decks, handouts, worksheets, assessments, and other</p>
-<p>training materials</p>
-<ul><li></li></ul>
-<p>Role-Specific Onboarding – Training and orientation tailored to the responsibilities,</p>
-<p>competencies, and tools of a specific role</p>
-<ul><li></li></ul>
-<p>Learning and Development (L&amp;D) – The department responsible for training design,</p>
-<p>facilitation, and onboarding support</p>
-<ul><li></li></ul>
-<p>L&amp;D-Owned Role-Specific Onboarding – Role-specific onboarding fully conducted by</p>
-<p>L&amp;D</p>
-<ul><li></li></ul>
-<p>Department-Owned Role-Specific Onboarding – Role-specific onboarding conducted</p>
-<p>by the Hiring Manager’s department, with support from L&amp;D</p>
-<ul><li></li></ul>
-<p>Nesting – A monitored period where new hires apply learned skills in a live setting</p>
-<ul><li></li></ul>
-<p>New Employee – A recently recruited employee undergoing onboarding</p>
-<ul><li></li></ul>
-<p>Nesting Buddy – A current employee who supports new hires through guidance,</p>
-<p>coaching, and practical insights</p>
-<ul><li></li></ul>
-<p>Conditional Pass – A status from the Orientation Phase indicating minor deficiencies</p>
-<p>requiring monitoring during Integration</p>
-<ul><li></li></ul>
-<p>Endorsement – Formal approval for progression to the next onboarding phase</p>
-<ul><li></li></ul>
-<p>Non-Endorsement – Failure to meet onboarding requirements</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">5</div>
-          <div class="section-title">RASCI MATRIX</div>
-        </div>
-        <p>Activity R A S C I</p>
-<p>HR</p>
-<p>Review onboarding results</p>
-<p>Hiring Hiring Specialist, L&amp;D</p>
-<p>and endorse transition to Trainer</p>
-<p>Manager Manager HR Supervisor</p>
-<p>Integration Phase</p>
-<p>Manager</p>
-<p>Hiring</p>
-<p>Facilitate L&amp;D-Owned Role- L&amp;D Content Manager, HR</p>
-<p>Trainer</p>
-<p>Specific Onboarding Supervisor Developer HR Manager</p>
-<p>Specialist</p>
-<p>HR</p>
-<p>Facilitate Department-</p>
-<p>Hiring Hiring Specialist, HR</p>
-<p>Owned Role-Specific Trainer</p>
-<p>Manager Manager L&amp;D Manager</p>
-<p>Onboarding</p>
-<p>Supervisor</p>
-<p>Provide onboarding Content</p>
-<p>L&amp;D Hiring HR HR</p>
-<p>templates, tools, and Developer,</p>
-<p>Supervisor Manager Specialist Manager</p>
-<p>support materials Trainer</p>
-<p>HR</p>
-<p>Monitor onboarding Specialist,</p>
-<p>progress, compliance, and Hiring Hiring HR L&amp;D</p>
-<p>Trainer</p>
-<p>closure of Conditional Pass Manager Manager Manager, Director</p>
-<p>items L&amp;D</p>
-<p>Supervisor</p>
-<p>Maintain onboarding HR</p>
-<p>Hiring Hiring L&amp;D HR</p>
-<p>documentation and ensure Specialist,</p>
-<p>Manager Manager Supervisor Manager</p>
-<p>submission to HR Trainer</p>
-<p>Hiring Hiring Nesting HR</p>
-<p>Assign nesting buddy Trainer</p>
-<p>Manager Manager Buddy Specialist</p>
-<p>Activity R A S C I</p>
-<p>HR</p>
-<p>Conduct progress check-ins</p>
-<p>Hiring Hiring Specialist, HR L&amp;D</p>
-<p>and performance</p>
-<p>Manager Manager Nesting Manager Supervisor</p>
-<p>discussions</p>
-<p>Buddy</p>
-<p>HR</p>
-<p>Provide feedback and</p>
-<p>Hiring Hiring Specialist, HR L&amp;D</p>
-<p>document competency</p>
-<p>Manager Manager Nesting Manager Supervisor</p>
-<p>milestones</p>
-<p>Buddy</p>
-<p>Support the new employee</p>
-<p>Nesting Hiring HR Hiring HR</p>
-<p>throughout the nesting</p>
-<p>Buddy Manager Specialist Manager Specialist</p>
-<p>phase</p>
-<p>Hiring</p>
-<p>Notify the Hiring Manager of</p>
-<p>Nesting Hiring Manager, HR</p>
-<p>any major challenges or Trainer</p>
-<p>Buddy Manager HR Manager</p>
-<p>support needs</p>
-<p>Specialist</p>
-<p>HR</p>
-<p>Specialist,</p>
-<p>Conduct integration</p>
-<p>Hiring Hiring Nesting HR L&amp;D</p>
-<p>evaluation and determine</p>
-<p>Manager Manager Buddy Manager, Director</p>
-<p>endorsement outcome</p>
-<p>L&amp;D</p>
-<p>Supervisor</p>
-<p>File DermoDesk ticket to</p>
-<p>L&amp;D Hiring HR Hiring</p>
-<p>endorse progression to Early Trainer</p>
-<p>Supervisor Manager Specialist Manager</p>
-<p>Performance Phase</p>
-<p>Evaluate and process cases HR HR Hiring L&amp;D L&amp;D</p>
-<p>of non-endorsement Specialist Manager Manager Supervisor Director</p>
-<p>L&amp;D</p>
-<p>L&amp;D L&amp;D Trainer, HR Hiring</p>
-<p>Review and revise this SOP Director, HR</p>
-<p>Supervisor Supervisor Specialist Manager</p>
-<p>Manager</p>
-<p>Provide onboarding Content</p>
-<p>L&amp;D Hiring HR HR</p>
-<p>templates, tools, and Developer,</p>
-<p>Supervisor Manager Specialist Manager</p>
-<p>support materials Trainer</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">6</div>
-          <div class="section-title">PROCESS FLOW DIAGRAM</div>
-        </div>
-        
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">7</div>
-          <div class="section-title">PROCEDURE</div>
-        </div>
-        <p class="subsection-title">7.1. Integration Handoff and Review</p>
-<ul><li></li></ul>
-<p>The Hiring Manager shall acknowledge endorsement of the new hire from the</p>
-<p>Orientation Phase.</p>
-<ul><li></li></ul>
-<p>The Hiring Manager shall review the Training Report and onboarding results, including</p>
-<p>assessment performance, attendance, and identified gaps.</p>
-<ul><li></li></ul>
-<p>Any Conditional Pass items or outstanding requirements shall be documented, along</p>
-<p>with required corrective actions and timelines.</p>
-<ul><li></li></ul>
-<p>Monitoring responsibility shall be aligned based on onboarding ownership:</p>
-<p>o L&amp;D, for L&amp;D-owned onboarding</p>
-<p>o Hiring Manager, for department-owned onboarding</p>
-<p class="subsection-title">7.2. Role-Specific Onboarding</p>
-<p>The Trainer, in coordination with the Hiring Manager, shall identify which role-specific</p>
-<p>onboarding the new hire shall undertake based on the approved onboarding plan and</p>
-<p>availability of a structured onboarding curriculum.</p>
-<p>7.2.1. L&amp;D-Owned Role-Specific Onboarding</p>
-<ul><li></li></ul>
-<p>Trainer facilitates role-specific onboarding, including an overview of the department</p>
-<p>and its structure, role introduction, job-specific tools and workflows, key</p>
-<p>performance indicators, and department policies</p>
-<ul><li></li></ul>
-<p>Trainer conducts other trainings as indicated in the onboarding plan.</p>
-<ul><li></li></ul>
-<p>Trainer facilitates post-training assessment and survey through Dermorepubliq</p>
-<p>University (Learning Management System or LMS).</p>
-<ul><li></li></ul>
-<p>All required post-training assessments shall meet a minimum passing score of</p>
-<p>eighty percent (80%), unless otherwise specified in the onboarding plan. Failure to</p>
-<p>meet the required passing standard shall require reassessment, coaching, or</p>
-<p>additional onboarding activities and may impact endorsement.</p>
-<ul><li></li></ul>
-<p>Trainer prepares Role-Specific Onboarding Acknowledgment Form</p>
-<ul><li></li></ul>
-<p>New hire signs Role-Specific Onboarding Acknowledgment Form</p>
-<ul><li></li></ul>
-<p>Trainer submits signed Role-Specific Onboarding Acknowledgment Form to HR</p>
-<p>compliance for recordkeeping.</p>
-<ul><li></li></ul>
-<p>Trainer endorses new hire to hiring manager for Nesting phase. Proceed to step 7.5.</p>
-<p>7.2.2. Department-Owned Role-Specific Onboarding</p>
-<ul><li></li></ul>
-<p>Hiring manager acknowledges endorsement from the L&amp;D trainer.</p>
-<ul><li></li></ul>
-<p>Hiring manager facilitates role-specific onboarding, including an overview of the</p>
-<p>department and its structure, role introduction, job-specific tools and workflows, key</p>
-<p>performance indicators, and department policies</p>
-<ul><li></li></ul>
-<p>Hiring manager facilitates post-training assessment and survey through</p>
-<p>Dermorepubliq University</p>
-<ul><li></li></ul>
-<p>All required post-training assessments shall meet a minimum passing score of</p>
-<p>eighty percent (80%), unless otherwise specified in the onboarding plan. Failure to</p>
-<p>meet the required passing standard may impact endorsement.</p>
-<ul><li></li></ul>
-<p>Hiring manager facilitates site tour and key stakeholders meet-and-greet</p>
-<ul><li></li></ul>
-<p>Hiring manager prepares Role-Specific Onboarding Acknowledgment Form</p>
-<ul><li></li></ul>
-<p>New hire signs Role-Specific Onboarding Acknowledgment Form</p>
-<ul><li></li></ul>
-<p>Hiring manager submits signed Role-Specific Onboarding Acknowledgment Form to</p>
-<p>L&amp;D for monitoring and HR compliance for recordkeeping. Proceed to step 7.5</p>
-<p class="subsection-title">7.3. Compliance Validation</p>
-<ul><li></li></ul>
-<p>The Hiring Manager, in coordination with L&amp;D and HR, shall verify completion of all</p>
-<p>required compliance training prior to operational exposure.</p>
-<ul><li></li></ul>
-<p>No new hire shall proceed to nesting, production areas, or regulated work</p>
-<p>environments unless required compliance training has been completed and validated.</p>
-<p class="subsection-title">7.4. Attendance and Participation Requirements</p>
-<p>Attendance, punctuality, participation, and conduct expectations during the Integration</p>
-<p>Phase shall continue to be governed by the New Hire Training Agreement and applicable</p>
-<p>company policies.</p>
-<p>The new hire is expected to:</p>
-<ul><li></li></ul>
-<p>Attend all scheduled onboarding activities and nesting schedules</p>
-<ul><li></li></ul>
-<p>Participate actively in assigned tasks, training, and coaching activities</p>
-<p>Any instances of unexcused absence, repeated tardiness, or failure to meet participation</p>
-<p>expectations shall be documented and may impact the new hire’s evaluation and</p>
-<p>endorsement status.</p>
-<p class="subsection-title">7.5. Nesting Phase</p>
-<p>7.5.1. Nesting Day 1</p>
-<ul><li></li></ul>
-<p>Hiring manager endorses new hire to nesting buddy.</p>
-<ul><li></li></ul>
-<p>The new hire shall observe team workflows.</p>
-<ul><li></li></ul>
-<p>The new hire shall shadow and practice simple tasks.</p>
-<ul><li></li></ul>
-<p>The immediate supervisor assigns starter projects to the new hire.</p>
-<p>7.5.2. Nesting Day 2 until the end of the nesting period</p>
-<p>The Nesting Buddy shall</p>
-<ul><li></li></ul>
-<p>Support knowledge transfer through peer coaching</p>
-<ul><li></li></ul>
-<p>Encourage questions and directs the new employee to appropriate resources</p>
-<ul><li></li></ul>
-<p>Share helpful tips and insights that the new employee wouldn’t find in formal</p>
-<p>documentation</p>
-<ul><li></li></ul>
-<p>Provide context for team norms, communication styles, and cross-functional</p>
-<p>relationships</p>
-<ul><li></li></ul>
-<p>Notify the Hiring Manager of any major challenges or support needs</p>
-<p>The Hiring Manager shall:</p>
-<ul><li></li></ul>
-<p>Conduct regular check-ins and performance discussions</p>
-<ul><li></li></ul>
-<p>Monitor progress and address support needs</p>
-<ul><li></li></ul>
-<p>Ensure that feedback and observations are documented</p>
-<p class="subsection-title">7.6. Conditional Pass Monitoring</p>
-<ul><li></li></ul>
-<p>Any gaps identified during the Orientation Phase shall be monitored and</p>
-<p>addressed during the Integration Phase.</p>
-<ul><li></li></ul>
-<p>Progress against required corrective actions shall be documented.</p>
-<ul><li></li></ul>
-<p>Unresolved gaps may impact endorsement and progression decisions.</p>
-<p class="subsection-title">7.7. Integration Evaluation</p>
-<p>7.7.1. Retrospective Discussion</p>
-<ul><li></li></ul>
-<p>The hiring manager shall discuss what transpired during the nesting phase with the</p>
-<p>new hire.</p>
-<ul><li></li></ul>
-<p>The hiring manager shall go over the general nesting feedback form and discuss the</p>
-<p>recommendations and action plans to address areas for improvement.</p>
-<p>7.7.2. Evaluation Criteria</p>
-<p>Evaluation shall be based on documented performance, including:</p>
-<ul><li></li></ul>
-<p>Completion of role-specific onboarding and required assessments</p>
-<ul><li></li></ul>
-<p>Performance during nesting and guided work execution</p>
-<ul><li></li></ul>
-<p>Attendance, participation, and conduct</p>
-<ul><li></li></ul>
-<p>Compliance with onboarding requirements and completion of assigned corrective</p>
-<p>actions</p>
-<ul><li></li></ul>
-<p>Adherence to the New Hire Training Agreement</p>
-<p>7.7.3. Integration Outcomes</p>
-<p>Successful Integration</p>
-<ul><li></li></ul>
-<p>The assigned Integration Phase owner shall determine the endorsement of the</p>
-<p>new hire based on evaluation results:</p>
-<p>o The Trainer, for L&amp;D-owned role-specific onboarding and nesting</p>
-<p>o The Hiring Manager, for department-owned role-specific onboarding and</p>
-<p>nesting</p>
-<ul><li></li></ul>
-<p>The assigned Integration Phase owner shall discuss the next step and expectations</p>
-<p>for the next phases of the onboarding journey with the new hire.</p>
-<ul><li></li></ul>
-<p>The hiring manager shall send a signed copy of the nesting feedback form to L&amp;D</p>
-<p>and HR for monitoring and record keeping.</p>
-<ul><li></li></ul>
-<p>L&amp;D files ticket in Dermo Desk to endorse new hire for probationary status.</p>
-<p>Integration Extension</p>
-<ul><li></li></ul>
-<p>In case the new hire does not satisfy the requirements of the integration phase, their</p>
-<p>integration phase shall be extended for five (5) days, where they will focus on areas</p>
-<p>for improvement.</p>
-<ul><li></li></ul>
-<p>The hiring manager shall discuss expectations for the nesting extension and action</p>
-<p>plans to address areas for improvement</p>
-<ul><li></li></ul>
-<p>The hiring manager shall inform L&amp;D and HR teams of nesting extension for</p>
-<p>monitoring</p>
-<ul><li></li></ul>
-<p>Repeat Step 7.7.2</p>
-<p>Unsuccessful Integration</p>
-<ul><li></li></ul>
-<p>In case they do not satisfy the integration extension requirements, the hiring</p>
-<p>manager will not endorse the new hire for probationary employment.</p>
-<ul><li></li></ul>
-<p>The hiring manager shall discuss the reasons for discontinuation of employment</p>
-<p>with the new hire.</p>
-<ul><li></li></ul>
-<p>The case shall be referred to HR for appropriate action in accordance with company</p>
-<p>policy.</p>
-<ul><li></li></ul>
-<p>The hiring manager shall inform L&amp;D and HR teams of unsuccessful integration for</p>
-<p>monitoring and processing of end-of-employment.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">8</div>
-          <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
-        </div>
-        <p>The following forms, tools, and systems shall be used to support the execution, monitoring, and</p>
-<p>documentation of the Integration Phase:</p>
-<ul><li></li></ul>
-<p>LD-TMP-008-1.0-2025 General Nesting Feedback</p>
-<ul><li></li></ul>
-<p>LD-TMP-000-1.0-2025 Role-Specific Onboarding Acknowledgment Form</p>
-<ul><li></li></ul>
-<p>New Hire Performance Tracker</p>
-<ul><li></li></ul>
-<p>DermoDesk Ticketing System</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">9</div>
-          <div class="section-title">TRAINING REQUIREMENTS</div>
-        </div>
-        <p class="subsection-title">9.1. Hiring Manager Training Requirements</p>
-<p>Before facilitating role-specific onboarding and conducting integration evaluations, Hiring</p>
-<p>Managers must:</p>
-<ul><li></li></ul>
-<p>Be oriented on the New Hire Onboarding Journey Policy and applicable SOPs</p>
-<p>Be trained on:</p>
-<ul><li></li></ul>
-<p>Role-specific onboarding facilitation standards</p>
-<ul><li></li></ul>
-<p>Use of onboarding tools and documentation (e.g., acknowledgment forms,</p>
-<p>feedback forms)</p>
-<ul><li></li></ul>
-<p>Conducting structured check-ins, coaching, and performance discussions</p>
-<ul><li></li></ul>
-<p>Evaluation criteria and endorsement decision guidelines</p>
-<p>Be familiar with:</p>
-<ul><li></li></ul>
-<p>Compliance training requirements</p>
-<ul><li></li></ul>
-<p>Attendance and Training Agreement enforcement</p>
-<ul><li></li></ul>
-<p>Documentation and submission requirements</p>
-<p>Hiring Managers may be required to undergo onboarding facilitation briefing or</p>
-<p>calibration sessions conducted by Learning and Development (L&amp;D) to ensure</p>
-<p>consistency across departments.</p>
-<p class="subsection-title">9.2. L&amp;D Trainer Training Requirements</p>
-<p>Before being assigned to facilitate role-specific onboarding or manage onboarding</p>
-<p>delivery, the L&amp;D Trainer must:</p>
-<ul><li></li></ul>
-<p>Observe and assist in at least one (1) onboarding cycle covering role-specific</p>
-<p>onboarding and nesting</p>
-<ul><li></li></ul>
-<p>Facilitate at least one (1) onboarding cycle under supervision of an L&amp;D Supervisor</p>
-<p>or a Senior Trainer.</p>
-<p>The L&amp;D Trainer must demonstrate competency in:</p>
-<ul><li></li></ul>
-<p>Facilitation of onboarding programs and training sessions</p>
-<ul><li></li></ul>
-<p>Administration of assessments through the Learning Management System (LMS)</p>
-<ul><li></li></ul>
-<p>Documentation and reporting (e.g., training reports, acknowledgment forms)</p>
-<ul><li></li></ul>
-<p>Monitoring onboarding progress and identifying learning gaps</p>
-<ul><li></li></ul>
-<p>Applying onboarding standards, evaluation criteria, and endorsement guidelines</p>
-<p>The L&amp;D Supervisor shall validate readiness before the Trainer independently handles</p>
-<p>onboarding activities.</p>
-<p class="subsection-title">9.3 Nesting Buddy Requirements</p>
-<ul><li></li></ul>
-<p>Be a regular employee or have at least six (6) months tenure in the company</p>
-<ul><li></li></ul>
-<p>Demonstrate strong performance and understanding of team processes</p>
-<ul><li></li></ul>
-<p>Be capable of providing effective support, coaching, and guidance to new hires</p>
-<p>10.KPI AND COMPLIANCE</p>
-<p>KPI / Metric Target Frequency Responsible Monitoring Tool</p>
-<p>Role-Specific 100% of endorsed new Per Hiring LD-TMP-000-1.0-2025</p>
-<p>Onboarding Compliance hires have undergone onboarding Manager Role-Specific</p>
-<p>Rate role-specific batch Onboarding</p>
-<p>onboarding Acknowledgment</p>
-<p>Form</p>
-<p>Post-Training ≥ 80% passing score Per Hiring Dermorepubliq</p>
-<p>Assessment Passing Rate onboarding Manager, L&amp;D University</p>
-<p>batch Trainer</p>
-<p>Timely Completion of Completed within the Per Hiring LD-TMP-000-1.0-2025</p>
-<p>Role-Specific prescribed schedule onboarding Manager Role-Specific</p>
-<p>Onboarding after HR orientation batch Onboarding</p>
-<p>Acknowledgment</p>
-<p>Form</p>
-<p>KPI / Metric Target Frequency Responsible Monitoring Tool</p>
-<p>Nesting Phase ≥ 95% of eligible hires Per Hiring LD-TMP-008-1.0-2025</p>
-<p>Completion Rate complete nesting onboarding Manager General Nesting</p>
-<p>successfully batch Feedback</p>
-<p>Submission of General 100% submitted and Per Hiring LD-TMP-008-1.0-2025</p>
-<p>Nesting Feedback Form filed on time onboarding Manager, L&amp;D General Nesting</p>
-<p>batch Trainer Feedback, New Hire</p>
-<p>Performance Tracker,</p>
-<p>DermoDesk Ticketing</p>
-<p>System</p>
-<p>Integration evaluation shall be completed and properly documented for all eligible new hires to</p>
-<p>ensure consistency, traceability, and compliance with onboarding standards.</p>
-<p>Failure to meet the performance standards during the Integration Phase, including unsuccessful</p>
-<p>completion of role-specific onboarding or nesting requirements, may result in an extension of the</p>
-<p>Integration Phase, non-endorsement for progression to the Early Performance Phase, or referral to</p>
-<p>Human Resources (HR) for appropriate action, as determined based on documented evaluation</p>
-<p>results.</p>
-<p>All performance and endorsement decisions shall be based on documented assessments,</p>
-<p>feedback, and observed behaviors to ensure objectivity, fairness, and alignment with established</p>
-<p>onboarding criteria.</p>
-<p>Non-compliance with this SOP, including failure to conduct required onboarding activities, submit</p>
-<p>mandatory documentation, or meet defined timelines, may result in corrective actions for</p>
-<p>responsible parties.</p>
-<p>Repeated or unresolved non-compliance may be escalated to HR and senior leadership and may</p>
-<p>impact departmental audit results, performance accountability, and overall compliance</p>
-<p>standing.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">10</div>
-          <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
-        </div>
-        <p>This SOP shall be reviewed at least annually by the L&amp;D Team, or as required due to changes in</p>
-<p>roles, systems, or organizational processes.</p>
-<p>The review shall be conducted in coordination with HR and relevant stakeholders to ensure</p>
-<p>continued alignment with organizational, legal, and regulatory requirements.</p>
-      </div>
-      <div class="section">
-        <div class="section-header">
-          <div class="section-number">11</div>
-          <div class="section-title">REVISION AND CHANGE LOGS</div>
-        </div>
-        <p>Version Author Date Summary of Change(s)</p>
-<p>December</p>
-<p class="subsection-title">1.0 Joseph San Jose Initiated draft</p>
-<p>4, 2025</p>
-      </div>
-    </div>
-    <footer class="doc-footer">
-      <div class="footer-left">
-        DR-SOP-L&amp;D-001 · Version 1.0 · Effective April 1, 2026
-        <br/>©2026 Dermorepubliq Corporation. All rights reserved.
-        <br/><span class="confidential-tag">Internal Use Only</span>
-      </div>
-      <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
-    </footer>
+  </header>
+  <div class="title-block">
+    <div class="doc-type-label">SOP &middot; Learning &amp; Development</div>
+    <h1>Integration Phase</h1>
   </div>
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">Author/s</div><div class="info-value">John Peter Paul Carriedo, Joseph Kier San Jose</div></div>
+    <div class="info-cell"><div class="info-label">Reviewer/s</div><div class="info-value">Sandra Abegail Barlao</div></div>
+    <div class="info-cell"><div class="info-label">Approver/s</div><div class="info-value">Abimelex Brad Vele&#xF1;a</div></div>
+    <div class="info-cell"><div class="info-label">Release Date</div><div class="info-value">April 1, 2026</div></div>
+  </div>
+
+  <div class="doc-toolbar">
+    <button class="toolbar-btn" onclick="expandAll()">&#9660; Expand All</button>
+    <button class="toolbar-btn" onclick="collapseAll()">&#9654; Collapse All</button>
+    <div class="toolbar-sep"></div>
+    <button class="toolbar-btn" onclick="window.print()">&#128438; Print</button>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- 1. PURPOSE -->
+    <div class="section" id="sec-1">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">1</div>
+        <div class="section-title">PURPOSE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This Standard Operating Procedure (SOP) defines the standardized procedures for conducting role-specific onboarding and nesting activities during the Integration Phase of the onboarding journey.</p>
+          <p>It ensures that new hires acquire the knowledge, skills, and tools necessary for effective job performance through structured onboarding, guided work application, and documented evaluation, and are properly prepared for progression to the Early Performance Phase.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SCOPE -->
+    <div class="section" id="sec-2">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">2</div>
+        <div class="section-title">SCOPE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <div class="sub-heading">2.1 &nbsp; In Scope</div>
+          <p>This SOP applies to all hiring managers, department heads, role trainers, mentors, Human Resources (HR) personnel, and new individual contributors participating in the onboarding process.</p>
+          <div class="sub-heading">2.2 &nbsp; Out of Scope</div>
+          <p>This SOP does not apply to new people leader employees, consultants, external partners, third-party personnel, and interns.</p>
+          <p>These roles may follow separate or modified onboarding procedures, as applicable.</p>
+          <div class="sub-heading">2.3 &nbsp; Process Start and End</div>
+          <p>This SOP is triggered once the new hire has been endorsed for the Integration Phase by the Trainer.</p>
+          <p>This SOP ends upon the Hiring Manager's endorsement, extension, or non-endorsement of the new hire and progression to the Early Performance Phase, or referral to HR for appropriate action.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. REFERENCES -->
+    <div class="section" id="sec-3">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">3</div>
+        <div class="section-title">REFERENCES</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li>LD-POL-001-1.1-2026 &#8211; New Hire Onboarding Journey</li>
+            <li>LD-SOP-002-1.0-2025 &#8211; Pre-Boarding and Orientation Phases</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. DEFINITIONS -->
+    <div class="section" id="sec-4">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">4</div>
+        <div class="section-title">DEFINITIONS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <ul>
+            <li><strong>Onboarding Plan</strong> &#8211; Activities that the new employee must undergo during the Integration Phase</li>
+            <li><strong>Onboarding Collaterals</strong> &#8211; Slide decks, handouts, worksheets, assessments, and other training materials</li>
+            <li><strong>Role-Specific Onboarding</strong> &#8211; Training and orientation tailored to the responsibilities, competencies, and tools of a specific role</li>
+            <li><strong>Learning and Development (L&amp;D)</strong> &#8211; The department responsible for training design, facilitation, and onboarding support</li>
+            <li><strong>L&amp;D-Owned Role-Specific Onboarding</strong> &#8211; Role-specific onboarding fully conducted by L&amp;D</li>
+            <li><strong>Department-Owned Role-Specific Onboarding</strong> &#8211; Role-specific onboarding conducted by the Hiring Manager's department, with support from L&amp;D</li>
+            <li><strong>Nesting</strong> &#8211; A monitored period where new hires apply learned skills in a live setting</li>
+            <li><strong>New Employee</strong> &#8211; A recently recruited employee undergoing onboarding</li>
+            <li><strong>Nesting Buddy</strong> &#8211; A current employee who supports new hires through guidance, coaching, and practical insights</li>
+            <li><strong>Conditional Pass</strong> &#8211; A status from the Orientation Phase indicating minor deficiencies requiring monitoring during Integration</li>
+            <li><strong>Endorsement</strong> &#8211; Formal approval for progression to the next onboarding phase</li>
+            <li><strong>Non-Endorsement</strong> &#8211; Failure to meet onboarding requirements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RASCI MATRIX -->
+    <div class="section" id="sec-5">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">5</div>
+        <div class="section-title">RASCI MATRIX</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead>
+              <tr><th>Activity</th><th>R</th><th>A</th><th>S</th><th>C</th><th>I</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Review onboarding results and endorse transition to Integration Phase</td><td>Hiring Manager</td><td>Hiring Manager</td><td>Trainer</td><td>HR Specialist, L&amp;D Supervisor</td><td>HR Manager</td></tr>
+              <tr><td>Facilitate L&amp;D-Owned Role-Specific Onboarding</td><td>Trainer</td><td>L&amp;D Supervisor</td><td>Hiring Manager</td><td>Content Developer, HR Manager</td><td>HR Specialist</td></tr>
+              <tr><td>Facilitate Department-Owned Role-Specific Onboarding</td><td>Hiring Manager</td><td>Hiring Manager</td><td>Trainer</td><td>HR Specialist, L&amp;D Manager</td><td>HR Manager</td></tr>
+              <tr><td>Provide onboarding templates, tools, and support materials</td><td>L&amp;D Supervisor</td><td>HR Manager</td><td>Content Developer, Trainer</td><td>Hiring Manager</td><td>HR Specialist</td></tr>
+              <tr><td>Monitor onboarding progress, compliance, and closure of Conditional Pass items</td><td>Hiring Manager</td><td>Hiring Manager</td><td>HR Specialist, Trainer</td><td>HR Manager, L&amp;D Supervisor</td><td>L&amp;D Director</td></tr>
+              <tr><td>Maintain onboarding documentation and ensure submission to HR</td><td>Hiring Manager</td><td>Hiring Manager</td><td>HR Specialist, Trainer</td><td>L&amp;D Supervisor</td><td>HR Manager</td></tr>
+              <tr><td>Assign nesting buddy</td><td>Hiring Manager</td><td>Hiring Manager</td><td>Trainer</td><td>Nesting Buddy</td><td>HR Specialist</td></tr>
+              <tr><td>Conduct progress check-ins and performance discussions</td><td>Hiring Manager</td><td>Hiring Manager</td><td>HR Specialist, Nesting Buddy</td><td>HR Manager</td><td>L&amp;D Supervisor</td></tr>
+              <tr><td>Provide feedback and document competency milestones</td><td>Hiring Manager</td><td>Hiring Manager</td><td>HR Specialist, Nesting Buddy</td><td>HR Manager</td><td>L&amp;D Supervisor</td></tr>
+              <tr><td>Support the new employee throughout the nesting phase</td><td>Nesting Buddy</td><td>Hiring Manager</td><td>HR Specialist</td><td>Hiring Manager</td><td>HR Specialist</td></tr>
+              <tr><td>Notify the Hiring Manager of any major challenges or support needs</td><td>Nesting Buddy</td><td>Hiring Manager</td><td>Trainer</td><td>Hiring Manager, HR Specialist</td><td>HR Manager</td></tr>
+              <tr><td>Conduct integration evaluation and determine endorsement outcome</td><td>Hiring Manager</td><td>Hiring Manager</td><td>HR Specialist, Nesting Buddy</td><td>HR Manager, L&amp;D Supervisor</td><td>L&amp;D Director</td></tr>
+              <tr><td>File DermoDesk ticket to endorse progression to Early Performance Phase</td><td>Trainer</td><td>L&amp;D Supervisor</td><td>Hiring Manager</td><td>HR Specialist</td><td>Hiring Manager</td></tr>
+              <tr><td>Evaluate and process cases of non-endorsement</td><td>HR Specialist</td><td>HR Manager</td><td>Hiring Manager</td><td>L&amp;D Supervisor</td><td>L&amp;D Director</td></tr>
+              <tr><td>Review and revise this SOP</td><td>L&amp;D Supervisor</td><td>L&amp;D Director, HR Manager</td><td>L&amp;D Supervisor</td><td>Trainer, HR Specialist</td><td>Hiring Manager</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PROCESS FLOW DIAGRAM -->
+    <div class="section" id="sec-6">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">6</div>
+        <div class="section-title">PROCESS FLOW DIAGRAM</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>Process flow diagram to be inserted.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. PROCEDURE -->
+    <div class="section" id="sec-7">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">7</div>
+        <div class="section-title">PROCEDURE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+
+          <div class="sub-heading">7.1 &nbsp; Integration Handoff and Review</div>
+          <ul>
+            <li>The Hiring Manager shall acknowledge endorsement of the new hire from the Orientation Phase.</li>
+            <li>The Hiring Manager shall review the Training Report and onboarding results, including assessment performance, attendance, and identified gaps.</li>
+            <li>Any Conditional Pass items or outstanding requirements shall be documented, along with required corrective actions and timelines.</li>
+            <li>Monitoring responsibility shall be aligned based on onboarding ownership:
+              <ul>
+                <li>L&amp;D, for L&amp;D-owned onboarding</li>
+                <li>Hiring Manager, for department-owned onboarding</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="sub-heading">7.2 &nbsp; Role-Specific Onboarding</div>
+          <p>The Trainer, in coordination with the Hiring Manager, shall identify which role-specific onboarding the new hire shall undertake based on the approved onboarding plan and availability of a structured onboarding curriculum.</p>
+
+          <div class="step-label">7.2.1 &nbsp; L&amp;D-Owned Role-Specific Onboarding</div>
+          <ul>
+            <li>Trainer facilitates role-specific onboarding, including an overview of the department and its structure, role introduction, job-specific tools and workflows, key performance indicators, and department policies.</li>
+            <li>Trainer conducts other trainings as indicated in the onboarding plan.</li>
+            <li>Trainer facilitates post-training assessment and survey through Dermorepubliq University (Learning Management System or LMS).</li>
+            <li>All required post-training assessments shall meet a minimum passing score of eighty percent (80%), unless otherwise specified in the onboarding plan. Failure to meet the required passing standard shall require reassessment, coaching, or additional onboarding activities and may impact endorsement.</li>
+            <li>Trainer prepares Role-Specific Onboarding Acknowledgment Form.</li>
+            <li>New hire signs Role-Specific Onboarding Acknowledgment Form.</li>
+            <li>Trainer submits signed Role-Specific Onboarding Acknowledgment Form to HR compliance for recordkeeping.</li>
+            <li>Trainer endorses new hire to hiring manager for Nesting phase. Proceed to step 7.5.</li>
+          </ul>
+
+          <div class="step-label">7.2.2 &nbsp; Department-Owned Role-Specific Onboarding</div>
+          <ul>
+            <li>Hiring manager acknowledges endorsement from the L&amp;D trainer.</li>
+            <li>Hiring manager facilitates role-specific onboarding, including an overview of the department and its structure, role introduction, job-specific tools and workflows, key performance indicators, and department policies.</li>
+            <li>Hiring manager facilitates post-training assessment and survey through Dermorepubliq University.</li>
+            <li>All required post-training assessments shall meet a minimum passing score of eighty percent (80%), unless otherwise specified in the onboarding plan. Failure to meet the required passing standard may impact endorsement.</li>
+            <li>Hiring manager facilitates site tour and key stakeholders meet-and-greet.</li>
+            <li>Hiring manager prepares Role-Specific Onboarding Acknowledgment Form.</li>
+            <li>New hire signs Role-Specific Onboarding Acknowledgment Form.</li>
+            <li>Hiring manager submits signed Role-Specific Onboarding Acknowledgment Form to L&amp;D for monitoring and HR compliance for recordkeeping. Proceed to step 7.5.</li>
+          </ul>
+
+          <div class="sub-heading">7.3 &nbsp; Compliance Validation</div>
+          <ul>
+            <li>The Hiring Manager, in coordination with L&amp;D and HR, shall verify completion of all required compliance training prior to operational exposure.</li>
+            <li>No new hire shall proceed to nesting, production areas, or regulated work environments unless required compliance training has been completed and validated.</li>
+          </ul>
+
+          <div class="sub-heading">7.4 &nbsp; Attendance and Participation Requirements</div>
+          <p>Attendance, punctuality, participation, and conduct expectations during the Integration Phase shall continue to be governed by the New Hire Training Agreement and applicable company policies.</p>
+          <p>The new hire is expected to:</p>
+          <ul>
+            <li>Attend all scheduled onboarding activities and nesting schedules</li>
+            <li>Participate actively in assigned tasks, training, and coaching activities</li>
+          </ul>
+          <p>Any instances of unexcused absence, repeated tardiness, or failure to meet participation expectations shall be documented and may impact the new hire's evaluation and endorsement status.</p>
+
+          <div class="sub-heading">7.5 &nbsp; Nesting Phase</div>
+          <div class="step-label">7.5.1 &nbsp; Nesting Day 1</div>
+          <ul>
+            <li>Hiring manager endorses new hire to nesting buddy.</li>
+            <li>The new hire shall observe team workflows.</li>
+            <li>The new hire shall shadow and practice simple tasks.</li>
+            <li>The immediate supervisor assigns starter projects to the new hire.</li>
+          </ul>
+
+          <div class="step-label">7.5.2 &nbsp; Nesting Day 2 until the end of the nesting period</div>
+          <p>The Nesting Buddy shall:</p>
+          <ul>
+            <li>Support knowledge transfer through peer coaching</li>
+            <li>Encourage questions and direct the new employee to appropriate resources</li>
+            <li>Share helpful tips and insights that the new employee wouldn't find in formal documentation</li>
+            <li>Provide context for team norms, communication styles, and cross-functional relationships</li>
+            <li>Notify the Hiring Manager of any major challenges or support needs</li>
+          </ul>
+          <p>The Hiring Manager shall:</p>
+          <ul>
+            <li>Conduct regular check-ins and performance discussions</li>
+            <li>Monitor progress and address support needs</li>
+            <li>Ensure that feedback and observations are documented</li>
+          </ul>
+
+          <div class="sub-heading">7.6 &nbsp; Conditional Pass Monitoring</div>
+          <ul>
+            <li>Any gaps identified during the Orientation Phase shall be monitored and addressed during the Integration Phase.</li>
+            <li>Progress against required corrective actions shall be documented.</li>
+            <li>Unresolved gaps may impact endorsement and progression decisions.</li>
+          </ul>
+
+          <div class="sub-heading">7.7 &nbsp; Integration Evaluation</div>
+          <div class="step-label">7.7.1 &nbsp; Retrospective Discussion</div>
+          <ul>
+            <li>The hiring manager shall discuss what transpired during the nesting phase with the new hire.</li>
+            <li>The hiring manager shall go over the general nesting feedback form and discuss the recommendations and action plans to address areas for improvement.</li>
+          </ul>
+
+          <div class="step-label">7.7.2 &nbsp; Evaluation Criteria</div>
+          <p>Evaluation shall be based on documented performance, including:</p>
+          <ul>
+            <li>Completion of role-specific onboarding and required assessments</li>
+            <li>Performance during nesting and guided work execution</li>
+            <li>Attendance, participation, and conduct</li>
+            <li>Compliance with onboarding requirements and completion of assigned corrective actions</li>
+            <li>Adherence to the New Hire Training Agreement</li>
+          </ul>
+
+          <div class="step-label">7.7.3 &nbsp; Integration Outcomes</div>
+          <p><strong>Successful Integration</strong></p>
+          <ul>
+            <li>The assigned Integration Phase owner shall determine the endorsement of the new hire based on evaluation results:
+              <ul>
+                <li>The Trainer, for L&amp;D-owned role-specific onboarding and nesting</li>
+                <li>The Hiring Manager, for department-owned role-specific onboarding and nesting</li>
+              </ul>
+            </li>
+            <li>The assigned Integration Phase owner shall discuss the next step and expectations for the next phases of the onboarding journey with the new hire.</li>
+            <li>The hiring manager shall send a signed copy of the nesting feedback form to L&amp;D and HR for monitoring and record keeping.</li>
+            <li>L&amp;D files ticket in Dermo Desk to endorse new hire for probationary status.</li>
+          </ul>
+          <p><strong>Integration Extension</strong></p>
+          <ul>
+            <li>In case the new hire does not satisfy the requirements of the integration phase, their integration phase shall be extended for five (5) days, where they will focus on areas for improvement.</li>
+            <li>The hiring manager shall discuss expectations for the nesting extension and action plans to address areas for improvement.</li>
+            <li>The hiring manager shall inform L&amp;D and HR teams of nesting extension for monitoring.</li>
+            <li>Repeat Step 7.7.2.</li>
+          </ul>
+          <p><strong>Unsuccessful Integration</strong></p>
+          <ul>
+            <li>In case they do not satisfy the integration extension requirements, the hiring manager will not endorse the new hire for probationary employment.</li>
+            <li>The hiring manager shall discuss the reasons for discontinuation of employment with the new hire.</li>
+            <li>The case shall be referred to HR for appropriate action in accordance with company policy.</li>
+            <li>The hiring manager shall inform L&amp;D and HR teams of unsuccessful integration for monitoring and processing of end-of-employment.</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. FORMS, TOOLS, AND SYSTEMS -->
+    <div class="section" id="sec-8">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">8</div>
+        <div class="section-title">FORMS, TOOLS, AND SYSTEMS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>The following forms, tools, and systems shall be used to support the execution, monitoring, and documentation of the Integration Phase:</p>
+          <ul>
+            <li>LD-TMP-008-1.0-2025 General Nesting Feedback</li>
+            <li>LD-TMP-000-1.0-2025 Role-Specific Onboarding Acknowledgment Form</li>
+            <li>New Hire Performance Tracker</li>
+            <li>DermoDesk Ticketing System</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. TRAINING REQUIREMENTS -->
+    <div class="section" id="sec-9">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">9</div>
+        <div class="section-title">TRAINING REQUIREMENTS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+
+          <div class="sub-heading">9.1 &nbsp; Hiring Manager Training Requirements</div>
+          <p>Before facilitating role-specific onboarding and conducting integration evaluations, Hiring Managers must:</p>
+          <ul>
+            <li>Be oriented on the New Hire Onboarding Journey Policy and applicable SOPs</li>
+            <li>Be trained on:
+              <ul>
+                <li>Role-specific onboarding facilitation standards</li>
+                <li>Use of onboarding tools and documentation (e.g., acknowledgment forms, feedback forms)</li>
+                <li>Conducting structured check-ins, coaching, and performance discussions</li>
+                <li>Evaluation criteria and endorsement decision guidelines</li>
+              </ul>
+            </li>
+            <li>Be familiar with:
+              <ul>
+                <li>Compliance training requirements</li>
+                <li>Attendance and Training Agreement enforcement</li>
+                <li>Documentation and submission requirements</li>
+              </ul>
+            </li>
+          </ul>
+          <p>Hiring Managers may be required to undergo onboarding facilitation briefing or calibration sessions conducted by Learning and Development (L&amp;D) to ensure consistency across departments.</p>
+
+          <div class="sub-heading">9.2 &nbsp; L&amp;D Trainer Training Requirements</div>
+          <p>Before being assigned to facilitate role-specific onboarding or manage onboarding delivery, the L&amp;D Trainer must:</p>
+          <ul>
+            <li>Observe and assist in at least one (1) onboarding cycle covering role-specific onboarding and nesting</li>
+            <li>Facilitate at least one (1) onboarding cycle under supervision of an L&amp;D Supervisor or a Senior Trainer</li>
+          </ul>
+          <p>The L&amp;D Trainer must demonstrate competency in:</p>
+          <ul>
+            <li>Facilitation of onboarding programs and training sessions</li>
+            <li>Administration of assessments through the Learning Management System (LMS)</li>
+            <li>Documentation and reporting (e.g., training reports, acknowledgment forms)</li>
+            <li>Monitoring onboarding progress and identifying learning gaps</li>
+            <li>Applying onboarding standards, evaluation criteria, and endorsement guidelines</li>
+          </ul>
+          <p>The L&amp;D Supervisor shall validate readiness before the Trainer independently handles onboarding activities.</p>
+
+          <div class="sub-heading">9.3 &nbsp; Nesting Buddy Requirements</div>
+          <ul>
+            <li>Be a regular employee or have at least six (6) months tenure in the company</li>
+            <li>Demonstrate strong performance and understanding of team processes</li>
+            <li>Be capable of providing effective support, coaching, and guidance to new hires</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. KPI AND COMPLIANCE -->
+    <div class="section" id="sec-10">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">10</div>
+        <div class="section-title">KPI AND COMPLIANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead>
+              <tr><th>KPI / Metric</th><th>Target</th><th>Frequency</th><th>Responsible</th><th>Monitoring Tool</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Role-Specific Onboarding Compliance Rate</td><td>100% of endorsed new hires have undergone role-specific onboarding</td><td>Per onboarding batch</td><td>Hiring Manager</td><td>LD-TMP-000-1.0-2025 Role-Specific Onboarding Acknowledgment Form</td></tr>
+              <tr><td>Post-Training Assessment Passing Rate</td><td>&#8805; 80% passing score</td><td>Per onboarding batch</td><td>Hiring Manager, L&amp;D Trainer</td><td>Dermorepubliq University</td></tr>
+              <tr><td>Timely Completion of Role-Specific Onboarding</td><td>Completed within the prescribed schedule after HR orientation</td><td>Per onboarding batch</td><td>Hiring Manager</td><td>LD-TMP-000-1.0-2025 Role-Specific Onboarding Acknowledgment Form</td></tr>
+              <tr><td>Nesting Phase Completion Rate</td><td>&#8805; 95% of eligible hires complete nesting successfully</td><td>Per onboarding batch</td><td>Hiring Manager</td><td>LD-TMP-008-1.0-2025 General Nesting Feedback</td></tr>
+              <tr><td>Submission of General Nesting Feedback Form</td><td>100% submitted and filed on time</td><td>Per onboarding batch</td><td>Hiring Manager, L&amp;D Trainer</td><td>LD-TMP-008-1.0-2025 General Nesting Feedback, New Hire Performance Tracker, DermoDesk Ticketing System</td></tr>
+            </tbody>
+          </table>
+          <p>Integration evaluation shall be completed and properly documented for all eligible new hires to ensure consistency, traceability, and compliance with onboarding standards.</p>
+          <p>Failure to meet the performance standards during the Integration Phase, including unsuccessful completion of role-specific onboarding or nesting requirements, may result in an extension of the Integration Phase, non-endorsement for progression to the Early Performance Phase, or referral to Human Resources (HR) for appropriate action, as determined based on documented evaluation results.</p>
+          <p>All performance and endorsement decisions shall be based on documented assessments, feedback, and observed behaviors to ensure objectivity, fairness, and alignment with established onboarding criteria.</p>
+          <p>Non-compliance with this SOP, including failure to conduct required onboarding activities, submit mandatory documentation, or meet defined timelines, may result in corrective actions for responsible parties.</p>
+          <p>Repeated or unresolved non-compliance may be escalated to HR and senior leadership and may impact departmental audit results, performance accountability, and overall compliance standing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. DOCUMENT REVIEW AND MAINTENANCE -->
+    <div class="section" id="sec-11">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">11</div>
+        <div class="section-title">DOCUMENT REVIEW AND MAINTENANCE</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <p>This SOP shall be reviewed at least annually by the L&amp;D Team, or as required due to changes in roles, systems, or organizational processes.</p>
+          <p>The review shall be conducted in coordination with HR and relevant stakeholders to ensure continued alignment with organizational, legal, and regulatory requirements.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. REVISION AND CHANGE LOGS -->
+    <div class="section" id="sec-12">
+      <button class="section-header" onclick="toggle(this)" aria-expanded="true">
+        <div class="section-number">12</div>
+        <div class="section-title">REVISION AND CHANGE LOGS</div>
+        <svg class="toggle-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="5 8 10 13 15 8"/></svg>
+      </button>
+      <div class="section-body">
+        <div class="section-content">
+          <table class="data-table">
+            <thead>
+              <tr><th>Version</th><th>Author</th><th>Date</th><th>Summary of Change(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1.0</td><td>Joseph San Jose</td><td>December 4, 2025</td><td>Initiated draft</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="doc-footer">
+    <div class="footer-left">
+      DR-SOP-L&amp;D-001 &middot; Version 1.0 &middot; Effective April 1, 2026
+      <br/>&#169;2026 Dermorepubliq Corporation. All rights reserved.
+      <br/><span class="confidential-tag">Internal Use Only</span>
+    </div>
+    <div class="footer-right">Uncontrolled when printed.<br/>Verify version before use.</div>
+  </footer>
+</div>
+
+<script>
+  function toggle(btn) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    const body = btn.nextElementSibling;
+    if (expanded) { body.classList.add('collapsed'); } else { body.classList.remove('collapsed'); }
+  }
+  function expandAll() {
+    document.querySelectorAll('.section-header').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.nextElementSibling.classList.remove('collapsed');
+    });
+  }
+  function collapseAll() {
+    document.querySelectorAll('.section-header').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.nextElementSibling.classList.add('collapsed');
+    });
+  }
+</script>
 </body>
 </html>
